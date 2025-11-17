@@ -11,7 +11,9 @@ export default function HomePage() {
           </div>
           <nav className="flex gap-6 text-white font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
             <a href="#" className="hover:text-blue-300 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">Home</a>
-            <a href="#" className="hover:text-blue-300 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">Catalog</a>
+            <a to="#" className="hover:text-blue-300 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">Catalog</a>
+            <a to="#" className="hover:text-blue-300 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">Create Spot</a>
+            <a to="#" className="hover:text-blue-300 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">Logout</a>
             <a href="#" className="hover:text-blue-300 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">Login</a>
             <a href="#" className="hover:text-blue-300 drop-shadow-[0_2px_4px_rgba(0,0,0,1)]">Register</a>
           </nav>
@@ -28,19 +30,19 @@ export default function HomePage() {
                 {
                   id: 1,
                   title: "Paris, France",
-                  img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80",
+                  img: "https://images2.alphacoders.com/561/thumb-1920-561115.jpg",
                   desc: "The romantic city of lights with stunning architecture and rich culture."
                 },
                 {
                   id: 2,
                   title: "New York, USA",
-                  img: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80",
+                  img: "https://lh3.googleusercontent.com/places/AAcXr8oELGjp26s1mDaTs07ebLQ05ZdAOICFWmQbHv3Hy43Gy7VfuzRCgQUw_kCNbfVsFexY0QfO4wuj6kOGrSy3UJXakGAadOvQJCM=s1600-w612",
                   desc: "The iconic skyline and fast-paced lifestyle of the Big Apple."
                 },
                 {
                   id: 3,
                   title: "Tokyo, Japan",
-                  img: "https://images.unsplash.com/photo-1549692520-acc6669e2f0c?auto=format&fit=crop&w=800&q=80",
+                  img: "https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt0db69fde9a0f6d98/675e125faf051ba02b13ded4/japan-725347-Header_Desktop.jpg?fit=crop&disable=upscale&auto=webp&quality=60&crop=smart&width=1920&height=1080",
                   desc: "A perfect blend of modern neon streets and traditional temples."
                 }
               ].map(place => (
@@ -62,7 +64,7 @@ export default function HomePage() {
         </main>
 
         {/* Footer */}
-        <footer className="bg-white/20 backdrop-blur-md border-t border-white/30 text-center py-4 mt-12 rounded-t-xl shadow-lg text-white">
+        <footer className="bg-white/20 backdrop-blur-md border-t border-white/30 text-center py-4 mt-39 rounded-t-xl shadow-lg text-white">
           <p className="text-white text-sm drop-shadow-2xl">
             © {new Date().getFullYear()} Travel Spots — All rights reserved.
           </p>

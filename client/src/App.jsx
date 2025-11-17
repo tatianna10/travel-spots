@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router";
-import HomePage from "./components/HomePage.jsx";
-import DetailsPage from "./components/DetailsPage.jsx";
+import Home from "./components/home/Home.jsx";
+import DetailsPage from "./components/details-page/DetailsPage.jsx";
+
+
 
 
 
@@ -8,8 +10,8 @@ function App() {
   return (
     <>
       <Routes>
-        < Route path="/" element={<HomePage />} />
-        < Route path="/details/:id" element={<DetailsPage />} />
+        < Route path="/" element={<Home />} />
+        < Route path="/details/:id/details" element={<DetailsPage />} />
       </Routes>
     </>
   );

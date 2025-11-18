@@ -30,7 +30,7 @@ export default function CatalogPage() {
       }}
     >
       <div className="relative z-10">
-    
+
         <header className="bg-white/20 backdrop-blur-md border-b border-white/30 py-4 px-6 flex justify-between items-center shadow-lg">
           <h1 className="text-2xl font-bold text-white drop-shadow-xl tracking-wide">
             Catalog
@@ -67,9 +67,7 @@ export default function CatalogPage() {
           )}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            {places.map((place) => (
-              <PlaceCard key={place.id} place={place} />
-            ))}
+            {places.map((place) => (<PlaceCard key={place.id} place={place} />))}
           </div>
         </main>
       </div>

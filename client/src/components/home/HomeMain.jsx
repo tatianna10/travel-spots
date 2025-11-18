@@ -23,39 +23,22 @@ export default function HomeMain() {
   ];
 
   return (
-    <main className="flex-grow container mx-auto px-4 py-8">
-      <section className="relative">
-        <div className="absolute inset-0 bg-black/30 rounded-xl z-0"></div>
+    <main className="home-main">
+      <section className="places-section">
+        <div className="places-background"></div>
 
-        <h2 className="text-3xl font-bold mb-6 text-white drop-shadow-2xl">
-          Explore Places
-        </h2>
+        <h2 className="places-title">Explore Places</h2>
 
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 relative z-10">
-          {places.map((place) => (
-            <div
-              key={place.id}
-              className="bg-white/30 backdrop-blur-md border border-white/40 rounded-xl shadow-md hover:scale-105 transition transform hover:shadow-blue-500/40"
-            >
-              <img
-                src={place.img}
-                alt={place.title}
-                className="h-48 w-full object-cover rounded-lg"
-              />
+        <div className="places-grid">
+          {places.map(place => (
+            <div className="place-card" key={place.id}>
+              <img className="place-image" src={place.img} alt={place.title} />
 
-              <h3 className="text-xl font-bold mt-3 text-center text-white">
-                {place.title}
-              </h3>
+              <h3 className="place-name">{place.title}</h3>
 
-              <p className="text-white mt-1 text-center px-4">
-                {place.desc}
-              </p>
+              <p className="place-desc">{place.desc}</p>
 
-              {/* Restored View Details Button */}
-              <Link
-                to={`/details/${place.id}`}
-                className="mt-4 mb-4 mx-auto block bg-blue-500/20 backdrop-blur-md border border-blue-300/40 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-500/30 transition-colors duration-300 hover:shadow-xl w-40 text-center"
-              >
+              <Link to={`/details/${place.id}`} className="place-details-btn">
                 View Details
               </Link>
             </div>

@@ -1,0 +1,105 @@
+/* ========== HOME MAIN AREA ========== */
+
+/* Main wrapper */
+.home-main {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem 1rem;
+  margin: 0 auto;
+}
+
+/* Section */
+.places-section {
+  position: relative;
+}
+
+/* Dark overlay background */
+.places-background {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 1rem;
+  z-index: 0;
+}
+
+/* Section title */
+.places-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: white;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
+  position: relative;
+  z-index: 10;
+}
+
+/* Card grid */
+.places-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  position: relative;
+  z-index: 10;
+}
+
+/* Card */
+.place-card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 1rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.place-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+
+/* Image */
+.place-image {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+/* Title */
+.place-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 0.75rem;
+  text-align: center;
+  color: white;
+}
+
+/* Description */
+.place-desc {
+  color: white;
+  text-align: center;
+  padding: 0 1rem;
+  margin-top: 0.25rem;
+}
+
+/* Button */
+.place-details-btn {
+  display: block;
+  width: 160px;
+  text-align: center;
+  margin: 1rem auto;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(147, 197, 253, 0.5);
+  background: rgba(59, 130, 246, 0.2);
+  backdrop-filter: blur(6px);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.place-details-btn:hover {
+  background: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+}

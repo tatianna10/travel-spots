@@ -1,0 +1,23 @@
+/* ===== FOOTER WRAPPER ===== */
+.site-footer {
+    width: 100%; /* IMPORTANT — FIXES YOUR GRID */
+    padding: 1rem;
+    margin-top: auto;
+
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+
+    text-align: center;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== TEXT ===== */
+.footer-text {
+    color: white;
+    font-size: 0.875rem;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.9));
+}

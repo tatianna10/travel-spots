@@ -1,0 +1,57 @@
+/* ===== HEADER WRAPPER ===== */
+.site-header {
+    width: 100%;
+    padding: 1rem 1.5rem;
+
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== LEFT SIDE (logo + title) ===== */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.header-logo {
+    width: 2rem;
+    height: 2rem;
+    filter: drop-shadow(0 0 15px #1E90FF);
+}
+
+.header-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #1E90FF;
+    filter: drop-shadow(0 0 15px #1E90FF);
+}
+
+/* ===== NAVIGATION LINKS ===== */
+.header-nav {
+    display: flex;
+    gap: 1.5rem;
+    font-weight: 600;
+    color: white;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+}
+
+.header-nav a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.header-nav a:hover {
+    color: #93C5FD; /* blue-300 */
+}

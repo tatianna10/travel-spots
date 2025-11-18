@@ -1,0 +1,85 @@
+/* WRAPPER BACKGROUND */
+.catalog-wrapper {
+  min-height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+  font-family: sans-serif;
+}
+
+.catalog-inner {
+  position: relative;
+  z-index: 10;
+}
+
+/* HEADER */
+.catalog-header {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+.catalog-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 0 10px black;
+}
+
+.catalog-nav {
+  display: flex;
+  gap: 1.5rem;
+  font-weight: 600;
+}
+
+.catalog-nav-link {
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+  transition: color .2s ease;
+}
+
+.catalog-nav-link:hover {
+  color: #93c5fd;
+}
+
+/* MAIN CONTENT */
+.catalog-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1rem;
+}
+
+.catalog-main-title {
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 0 12px black;
+}
+
+/* STATES */
+.catalog-loading,
+.catalog-error,
+.catalog-empty {
+  text-align: center;
+  font-size: 1.25rem;
+  color: white;
+  text-shadow: 0 0 6px black;
+}
+
+.catalog-error {
+  color: #fecaca; /* red-ish */
+}
+
+/* GRID */
+.catalog-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}

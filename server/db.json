@@ -7,6 +7,20 @@
       "imageUrl": "https://images2.alphacoders.com/561/thumb-1920-561115.jpg",
       "description": "The romantic city of lights.",
       "ownerId": "USER-ID-HERE"
+    },
+    {
+      "id": "3e74a23f-67a7-4ed5-8907-5df0297b40a5",
+      "title": "New York, USA",
+      "imageUrl": "https://lh3.googleusercontent.com/places/AAcXr8oELGjp26s1mDaTs07ebLQ05ZdAOICFWmQbHv3Hy43Gy7VfuzRCgQUw_kCNbfVsFexY0QfO4wuj6kOGrSy3UJXakGAadOvQJCM=s1600-w612",
+      "description": "The iconic skyline and fast-paced lifestyle of the Big Apple.",
+      "ownerId": "USER-ID-HERE"
+    },
+    {
+      "id": "6fe7459c-96f1-4ab2-beae-fe4d9ea12f7e",
+      "title": "Tokyo, Japan",
+      "imageUrl": "https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt0db69fde9a0f6d98/675e125faf051ba02b13ded4/japan-725347-Header_Desktop.jpg?fit=crop&disable=upscale&auto=webp&quality=60&crop=smart&width=1920&height=1080",
+      "description": "A perfect blend of modern neon streets and traditional temples.",
+      "ownerId": "USER-ID-HERE"
     }
   ]
 }

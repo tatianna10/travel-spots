@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";   // <= IMPORTANT: react-router-dom
+import { Link } from "react-router";
 import { getAllPlaces } from "../../api/placesApi.js";
+import PlaceCard from "../place-card/PlaceCard.jsx";
 
 export default function CatalogPage() {
   const [places, setPlaces] = useState([]);
@@ -29,6 +30,7 @@ export default function CatalogPage() {
       }}
     >
       <div className="relative z-10">
+    
         <header className="bg-white/20 backdrop-blur-md border-b border-white/30 py-4 px-6 flex justify-between items-center shadow-lg">
           <h1 className="text-2xl font-bold text-white drop-shadow-xl tracking-wide">
             Catalog
@@ -66,32 +68,7 @@ export default function CatalogPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {places.map((place) => (
-              <div
-                key={place._id}   // backend id
-                className="group bg-white/20 backdrop-blur-lg border border-white/40 rounded-2xl shadow-lg overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/40"
-              >
-                <img
-                  src={place.imageUrl}
-                  alt={place.title}
-                  className="h-56 w-full object-cover"
-                />
-
-                <div className="p-4 text-center text-white">
-                  <h3 className="text-2xl font-semibold drop-shadow-[0_0_6px_#000000aa]">
-                    {place.title}
-                  </h3>
-                  <p className="mt-2 text-sm opacity-90 drop-shadow-[0_0_6px_#000000aa] line-clamp-2">
-                    {place.description}
-                  </p>
-
-                  <Link
-                    to={`/details/${place._id}`}
-                    className="mt-4 inline-block bg-blue-500/30 border border-blue-300/40 text-white px-5 py-2 rounded-lg shadow-lg hover:bg-blue-500/40 transition"
-                  >
-                    View Details
-                  </Link>
-                </div>
-              </div>
+              <PlaceCard key={place.id} place={place} />
             ))}
           </div>
         </main>

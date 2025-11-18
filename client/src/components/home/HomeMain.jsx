@@ -9,7 +9,7 @@ export default function HomeMain() {
   useEffect(() => {
     getAllPlaces()
       .then(data => {
-        setPlaces(data);
+        setPlaces(data.slice(0, 3));
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -29,7 +29,7 @@ export default function HomeMain() {
             <div key={place.id} className="home-card">
               <img src={place.imageUrl} alt={place.title} className="home-image" />
               <h3 className="home-card-title">{place.title}</h3>
-              <p className="home-card-desc">{place.desc}</p>
+              <p className="home-card-desc">{place.description}</p>
               <Link to={`/details/${place.id}`} className="home-button">
                 View Details
               </Link>

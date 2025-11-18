@@ -1,0 +1,12 @@
+{
+  "users": [],
+  "places": [
+    {
+      "id": "78877795-98e5-4fd6-b90c-6a792dbbb1db",
+      "title": "Paris, France",
+      "imageUrl": "https://images2.alphacoders.com/561/thumb-1920-561115.jpg",
+      "description": "The romantic city of lights.",
+      "ownerId": "USER-ID-HERE"
+    }
+  ]
+}

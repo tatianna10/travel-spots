@@ -1,0 +1,69 @@
+/* ============================
+   PLACE CARD COMPONENT
+=============================== */
+
+.place-card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.place-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+}
+
+/* Image */
+.place-card-image {
+    width: 100%;
+    height: 14rem;
+    object-fit: cover;
+}
+
+/* Content */
+.place-card-content {
+    padding: 1rem;
+    text-align: center;
+    color: white;
+}
+
+/* Title */
+.place-card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+}
+
+/* Description */
+.place-card-desc {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;      /* line-clamp like Tailwind */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* View Button */
+.place-card-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+
+    background: rgba(59, 130, 246, 0.3);
+    border: 1px solid rgba(147, 197, 253, 0.5);
+    color: white;
+
+    backdrop-filter: blur(6px);
+    transition: background-color 0.25s ease;
+}
+
+.place-card-button:hover {
+    background: rgba(59, 130, 246, 0.4);
+}

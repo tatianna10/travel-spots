@@ -1,7 +1,6 @@
 import { useParams, Link } from "react-router";
 import { useEffect, useState } from "react";
 import { getPlaceById } from "../../api/placesApi";
-import "./details.css";
 
 export default function DetailsPage() {
   const { id } = useParams();

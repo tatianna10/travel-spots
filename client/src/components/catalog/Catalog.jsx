@@ -52,9 +52,7 @@ export default function CatalogPage() {
           )}
 
           <div className="catalog-grid">
-            {places.map((place) => (
-              <PlaceCard key={place.id} place={place} />
-            ))}
+            {places.map((place) => (<PlaceCard key={place.id} place={place} />))}
           </div>
         </main>
       </div>

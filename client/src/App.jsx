@@ -5,15 +5,16 @@ import DetailsPage from "./components/details-page/DetailsPage.jsx";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/places" element={<Catalog />} />
-      <Route path="/places/:id/details" element={<DetailsPage />} />
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/places" element={<Catalog />} />
+        <Route path="/places/:id/details" element={<DetailsPage />} />
         {/* TODO later:
       <Route path="/create/spot" element={<CreateSpot />} />
       */}
-    </Routes>
-    </Routes>
+      </Routes>
+    </>
   );
 }
 

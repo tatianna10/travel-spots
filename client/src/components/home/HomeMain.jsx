@@ -8,7 +8,8 @@ export default function HomeMain() {
 
   useEffect(() => {
     getAllPlaces()
-      .then(data => {
+      .then((data) => {
+        // show only first 3
         setPlaces(data.slice(0, 3));
         setLoading(false);
       })
@@ -25,12 +26,19 @@ export default function HomeMain() {
         <h2 className="home-title">Explore Places</h2>
 
         <div className="home-grid">
-          {places.map(place => (
+          {places.map((place) => (
             <div key={place.id} className="home-card">
-              <img src={place.imageUrl} alt={place.title} className="home-image" />
+              <img
+                src={place.imageUrl}
+                alt={place.title}
+                className="home-image"
+              />
               <h3 className="home-card-title">{place.title}</h3>
               <p className="home-card-desc">{place.description}</p>
-              <Link to={`/details/${place.id}`} className="home-button">
+              <Link
+                to={`/places/${place.id}/details`}
+                className="home-button"
+              >
                 View Details
               </Link>
             </div>

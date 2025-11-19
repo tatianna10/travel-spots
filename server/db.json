@@ -1,41 +1,326 @@
-[
-  {
-    "id": "78877795-98e5-4fd6-b90c-6a792dbbb1db",
-    "title": "Paris, France",
-    "country": "France",
-    "city": "Paris",
-    "longDescription": "Paris is known worldwide for its romantic ambiance, historic boulevards, iconic monuments such as the Eiffel Tower and Notre-Dame Cathedral, world-class museums like the Louvre, and charming cafes along the Seine River. The city blends art, culture, and history in a way no other city does.",
-    "imageUrl": "https://images2.alphacoders.com/561/thumb-1920-561115.jpg",
-    "description": "The romantic city of lights.",
-    "createdAt": "2025-01-20T12:00:00Z",
-    "ownerId": "USER-ID-HERE",
-    "rating": 4.9,
-    "tags": ["romantic", "historic", "museum", "architecture"]
-  },
-  {
-    "id": "3e74a23f-67a7-4ed5-8907-5df0297b40a5",
-    "title": "New York, USA",
-    "country": "USA",
-    "city": "New York",
-    "longDescription": "New York City is known for its iconic skyline, Central Park, Broadway theaters, luxury shopping, diverse food culture, and fast-paced lifestyle. From Times Square to Wall Street, NYC blends ambition, culture, and innovation in a unique way.",
-    "imageUrl": "https://lh3.googleusercontent.com/places/AAcXr8oELGjp26s1mDaTs07ebLQ05ZdAOICFWmQbHv3Hy43Gy7VfuzRCgQUw_kCNbfVsFexY0QfO4wuj6kOGrSy3UJXakGAadOvQJCM=s1600-w612",
-    "description": "The iconic skyline and fast-paced lifestyle of the Big Apple.",
-    "createdAt": "2025-02-14T10:30:00Z",
-    "ownerId": "USER-ID-HERE",
-    "rating": 4.8,
-    "tags": ["modern", "city", "nightlife", "food"]
-  },
-  {
-    "id": "6fe7459c-96f1-4ab2-beae-fe4d9ea12f7e",
-    "title": "Tokyo, Japan",
-    "country": "Japan",
-    "city": "Tokyo",
-    "longDescription": "Tokyo is a fusion of futuristic skyscrapers, neon-lit streets, traditional temples, and peaceful gardens. It is famous for its cuisine, technology, anime culture, historic shrines, and some of the cleanest and most efficient public transportation systems in the world.",
-    "imageUrl": "https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt0db69fde9a0f6d98/675e125faf051ba02b13ded4/japan-725347-Header_Desktop.jpg",
-    "description": "A perfect blend of modern neon streets and traditional temples.",
-    "createdAt": "2025-03-05T08:22:00Z",
-    "ownerId": "USER-ID-HERE",
-    "rating": 4.7,
-    "tags": ["technology", "culture", "anime", "food"]
-  }
-]
+{
+  "places": [
+    {
+      "id": "1",
+      "title": "Paris, France",
+      "city": "Paris",
+      "country": "France",
+      "description": "The romantic capital of the world.",
+      "longDescription": "Paris is known for the Eiffel Tower, rich culture, museums, fashion, luxury cafes, and historic architecture.",
+      "imageUrl": "https://images2.alphacoders.com/561/thumb-1920-561115.jpg",
+      "price": 1200,
+      "weather": "Mild, 12–25°C",
+      "coordinates": {
+        "lat": 48.8566,
+        "lng": 2.3522
+      },
+      "seasons": [
+        "Spring",
+        "Summer",
+        "Autumn"
+      ],
+      "createdAt": "2025-02-10T10:00:00Z",
+      "ownerId": "USER-ID-1",
+      "rating": 4.9,
+      "tags": [
+        "romantic",
+        "historic",
+        "city"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "New York, USA",
+      "city": "New York",
+      "country": "USA",
+      "description": "The iconic skyline and fast-paced lifestyle of the Big Apple.",
+      "longDescription": "New York City has skyscrapers, Central Park, Broadway, Wall Street, luxury shopping, museums, and endless nightlife.",
+      "imageUrl": "https://lh3.googleusercontent.com/places/AAcXr8oELGjp26s1mDaTs07ebLQ05ZdAOICFWmQbHv3Hy43Gy7VfuzRCgQUw_kCNbfVsFexY0QfO4wuj6kOGrSy3UJXakGAadOvQJCM=s1600-w612",
+      "price": 1600,
+      "weather": "Cold winters, warm summers",
+      "coordinates": {
+        "lat": 40.7128,
+        "lng": -74.0060
+      },
+      "seasons": [
+        "Spring",
+        "Autumn"
+      ],
+      "createdAt": "2025-02-14T10:30:00Z",
+      "ownerId": "USER-ID-1",
+      "rating": 4.8,
+      "tags": [
+        "modern",
+        "city",
+        "nightlife"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Tokyo, Japan",
+      "city": "Tokyo",
+      "country": "Japan",
+      "description": "A blend of neon skyscrapers and ancient temples.",
+      "longDescription": "Tokyo is famous for anime culture, Shibuya Crossing, technology, temples, cherry blossoms, and unique cuisine.",
+      "imageUrl": "https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt0db69fde9a0f6d98/675e125faf051ba02b13ded4/japan-725347-Header_Desktop.jpg",
+      "price": 1400,
+      "weather": "Mild, occasional rain",
+      "coordinates": {
+        "lat": 35.6762,
+        "lng": 139.6503
+      },
+      "seasons": [
+        "Spring",
+        "Autumn"
+      ],
+      "createdAt": "2025-02-12T09:00:00Z",
+      "ownerId": "USER-ID-2",
+      "rating": 4.7,
+      "tags": [
+        "tech",
+        "culture",
+        "city"
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Sydney, Australia",
+      "city": "Sydney",
+      "country": "Australia",
+      "description": "Home of beaches, sunshine, and the Sydney Opera House.",
+      "longDescription": "Sydney offers Bondi Beach, the Opera House, the Harbour Bridge, wildlife parks, and coastal walks.",
+      "imageUrl": "https://images5.alphacoders.com/555/thumb-1920-555090.jpg",
+      "price": 1800,
+      "weather": "Warm, 20–35°C",
+      "coordinates": {
+        "lat": -33.8688,
+        "lng": 151.2093
+      },
+      "seasons": [
+        "Summer",
+        "Autumn"
+      ],
+      "createdAt": "2025-02-16T12:00:00Z",
+      "ownerId": "USER-ID-3",
+      "rating": 4.6,
+      "tags": [
+        "beach",
+        "sunny",
+        "nature"
+      ]
+    },
+    {
+      "id": "5",
+      "title": "London, UK",
+      "city": "London",
+      "country": "United Kingdom",
+      "description": "Historic streets, famous monuments, and rainy charm.",
+      "longDescription": "London features Big Ben, Buckingham Palace, the Thames, museums, theaters, and multicultural cuisine.",
+      "imageUrl": "https://images.ctfassets.net/szez98lehkfm/15BqGrxg9mJrHYLhQEZObo/7db404e41a288b7f7e34c9684b0bd3a8/MyIC_Article123611?w=1106&h=622&fm=webp&fit=fill",
+      "price": 1100,
+      "weather": "Cool & rainy",
+      "coordinates": {
+        "lat": 51.5074,
+        "lng": -0.1278
+      },
+      "seasons": [
+        "Spring",
+        "Autumn",
+        "Winter"
+      ],
+      "createdAt": "2025-02-11T14:00:00Z",
+      "ownerId": "USER-ID-2",
+      "rating": 4.5,
+      "tags": [
+        "historic",
+        "city"
+      ]
+    },
+    {
+      "id": "6",
+      "title": "Dubai, UAE",
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "description": "Luxury desert city known for futuristic skyscrapers.",
+      "longDescription": "Dubai offers Burj Khalifa, desert safaris, luxury malls, pristine beaches, and vibrant nightlife.",
+      "imageUrl": "https://etimg.etb2bimg.com/photo/87053505.cms",
+      "price": 1900,
+      "weather": "Very hot, 30–45°C",
+      "coordinates": {
+        "lat": 25.2048,
+        "lng": 55.2708
+      },
+      "seasons": [
+        "Winter"
+      ],
+      "createdAt": "2025-02-13T18:45:00Z",
+      "ownerId": "USER-ID-3",
+      "rating": 4.7,
+      "tags": [
+        "luxury",
+        "desert",
+        "modern"
+      ]
+    },
+    {
+      "id": "7",
+      "title": "Venice, Italy",
+      "city": "Venice",
+      "country": "Italy",
+      "description": "The floating city of canals, bridges, and art.",
+      "longDescription": "Venice is famous for gondolas, canals, architecture, romantic alleys, and world-class Italian cuisine.",
+      "imageUrl": "https://w0.peakpx.com/wallpaper/867/706/HD-wallpaper-venice-r-grand-canal-gondolas-italy-venice-at-summer-europe-italian-cities.jpg",
+      "price": 900,
+      "weather": "Mild, 10–28°C",
+      "coordinates": {
+        "lat": 45.4408,
+        "lng": 12.3155
+      },
+      "seasons": [
+        "Spring",
+        "Summer"
+      ],
+      "createdAt": "2025-02-15T09:15:00Z",
+      "ownerId": "USER-ID-1",
+      "rating": 4.9,
+      "tags": [
+        "romantic",
+        "historic",
+        "canals"
+      ]
+    },
+    {
+      "id": "8",
+      "title": "Rio de Janeiro, Brazil",
+      "city": "Rio de Janeiro",
+      "country": "Brazil",
+      "description": "Vibrant beaches, mountains, and carnival culture.",
+      "longDescription": "Rio offers Copacabana Beach, Christ the Redeemer, Sugarloaf Mountain, samba, and breathtaking sunsets.",
+      "imageUrl": "https://www.thetimes.com/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2F592f4514-2e05-11e9-b50c-c6da8f614c54.jpg?crop=4300%2C2419%2C0%2C224&format=webp&quality=9&resize=1500",
+      "price": 1300,
+      "weather": "Warm tropical",
+      "coordinates": {
+        "lat": -22.9068,
+        "lng": -43.1729
+      },
+      "seasons": [
+        "Summer"
+      ],
+      "createdAt": "2025-02-14T20:20:00Z",
+      "ownerId": "USER-ID-3",
+      "rating": 4.6,
+      "tags": [
+        "beach",
+        "party",
+        "tropical"
+      ]
+    },
+    {
+      "id": "9",
+      "title": "Bangkok, Thailand",
+      "city": "Bangkok",
+      "country": "Thailand",
+      "description": "Exotic temples, street food, and vibrant nightlife.",
+      "longDescription": "Bangkok is known for floating markets, temples, spicy cuisine, and modern urban life.",
+      "imageUrl": "https://www.thailand-reiseprofis.com/wp-content/bilder/wat-arun-bangkok.jpg",
+      "price": 800,
+      "weather": "Hot & humid",
+      "coordinates": {
+        "lat": 13.7563,
+        "lng": 100.5018
+      },
+      "seasons": [
+        "Winter"
+      ],
+      "createdAt": "2025-02-09T08:30:00Z",
+      "ownerId": "USER-ID-2",
+      "rating": 4.5,
+      "tags": [
+        "exotic",
+        "food",
+        "culture"
+      ]
+    },
+    {
+      "id": "10",
+      "title": "Cape Town, South Africa",
+      "city": "Cape Town",
+      "country": "South Africa",
+      "description": "Beautiful beaches, mountains, and wildlife.",
+      "longDescription": "Cape Town offers Table Mountain, penguin beaches, wildlife tours, wine regions, and cultural history.",
+      "imageUrl": "https://boomers-daily.com/wp-content/uploads/2021/05/aerial-views-cape-town-south-africa-video-may-10-2021.jpg?w=1024&h=567&crop=1",
+      "price": 1000,
+      "weather": "Warm & windy",
+      "coordinates": {
+        "lat": -33.9249,
+        "lng": 18.4241
+      },
+      "seasons": [
+        "Summer"
+      ],
+      "createdAt": "2025-02-17T11:50:00Z",
+      "ownerId": "USER-ID-1",
+      "rating": 4.8,
+      "tags": [
+        "mountains",
+        "nature",
+        "beach"
+      ]
+    },
+    {
+      "id": "11",
+      "title": "Vancouver, Canada",
+      "city": "Vancouver",
+      "country": "Canada",
+      "description": "A coastal city surrounded by mountains, forests, and ocean.",
+      "longDescription": "Vancouver is known for its breathtaking nature, Stanley Park, scenic seawall walks, ski resorts, multicultural food scene, and modern downtown architecture.",
+      "imageUrl": "https://cyclingmagazine.ca/wp-content/uploads/2019/06/Vancouver-AerialView-01014_201809_AlbertNormandin_False-CreekVancouverDowntownCityAerial.jpg",
+      "price": 1300,
+      "weather": "Cool, rainy winters and mild summers",
+      "coordinates": {
+        "lat": 49.2827,
+        "lng": -123.1207
+      },
+      "seasons": [
+        "Spring",
+        "Summer",
+        "Autumn"
+      ],
+      "createdAt": "2025-02-18T09:20:00Z",
+      "ownerId": "USER-ID-2",
+      "rating": 4.7,
+      "tags": [
+        "nature",
+        "mountains",
+        "city"
+      ]
+    },
+    {
+      "id": "12",
+      "title": "Athens, Greece",
+      "city": "Athens",
+      "country": "Greece",
+      "description": "The birthplace of democracy and ancient civilization.",
+      "longDescription": "Athens offers ancient ruins like the Acropolis and Parthenon, Mediterranean cuisine, vibrant nightlife, and coastal beauty along the Athenian Riviera.",
+      "imageUrl": "https://images7.alphacoders.com/134/thumb-1920-1341836.jpeg",
+      "price": 900,
+      "weather": "Hot summers, mild winters",
+      "coordinates": {
+        "lat": 37.9838,
+        "lng": 23.7275
+      },
+      "seasons": [
+        "Spring",
+        "Autumn"
+      ],
+      "createdAt": "2025-02-19T13:45:00Z",
+      "ownerId": "USER-ID-3",
+      "rating": 4.6,
+      "tags": [
+        "historic",
+        "culture",
+        "sunny"
+      ]
+    }
+  ]
+}

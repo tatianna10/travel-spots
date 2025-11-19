@@ -1,114 +1,131 @@
-/* ===== DETAILS PAGE ROOT ===== */
+/* ===============================
+   DETAILS PAGE BACKGROUND
+================================ */
 .details-wrapper {
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 4rem 1rem;
     background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80");
     background-size: cover;
     background-position: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 4rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-family: sans-serif;
 }
 
-/* ===== CARD CONTAINER ===== */
+/* ===============================
+   MAIN CARD
+================================ */
 .details-card {
-    width: 100%;
-    max-width: 900px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 1.5rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 850px;
     color: white;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     text-align: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
-/* ===== IMAGE ===== */
+/* ===============================
+   IMAGE
+================================ */
 .details-image {
     width: 100%;
-    height: 350px;
+    height: 18rem;
     object-fit: cover;
     border-radius: 1rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
-/* ===== TITLE ===== */
+/* ===============================
+   TITLE
+================================ */
 .details-title {
+    font-size: 2.5rem;
+    font-weight: 700;
     margin-top: 1.5rem;
-    font-size: 2.4rem;
-    font-weight: bold;
-    text-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
 }
 
-/* ===== DESCRIPTION ===== */
+/* ===============================
+   DESCRIPTION TEXT
+================================ */
 .details-desc {
     margin-top: 1rem;
     font-size: 1.15rem;
     line-height: 1.6;
-    opacity: 0.95;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 }
 
-/* ===== EXTRA INFO BLOCK ===== */
-.details-extra {
-    margin-top: 2rem;
-    text-align: left;
-    background: rgba(255, 255, 255, 0.18);
-    padding: 1.2rem;
-    border-radius: 1rem;
-    font-size: 1.05rem;
-}
-
-.details-extra p {
-    margin: 0.4rem 0;
-}
-
-/* ===== BUTTONS AREA ===== */
+/* ===============================
+   BUTTON WRAPPER
+================================ */
 .details-actions {
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-top: 2rem;
+    flex-wrap: wrap;
 }
 
-/* ===== BUTTONS ===== */
+/* ===============================
+   BUTTON BASE STYLE
+================================ */
 .details-btn {
-    padding: 0.7rem 1.4rem;
-    border-radius: 0.6rem;
-    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
     font-weight: 600;
-    border: 1px solid rgba(255, 255, 255, 0.4);
     cursor: pointer;
     transition: 0.25s ease;
+    color: white;
+    backdrop-filter: blur(6px);
 }
 
+/* ===============================
+   INDIVIDUAL BUTTON COLORS
+================================ */
 .details-btn.blue {
-    background: rgba(59, 130, 246, 0.35);
+    background: rgba(59, 130, 246, 0.3);
 }
 .details-btn.blue:hover {
-    background: rgba(59, 130, 246, 0.55);
+    background: rgba(59, 130, 246, 0.4);
 }
 
 .details-btn.green {
-    background: rgba(16, 185, 129, 0.35);
+    background: rgba(34, 197, 94, 0.3);
 }
 .details-btn.green:hover {
-    background: rgba(16, 185, 129, 0.55);
+    background: rgba(34, 197, 94, 0.4);
 }
 
 .details-btn.yellow {
-    background: rgba(234, 179, 8, 0.35);
+    background: rgba(234, 179, 8, 0.3);
 }
 .details-btn.yellow:hover {
-    background: rgba(234, 179, 8, 0.55);
+    background: rgba(234, 179, 8, 0.4);
 }
 
-/* ===== NOT FOUND ===== */
+/* ===============================
+   NOT FOUND PAGE
+================================ */
 .details-notfound {
     min-height: 100vh;
-    background: #222;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     color: white;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.back-home {
+    margin-top: 1rem;
+    color: #93c5fd;
+    text-decoration: underline;
+    display: inline-block;
 }

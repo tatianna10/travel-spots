@@ -9,44 +9,54 @@ export default function CatalogPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Filters
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 
+  // FETCH PLACES
   useEffect(() => {
     getAllPlaces()
-      .then(data => {
+      .then((data) => {
+        if (!Array.isArray(data)) {
+          console.error("Backend returned something else:", data);
+          setError("Server returned invalid data format");
+          setLoading(false);
+          return;
+        }
+
         setPlaces(data);
-        setFilteredPlaces(data); 
+        setFilteredPlaces(data);
         setLoading(false);
       })
-      .catch(err => {
-        console.error(err);
+      .catch((err) => {
+        console.error("Fetch error:", err);
         setError(err.message || "Failed to load catalog");
         setLoading(false);
       });
   }, []);
 
+  // FILTER LOGIC
   useEffect(() => {
+    if (!Array.isArray(places)) return;
+
     let result = [...places];
 
-    // FILTER BY SEARCH (title)
-    if (search.trim() !== "") {
-      result = result.filter(place =>
-        place.title.toLowerCase().includes(search.toLowerCase())
+    // SEARCH FILTER
+    const s = search.trim().toLowerCase();
+    if (s !== "") {
+      result = result.filter((place) =>
+        place.title?.toLowerCase().includes(s)
       );
     }
 
-    // FILTER BY CATEGORY 
-    if (category && category !== "") {
-      result = result.filter(place =>
-        place.tags && place.tags.includes(category)
+    // CATEGORY FILTER (tags)
+    if (category !== "") {
+      result = result.filter((place) =>
+        Array.isArray(place.tags) && place.tags.includes(category)
       );
     }
 
     setFilteredPlaces(result);
   }, [search, category, places]);
-
 
   return (
     <div className="catalog-wrapper">
@@ -67,7 +77,7 @@ export default function CatalogPage() {
 
           <h2 className="catalog-main-title">All Travel Spots</h2>
 
-        
+          {/* FILTERS */}
           <div className="catalog-filters">
             <input
               type="text"
@@ -86,7 +96,6 @@ export default function CatalogPage() {
               <option value="city">City</option>
               <option value="beach">Beach</option>
               <option value="historic">Historic</option>
-              <option value="mountains">Mountains</option>
               <option value="culture">Culture</option>
               <option value="modern">Modern</option>
               <option value="nightlife">Nightlife</option>
@@ -95,16 +104,16 @@ export default function CatalogPage() {
             </select>
           </div>
 
-      
+          {/* STATUS */}
           {loading && <p className="catalog-loading">Loading...</p>}
           {error && !loading && <p className="catalog-error">{error}</p>}
           {!loading && !error && filteredPlaces.length === 0 && (
             <p className="catalog-empty">No places match your filters.</p>
           )}
 
-      
+          {/* GRID */}
           <div className="catalog-grid">
-            {filteredPlaces.map(place => (
+            {filteredPlaces.map((place) => (
               <PlaceCard key={place.id} place={place} />
             ))}
           </div>

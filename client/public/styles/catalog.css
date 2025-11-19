@@ -1,127 +1,87 @@
-/* ================================
-   BACKGROUND WRAPPER
-================================ */
+/* ===== CATALOG PAGE BACKGROUND ===== */
 .catalog-wrapper {
-  min-height: 100vh;
-  background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80");
-  background-size: cover;
-  background-position: center;
-  font-family: sans-serif;
+    min-height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80");
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
 }
 
 .catalog-inner {
-  position: relative;
-  z-index: 10;
+    min-height: 100vh;
+    backdrop-filter: blur(3px);
+    padding-bottom: 3rem;
 }
 
-/* ================================
-   HEADER
-================================ */
+/* ===== HEADER ===== */
 .catalog-header {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 1rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .catalog-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: white;
-  text-shadow: 0 0 10px black;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 10px #000000aa;
 }
 
 .catalog-nav {
-  display: flex;
-  gap: 1.5rem;
-  font-weight: 600;
+    display: flex;
+    gap: 1.5rem;
 }
 
 .catalog-nav-link {
-  color: white;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.9);
-  transition: color .2s ease;
+    color: white;
+    font-weight: 600;
+    text-shadow: 0 0 6px #000;
+    transition: 0.25s;
 }
 
 .catalog-nav-link:hover {
-  color: #93c5fd;
+    color: #a3d4ff;
 }
 
-/* ================================
-   MAIN
-================================ */
+/* ===== MAIN AREA ===== */
 .catalog-main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
 }
 
 .catalog-main-title {
-  font-size: 2.4rem;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  margin-bottom: 2.5rem;
-  text-shadow: 0 0 12px black;
+    font-size: 2.5rem;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 0 12px #000;
+    margin-bottom: 2rem;
 }
 
-/* ================================
-   FILTERS (Search + Category)
-================================ */
-.catalog-filters {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  justify-content: center;
-}
-
-.catalog-search,
-.catalog-category {
-  padding: 0.6rem 1rem;
-  border-radius: 10px;
-  border: none;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(8px);
-  color: white;
-  font-size: 1rem;
-}
-
-/* Fix placeholder color */
-.catalog-search::placeholder {
-  color: #e0e0e0;
-}
-
-/* Fix category dropdown visibility */
-.catalog-category option {
-  color: black;            /* readable text */
-  background: white;       /* visible background */
-}
-
-/* ================================
-   STATES
-================================ */
+/* ===== STATES ===== */
 .catalog-loading,
 .catalog-error,
 .catalog-empty {
-  text-align: center;
-  font-size: 1.25rem;
-  color: white;
-  text-shadow: 0 0 6px black;
+    color: white;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    text-shadow: 0 0 6px #000;
 }
 
 .catalog-error {
-  color: #fecaca; /* red */
+    color: #ffb3b3;
 }
 
-/* ================================
-   GRID
-================================ */
+/* ===== GRID ===== */
 .catalog-grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-top: 2rem;
 }

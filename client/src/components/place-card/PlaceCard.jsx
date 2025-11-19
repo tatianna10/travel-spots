@@ -15,7 +15,7 @@ export default function PlaceCard({ place }) {
 
                 <p className="place-card-desc">{place.description}</p>
 
-                <Link to={`/places/${place.id}/details`} className="place-card-button">
+                <Link to={`/places/${place.id}/details`} state={{ from: "catalog" }} className="place-card-button">
                     View Details
                 </Link>
             </div>

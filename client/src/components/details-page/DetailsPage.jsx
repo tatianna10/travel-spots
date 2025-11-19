@@ -1,13 +1,21 @@
-import { useParams, Link } from "react-router";
+import { useParams, Link, useNavigate, useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import { getPlaceById } from "../../api/placesApi";
-
 
 export default function DetailsPage() {
   const { id } = useParams();
   const [place, setPlace] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();          
+  const location = useLocation();          
+  const from = location.state?.from;       
+
+  const handleBack = () => {
+    if (from === "home") navigate("/");
+    else navigate("/places"); 
+  };
 
   useEffect(() => {
     getPlaceById(id)
@@ -42,15 +50,15 @@ export default function DetailsPage() {
 
         <h1 className="details-title">{place.title}</h1>
 
-        <p className="details-desc">{place.description}</p>
-
-
         <div className="details-extra">
           <p><strong></strong> {place.longDescription}</p>
         </div>
 
         <div className="details-actions">
-          <Link to="/places" className="details-btn blue">Back to Catalog</Link>
+          <button onClick={handleBack} className="details-btn blue">
+            {from === "home" ? "Back to Home" : "Back to Catalog"}
+          </button>
+
           <button className="details-btn green">Like ⭐</button>
           <button className="details-btn yellow">Add Comment 💬</button>
         </div>

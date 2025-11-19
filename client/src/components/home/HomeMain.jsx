@@ -9,7 +9,7 @@ export default function HomeMain() {
   useEffect(() => {
     getAllPlaces()
       .then(data => {
-        setPlaces(data.slice(0, 3)); 
+        setPlaces(data.slice(0, 3));
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -37,9 +37,10 @@ export default function HomeMain() {
 
               <p className="home-card-desc">{place.description}</p>
 
-              <Link to={`/places/${place.id}/details`} className="home-button">
+              <Link to={`/places/${place.id}/details`} state={{ from: "home" }} className="home-button">
                 View Details
               </Link>
+
             </div>
           ))}
         </div>

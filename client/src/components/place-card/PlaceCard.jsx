@@ -14,7 +14,7 @@ export default function PlaceCard({ place }) {
 
                 <p className="place-card-desc">{place.description}</p>
 
-                <Link to={`/details/${place.id}`} className="place-card-button">View Details</Link>
+                <Link to={`/places/${place.id}/details`} className="place-card-button">View Details</Link>
             </div>
         </div>
     );

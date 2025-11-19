@@ -21,7 +21,11 @@ export default function DetailsPage() {
   }, [id]);
 
   if (loading) {
-    return <div className="details-notfound"><h1>Loading...</h1></div>;
+    return (
+      <div className="details-notfound">
+        <h1>Loading...</h1>
+      </div>
+    );
   }
 
   if (error || !place) {
@@ -36,6 +40,7 @@ export default function DetailsPage() {
   return (
     <div className="details-wrapper">
       <div className="details-card">
+
         <img src={place.imageUrl} alt={place.title} className="details-image" />
 
         <h1 className="details-title">{place.title}</h1>
@@ -47,6 +52,7 @@ export default function DetailsPage() {
           <button className="details-btn green">Like ⭐</button>
           <button className="details-btn yellow">Add Comment 💬</button>
         </div>
+
       </div>
     </div>
   );

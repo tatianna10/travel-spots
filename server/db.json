@@ -1,26 +1,41 @@
-{
-  "users": [],
-  "places": [
-    {
-      "id": "78877795-98e5-4fd6-b90c-6a792dbbb1db",
-      "title": "Paris, France",
-      "imageUrl": "https://images2.alphacoders.com/561/thumb-1920-561115.jpg",
-      "description": "The romantic city of lights.",
-      "ownerId": "USER-ID-HERE"
-    },
-    {
-      "id": "3e74a23f-67a7-4ed5-8907-5df0297b40a5",
-      "title": "New York, USA",
-      "imageUrl": "https://lh3.googleusercontent.com/places/AAcXr8oELGjp26s1mDaTs07ebLQ05ZdAOICFWmQbHv3Hy43Gy7VfuzRCgQUw_kCNbfVsFexY0QfO4wuj6kOGrSy3UJXakGAadOvQJCM=s1600-w612",
-      "description": "The iconic skyline and fast-paced lifestyle of the Big Apple.",
-      "ownerId": "USER-ID-HERE"
-    },
-    {
-      "id": "6fe7459c-96f1-4ab2-beae-fe4d9ea12f7e",
-      "title": "Tokyo, Japan",
-      "imageUrl": "https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt0db69fde9a0f6d98/675e125faf051ba02b13ded4/japan-725347-Header_Desktop.jpg?fit=crop&disable=upscale&auto=webp&quality=60&crop=smart&width=1920&height=1080",
-      "description": "A perfect blend of modern neon streets and traditional temples.",
-      "ownerId": "USER-ID-HERE"
-    }
-  ]
-}
+[
+  {
+    "id": "78877795-98e5-4fd6-b90c-6a792dbbb1db",
+    "title": "Paris, France",
+    "country": "France",
+    "city": "Paris",
+    "longDescription": "Paris is known worldwide for its romantic ambiance, historic boulevards, iconic monuments such as the Eiffel Tower and Notre-Dame Cathedral, world-class museums like the Louvre, and charming cafes along the Seine River. The city blends art, culture, and history in a way no other city does.",
+    "imageUrl": "https://images2.alphacoders.com/561/thumb-1920-561115.jpg",
+    "description": "The romantic city of lights.",
+    "createdAt": "2025-01-20T12:00:00Z",
+    "ownerId": "USER-ID-HERE",
+    "rating": 4.9,
+    "tags": ["romantic", "historic", "museum", "architecture"]
+  },
+  {
+    "id": "3e74a23f-67a7-4ed5-8907-5df0297b40a5",
+    "title": "New York, USA",
+    "country": "USA",
+    "city": "New York",
+    "longDescription": "New York City is known for its iconic skyline, Central Park, Broadway theaters, luxury shopping, diverse food culture, and fast-paced lifestyle. From Times Square to Wall Street, NYC blends ambition, culture, and innovation in a unique way.",
+    "imageUrl": "https://lh3.googleusercontent.com/places/AAcXr8oELGjp26s1mDaTs07ebLQ05ZdAOICFWmQbHv3Hy43Gy7VfuzRCgQUw_kCNbfVsFexY0QfO4wuj6kOGrSy3UJXakGAadOvQJCM=s1600-w612",
+    "description": "The iconic skyline and fast-paced lifestyle of the Big Apple.",
+    "createdAt": "2025-02-14T10:30:00Z",
+    "ownerId": "USER-ID-HERE",
+    "rating": 4.8,
+    "tags": ["modern", "city", "nightlife", "food"]
+  },
+  {
+    "id": "6fe7459c-96f1-4ab2-beae-fe4d9ea12f7e",
+    "title": "Tokyo, Japan",
+    "country": "Japan",
+    "city": "Tokyo",
+    "longDescription": "Tokyo is a fusion of futuristic skyscrapers, neon-lit streets, traditional temples, and peaceful gardens. It is famous for its cuisine, technology, anime culture, historic shrines, and some of the cleanest and most efficient public transportation systems in the world.",
+    "imageUrl": "https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt0db69fde9a0f6d98/675e125faf051ba02b13ded4/japan-725347-Header_Desktop.jpg",
+    "description": "A perfect blend of modern neon streets and traditional temples.",
+    "createdAt": "2025-03-05T08:22:00Z",
+    "ownerId": "USER-ID-HERE",
+    "rating": 4.7,
+    "tags": ["technology", "culture", "anime", "food"]
+  }
+]

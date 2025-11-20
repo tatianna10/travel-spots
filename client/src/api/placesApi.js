@@ -14,25 +14,16 @@ async function handleResponse(res) {
   return res.json();
 }
 
-/* ======================================================
-   GET ALL PLACES — backend returns an ARRAY
-====================================================== */
 export async function getAllPlaces() {
   const res = await fetch(baseUrl);
-  return handleResponse(res);   // ← returns array
+  return handleResponse(res);   
 }
 
-/* ======================================================
-   GET SINGLE PLACE BY ID
-====================================================== */
 export async function getPlaceById(id) {
   const res = await fetch(`${baseUrl}/${id}`);
   return handleResponse(res);
 }
 
-/* ======================================================
-   CREATE PLACE
-====================================================== */
 export async function createPlace(placeData) {
   const res = await fetch(baseUrl, {
     method: "POST",
@@ -42,9 +33,6 @@ export async function createPlace(placeData) {
   return handleResponse(res);
 }
 
-/* ======================================================
-   UPDATE PLACE
-====================================================== */
 export async function updatePlace(id, placeData) {
   const res = await fetch(`${baseUrl}/${id}`, {
     method: "PUT",
@@ -54,9 +42,6 @@ export async function updatePlace(id, placeData) {
   return handleResponse(res);
 }
 
-/* ======================================================
-   DELETE PLACE
-====================================================== */
 export async function deletePlace(id) {
   const res = await fetch(`${baseUrl}/${id}`, {
     method: "DELETE",

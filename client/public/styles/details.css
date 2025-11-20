@@ -89,25 +89,27 @@
 /* ===============================
    INDIVIDUAL BUTTON COLORS
 ================================ */
-.details-btn.blue {
-    background: rgba(59, 130, 246, 0.3);
+.details-btn.back {
+    background: rgba(148, 163, 184, 0.35);
 }
-.details-btn.blue:hover {
-    background: rgba(59, 130, 246, 0.4);
-}
-
-.details-btn.green {
-    background: rgba(34, 197, 94, 0.3);
-}
-.details-btn.green:hover {
-    background: rgba(34, 197, 94, 0.4);
+.details-btn.back:hover {
+    background: rgba(148, 163, 184, 0.55);
 }
 
-.details-btn.yellow {
-    background: rgba(234, 179, 8, 0.3);
+/* LIKE BUTTON (Back) */
+.details-btn.like {
+    background: rgba(59, 130, 246, 0.35);
 }
-.details-btn.yellow:hover {
-    background: rgba(234, 179, 8, 0.4);
+.details-btn.like:hover {
+    background: rgba(59, 130, 246, 0.55);
+}
+
+/* COMMENT BUTTON (Comment) */
+.details-btn.comment {
+    background: rgba(168, 85, 247, 0.35);
+}
+.details-btn.comment:hover {
+    background: rgba(168, 85, 247, 0.55);
 }
 
 /* ===============================
@@ -129,3 +131,24 @@
     text-decoration: underline;
     display: inline-block;
 }
+
+/* Delete button */
+.details-btn.delete {
+    background: rgba(220, 38, 38, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.details-btn.delete:hover {
+    background: rgba(220, 38, 38, 0.55);
+}
+
+/* Edit button */
+.details-btn.edit {
+    background: rgba(34, 197, 94, 0.35);     
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.details-btn.edit:hover {
+    background: rgba(34, 197, 94, 0.55);   
+}
+

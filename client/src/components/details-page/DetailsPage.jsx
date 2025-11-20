@@ -1,6 +1,6 @@
 import { useParams, Link, useNavigate, useLocation } from "react-router";
 import { useEffect, useState } from "react";
-import { getPlaceById } from "../../api/placesApi";
+import { getPlaceById, deletePlace } from "../../api/placesApi";
 
 export default function DetailsPage() {
   const { id } = useParams();
@@ -8,13 +8,27 @@ export default function DetailsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const navigate = useNavigate();          
-  const location = useLocation();          
-  const from = location.state?.from;       
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from;
+
+  const handleDelete = async () => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete: ${place.title}?`
+    );
+    if (!confirmed) return;
+
+    try {
+      await deletePlace(id);  
+      navigate("/places");   
+    } catch (err) {
+      alert("Unable to delete place: " + err.message);
+    }
+  };
 
   const handleBack = () => {
     if (from === "home") navigate("/");
-    else navigate("/places"); 
+    else navigate("/places");
   };
 
   useEffect(() => {
@@ -55,12 +69,26 @@ export default function DetailsPage() {
         </div>
 
         <div className="details-actions">
-          <button onClick={handleBack} className="details-btn blue">
+     
+          <button onClick={handleBack} className="details-btn back">
             {from === "home" ? "Back to Home" : "Back to Catalog"}
           </button>
 
-          <button className="details-btn green">Like ⭐</button>
-          <button className="details-btn yellow">Add Comment 💬</button>
+       
+          {from !== "home" && (
+            <>
+              <button className="details-btn like">Like ⭐</button>
+              <button className="details-btn comment">Add Comment 💬</button>
+
+              <Link to={`/places/${id}/edit`} className="details-btn edit">
+                Edit
+              </Link>
+
+              <button className="details-btn delete" onClick={handleDelete}>
+                Delete
+              </button>
+            </>
+          )}
         </div>
 
       </div>

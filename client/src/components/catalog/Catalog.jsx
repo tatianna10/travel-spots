@@ -12,7 +12,7 @@ export default function CatalogPage() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 
-  // FETCH PLACES
+
   useEffect(() => {
     getAllPlaces()
       .then((data) => {

@@ -289,16 +289,25 @@
       "comments": []
     },
     {
-      "id": "cf13c2c5-0d06-4ff6-9407-87f0aec4caf1",
-      "title": "Barcelona",
-      "imageUrl": "https://aws-tiqets-cdn.imgix.net/images/content/3e067e94f86d4aeebf8eaa95df34c0d4.jpg?auto=format%2Ccompress&dpr=2&fit=clip&h=695.2000122070312&q=30&w=null",
+      "id": "848e0b78-a352-4f7a-987f-e41cf950ac65",
+      "title": "Rome, Italy",
+      "city": "Rome",
+      "country": "Italy",
       "description": "A vibrant Mediterranean city known for its beaches, Gaudí architecture, and lively cultural scene.",
-      "longDescription": "Barcelona blends stunning modernist architecture, golden beaches, rich Catalan culture, and world-famous cuisine. From the iconic Sagrada Família and Park Güell to the bustling La Rambla and historic Gothic Quarter, the city offers a unique mix of art, history, and coastal beauty. Whether you’re enjoying tapas in a local bar, watching a sunset along Barceloneta Beach, or exploring Gaudí’s fantastical creations, Barcelona delivers an unforgettable Mediterranean experience.",
-      "category": "modern",
+      "longDescription": "adw",
+      "imageUrl": "https://m.media-amazon.com/images/M/MV5BMjIzMjMxOTgzM15BMl5BanBnXkFtZTcwMTAwODM2NA@@._V1_.jpg",
+      "price": 1235,
+      "weather": "Unknown",
+      "lat": 41.8933203,
+      "lng": 12.4829321,
+      "seasons": "spring,summer,autumn",
       "tags": [
         "city",
         "modern"
       ],
+      "rating": 4.5,
+      "category": "nature",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     }

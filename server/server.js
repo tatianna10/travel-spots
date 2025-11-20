@@ -78,14 +78,19 @@ app.get("/data/places/:id", (req, res) => {
     res.json(place);
 });
 
-// CREATE place
+/// CREATE place
 app.post("/data/places", (req, res) => {
     const db = readDB();
+
+    // Preserve React's exact order:
+    const orderedBody = { ...req.body };
+
+    // Insert id FIRST + overwrite likes/comments LAST
     const newPlace = {
         id: uuid(),
-        ...req.body,
-        likes: req.body.likes || [],
-        comments: req.body.comments || []
+        ...orderedBody,
+        likes: Array.isArray(orderedBody.likes) ? orderedBody.likes : [],
+        comments: Array.isArray(orderedBody.comments) ? orderedBody.comments : []
     };
 
     db.places.push(newPlace);

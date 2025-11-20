@@ -1,160 +1,183 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router";
 import { createPlace } from "../../api/placesApi";
 
+export default function CreatePlace() {
+    const navigate = useNavigate();
 
-export default function CreateSpotPage() {
-  const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    title: "",
-    imageUrl: "",
-    description: "",
-    longDescription: "",
-    category: "",
-    tags: ""
-  });
-
-  function handleChange(e) {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+    const [formData, setFormData] = useState({
+        city: "",
+        country: "",
+        imageUrl: "",
+        description: "",
+        longDescription: "",
+        category: "",
+        tags: ""
     });
-  }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+    // ✅ Reset form ONCE when the page mounts
+    useEffect(() => {
+        setFormData({
+            city: "",
+            country: "",
+            imageUrl: "",
+            description: "",
+            longDescription: "",
+            category: "",
+            tags: ""
+        });
+    }, []);
 
-    const newSpot = {
-      title: formData.title,
-      imageUrl: formData.imageUrl,
-      description: formData.description,
-      longDescription: formData.longDescription,
-      category: formData.category,
-      tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean),
-      likes: [],
-      comments: []
-    };
+    const [submitting, setSubmitting] = useState(false);
 
-    try {
-      await createPlace(newSpot);
-      navigate("/catalog");
-    } catch (err) {
-      alert("Failed to create spot: " + err.message);
+    function handleChange(e) {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
     }
-  }
 
-  return (
-    <>
-      {/* HEADER */}
-      <header className="create-header">
-        <h1 className="create-header-title">Create Spot</h1>
+    function generateRandomRating() {
+        const value = Math.random() * 1.5 + 3.5;
+        return Number(value.toFixed(1));
+    }
 
-        <nav className="create-nav">
-          <Link to="/" className="create-nav-link">Home</Link>
-          <Link to="/catalog" className="create-nav-link">Catalog</Link>
-          <Link to="/login" className="create-nav-link">Login</Link>
-          <Link to="/register" className="create-nav-link">Register</Link>
-        </nav>
-      </header>
+    function generateRandomPrice() {
+        return Math.floor(Math.random() * (1900 - 800 + 1)) + 800;
+    }
 
-      {/* PAGE CONTENT */}
-      <div className="create-wrapper">
-        <form className="create-form" onSubmit={handleSubmit}>
-          <h2 className="create-title">Add New Travel Spot</h2>
+    function getSeasonsByLat(lat) {
+        if (!lat) return "";
+        return lat >= 0 ? "spring,summer,autumn" : "summer,autumn,winter";
+    }
 
-          {/* TITLE */}
-          <label className="create-label">
-            Title:
-            <input
-              type="text"
-              name="title"
-              className="create-input"
-              value={formData.title}
-              onChange={handleChange}
-              required
-            />
-          </label>
+    async function handleSubmit(e) {
+        e.preventDefault();
+        if (submitting) return;
 
-          {/* IMAGE */}
-          <label className="create-label">
-            Image URL:
-            <input
-              type="text"
-              name="imageUrl"
-              className="create-input"
-              value={formData.imageUrl}
-              onChange={handleChange}
-              required
-            />
-          </label>
+        setSubmitting(true);
 
-          {/* SHORT DESCRIPTION */}
-          <label className="create-label">
-            Short Description:
-            <input
-              type="text"
-              name="description"
-              className="create-input"
-              value={formData.description}
-              onChange={handleChange}
-              required
-            />
-          </label>
+        const city = formData.city.trim();
+        const country = formData.country.trim();
 
-          {/* LONG DESCRIPTION */}
-          <label className="create-label">
-            Long Description:
-            <textarea
-              name="longDescription"
-              className="create-textarea"
-              value={formData.longDescription}
-              onChange={handleChange}
-              rows="4"
-              required
-            ></textarea>
-          </label>
+        let lat = null;
+        let lng = null;
 
-          {/* CATEGORY */}
-          <label className="create-label">
-            Category:
-            <select
-              name="category"
-              className="create-select"
-              value={formData.category}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select category...</option>
-              <option value="city">City</option>
-              <option value="beach">Beach</option>
-              <option value="historic">Historic</option>
-              <option value="culture">Culture</option>
-              <option value="modern">Modern</option>
-              <option value="nightlife">Nightlife</option>
-              <option value="romantic">Romantic</option>
-              <option value="tropical">Tropical</option>
-            </select>
-          </label>
+        try {
+            const geoRes = await fetch(
+                `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&format=json&limit=1`
+            );
+            if (geoRes.ok) {
+                const geoData = await geoRes.json();
+                if (geoData.length > 0) {
+                    lat = Number(geoData[0].lat);
+                    lng = Number(geoData[0].lon);
+                }
+            }
+        } catch { }
 
-          {/* TAGS */}
-          <label className="create-label">
-            Tags (comma separated):
-            <input
-              type="text"
-              name="tags"
-              className="create-input"
-              value={formData.tags}
-              onChange={handleChange}
-              placeholder="city, modern, nightlife..."
-            />
-          </label>
+        const newSpot = {
+            // id will be added on backend
 
-          <button type="submit" className="create-btn">
-            Add Spot
-          </button>
-        </form>
-      </div>
-    </>
-  );
+            title: `${city}, ${country}`,
+            city,
+            country,
+            description: formData.description.trim(),
+            longDescription: formData.longDescription.trim(),
+            imageUrl: formData.imageUrl.trim(),
+            price: generateRandomPrice(),
+            weather: "Unknown",
+            lat,
+            lng,
+            seasons: getSeasonsByLat(lat),
+            tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean),
+            rating: generateRandomRating(),
+            category: formData.category,
+            ownerId: "anonymous",
+            likes: [],
+            comments: []
+        };
+
+
+        try {
+            await createPlace(newSpot);
+
+            navigate("/places");
+        } catch (err) {
+            alert("Failed to create spot: " + err.message);
+        } finally {
+            setSubmitting(false);
+        }
+    }
+
+    return (
+        <>
+            <header className="create-header">
+                <h1 className="create-header-title">Create Spot</h1>
+                <nav className="create-nav">
+                    <Link to="/" className="create-nav-link">Home</Link>
+                    <Link to="/places" className="create-nav-link">Catalog</Link>
+                    <Link to="/login" className="create-nav-link">Login</Link>
+                    <Link to="/register" className="create-nav-link">Register</Link>
+                </nav>
+            </header>
+
+            <div className="create-wrapper">
+                <form className="create-form" onSubmit={handleSubmit}>
+                    <h2 className="create-title">Add New Travel Spot</h2>
+
+                    <label className="create-label">
+                        City:
+                        <input type="text" name="city" value={formData.city} onChange={handleChange} className="create-input" required />
+                    </label>
+
+                    <label className="create-label">
+                        Country:
+                        <input type="text" name="country" value={formData.country} onChange={handleChange} className="create-input" required />
+                    </label>
+
+                    <label className="create-label">
+                        Image URL:
+                        <input type="text" name="imageUrl" value={formData.imageUrl} onChange={handleChange} className="create-input" required />
+                    </label>
+
+                    <label className="create-label">
+                        Short Description:
+                        <input type="text" name="description" value={formData.description} onChange={handleChange} className="create-input" required />
+                    </label>
+
+                    <label className="create-label">
+                        Long Description:
+                        <textarea name="longDescription" value={formData.longDescription} onChange={handleChange} className="create-textarea" rows="4" required></textarea>
+                    </label>
+
+                    <label className="create-label">
+                        Category:
+                        <select name="category" value={formData.category} onChange={handleChange} className="create-select" required>
+                            <option value="">Select category...</option>
+                            <option value="city">City</option>
+                            <option value="beach">Beach</option>
+                            <option value="historic">Historic</option>
+                            <option value="culture">Culture</option>
+                            <option value="modern">Modern</option>
+                            <option value="nightlife">Nightlife</option>
+                            <option value="romantic">Romantic</option>
+                            <option value="tropical">Tropical</option>
+                            <option value="nature">Nature</option>
+                            <option value="desert">Desert</option>
+                        </select>
+                    </label>
+
+                    <label className="create-label">
+                        Tags (comma-separated):
+                        <input type="text" name="tags" value={formData.tags} onChange={handleChange} className="create-input" />
+                    </label>
+
+                    <button type="submit" className="create-btn" disabled={submitting}>
+                        {submitting ? "Adding..." : "Add Spot"}
+                    </button>
+                </form>
+            </div>
+        </>
+    );
 }

@@ -62,42 +62,70 @@
 }
 
 /* ===============================
-   ⭐ WEATHER BAR (NEW)
+   ⭐ WEATHER BAR — HORIZONTAL
 ================================ */
 .weather-strip {
     display: flex;
     justify-content: center;
     gap: 1.2rem;
     margin: 1.8rem 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* always horizontal boxes */
 }
 
+/* Glass style weather boxes */
 .weather-box {
     background: rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(6px);
-    padding: 0.8rem 1.2rem;
-    border-radius: 0.85rem;
+    padding: 0.9rem 1.2rem;
+    border-radius: 1rem;
     border: 1px solid rgba(255, 255, 255, 0.35);
-    min-width: 130px;
+    width: 140px;
     text-align: center;
     font-size: 1rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    color: white;
 }
 
 .weather-day {
     font-weight: 700;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.35rem;
     font-size: 1.05rem;
 }
 
 .weather-icon {
-    font-size: 1.4rem;
+    font-size: 1.7rem;
     margin-bottom: 0.3rem;
 }
 
 .weather-temp {
-    font-size: 1.05rem;
-    opacity: 0.95;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* ===============================
+   WEATHER LOADING ANIMATION
+================================ */
+.weather-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* spinner ring */
+.weather-spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.35);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+
+/* KEYFRAMES (allowed) */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
 }
 
 /* ===============================
@@ -112,7 +140,7 @@
 }
 
 /* ===============================
-   BUTTON BASE STYLE
+   BUTTON STYLE
 ================================ */
 .details-btn {
     padding: 0.75rem 1.5rem;
@@ -125,9 +153,6 @@
     backdrop-filter: blur(6px);
 }
 
-/* ===============================
-   INDIVIDUAL BUTTON COLORS
-================================ */
 .details-btn.back {
     background: rgba(148, 163, 184, 0.35);
 }
@@ -181,23 +206,4 @@
     color: #93c5fd;
     text-decoration: underline;
     display: inline-block;
-}
-
-/* ===============================
-   RESPONSIVE
-================================ */
-@media (max-width: 600px) {
-    .details-title {
-        font-size: 2rem;
-    }
-
-    .weather-strip {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .weather-box {
-        width: 100%;
-        max-width: 260px;
-    }
 }

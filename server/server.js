@@ -4,6 +4,7 @@ import fs from "fs";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
+import fetch from "node-fetch";
 
 const app = express();
 const PORT = 3030;
@@ -132,6 +133,39 @@ app.delete("/data/places/:id", (req, res) => {
 
     res.json({ message: "Deleted", deleted });
 });
+
+/* ================================
+   WEATHER PROXY (Open-Meteo)
+================================ */
+app.get("/weather", async (req, res) => {
+    const { lat, lng, days } = req.query;
+
+    if (!lat || !lng) {
+        return res.status(400).json({ message: "lat and lng are required" });
+    }
+
+    const forecastDays = days || 3;
+
+    const url =
+        `https://api.open-meteo.com/v1/forecast` +
+        `?latitude=${encodeURIComponent(lat)}` +
+        `&longitude=${encodeURIComponent(lng)}` +
+        `&daily=weathercode,temperature_2m_max` +
+        `&forecast_days=${encodeURIComponent(forecastDays)}` +
+        `&timezone=auto`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            return res.status(502).json({ message: "Weather service error" });
+        }
+        const data = await response.json();
+        res.json(data);
+    } catch (err) {
+        res.status(500).json({ message: "Failed to fetch weather" });
+    }
+});
+
 
 /* ================================
    START SERVER

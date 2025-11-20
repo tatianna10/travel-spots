@@ -21,7 +21,7 @@
       ],
       "rating": 4.9,
       "category": "city",
-      "ownerId": "USER-ID-1",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     },
@@ -45,7 +45,7 @@
       ],
       "rating": 4.8,
       "category": "city",
-      "ownerId": "USER-ID-1",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     },
@@ -69,7 +69,7 @@
       ],
       "rating": 4.7,
       "category": "city",
-      "ownerId": "USER-ID-2",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     },
@@ -93,7 +93,7 @@
       ],
       "rating": 4.6,
       "category": "beach",
-      "ownerId": "USER-ID-3",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     },
@@ -116,7 +116,7 @@
       ],
       "rating": 4.5,
       "category": "city",
-      "ownerId": "USER-ID-2",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     },
@@ -140,7 +140,7 @@
       ],
       "rating": 4.7,
       "category": "desert",
-      "ownerId": "USER-ID-3",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     },
@@ -164,7 +164,7 @@
       ],
       "rating": 4.9,
       "category": "historic",
-      "ownerId": "USER-ID-1",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     },
@@ -188,7 +188,7 @@
       ],
       "rating": 4.6,
       "category": "beach",
-      "ownerId": "USER-ID-3",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     },
@@ -212,7 +212,7 @@
       ],
       "rating": 4.5,
       "category": "culture",
-      "ownerId": "USER-ID-2",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     },
@@ -236,7 +236,7 @@
       ],
       "rating": 4.8,
       "category": "nature",
-      "ownerId": "USER-ID-1",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     },
@@ -260,7 +260,7 @@
       ],
       "rating": 4.7,
       "category": "nature",
-      "ownerId": "USER-ID-2",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     },
@@ -284,7 +284,7 @@
       ],
       "rating": 4.6,
       "category": "historic",
-      "ownerId": "USER-ID-3",
+      "ownerId": "anonymous",
       "likes": [],
       "comments": []
     },

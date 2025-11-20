@@ -15,7 +15,7 @@ export default function Header() {
             <nav className="header-nav">
                 <Link to="/">Home</Link>
                 <Link to="/places">Catalog</Link>
-                <Link to="/create/spot">Create Spot</Link>
+                <Link to="/places/create">Create Spot</Link>
                 <Link to="/logout">Logout</Link>
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>

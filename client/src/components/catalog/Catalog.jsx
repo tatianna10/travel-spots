@@ -68,6 +68,8 @@ export default function CatalogPage() {
           <nav className="catalog-nav">
             <Link to="/" className="catalog-nav-link">Home</Link>
             <Link to="/places" className="catalog-nav-link">Catalog</Link>
+            <Link to="/places/create" className="catalog-nav-link">Create Spote</Link>
+            <Link to="/logout" className="catalog-nav-link">Logout</Link>
             <Link to="/login" className="catalog-nav-link">Login</Link>
             <Link to="/register" className="catalog-nav-link">Register</Link>
           </nav>

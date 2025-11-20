@@ -1,0 +1,153 @@
+/* ============================
+   PAGE WRAPPER + BACKGROUND
+============================ */
+.create-spot-wrapper {
+    min-height: 100vh;
+    font-family: sans-serif;
+    background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80");
+    background-size: cover;
+    background-position: center;
+}
+
+/* ============================
+   HEADER / NAVIGATION
+============================ */
+.create-spot-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 50;
+}
+
+.create-spot-logo {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+.create-spot-nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.create-spot-nav-link {
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.create-spot-nav-link:hover {
+    color: #bfdbfe;
+    transform: translateY(-1px);
+}
+
+/* ============================
+   MAIN LAYOUT
+============================ */
+.create-spot-main {
+    min-height: 100vh;
+    padding: 6rem 1.5rem 2rem; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-spot-form-wrapper {
+    width: 100%;
+    max-width: 600px;
+}
+
+/* ============================
+   FORM CARD
+============================ */
+.create-spot-card {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    color: #ffffff;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.create-spot-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+/* ============================
+   LABELS + INPUTS
+============================ */
+.create-spot-label {
+    display: block;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.create-spot-label span {
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.create-spot-input,
+.create-spot-textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+    font-size: 0.95rem;
+    outline: none;
+    backdrop-filter: blur(6px);
+}
+
+.create-spot-input::placeholder,
+.create-spot-textarea::placeholder {
+    color: #e2e8f0;
+}
+
+/* ============================
+   BUTTON
+============================ */
+.create-spot-btn {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.9rem;
+    border-radius: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+
+    background: rgba(59, 130, 246, 0.35);
+    color: #ffffff;
+
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.35);
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.create-spot-btn:hover {
+    background: rgba(59, 130, 246, 0.55);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}

@@ -11,11 +11,10 @@ export default function CreatePlace() {
         imageUrl: "",
         description: "",
         longDescription: "",
-        category: "",
-        tags: ""
+        category: ""
     });
 
-    // ✅ Reset form ONCE when the page mounts
+
     useEffect(() => {
         setFormData({
             city: "",
@@ -23,8 +22,7 @@ export default function CreatePlace() {
             imageUrl: "",
             description: "",
             longDescription: "",
-            category: "",
-            tags: ""
+            category: ""
         });
     }, []);
 
@@ -40,10 +38,6 @@ export default function CreatePlace() {
     function generateRandomRating() {
         const value = Math.random() * 1.5 + 3.5;
         return Number(value.toFixed(1));
-    }
-
-    function generateRandomPrice() {
-        return Math.floor(Math.random() * (1900 - 800 + 1)) + 800;
     }
 
     function getSeasonsByLat(lat) {
@@ -74,23 +68,23 @@ export default function CreatePlace() {
                     lng = Number(geoData[0].lon);
                 }
             }
-        } catch { }
+        } catch (err) {
+            console.error("Geocoding failed:", err);
+            alert("Could not fetch coordinates for this city.");
+        }
+
 
         const newSpot = {
-            // id will be added on backend
-
             title: `${city}, ${country}`,
             city,
             country,
             description: formData.description.trim(),
             longDescription: formData.longDescription.trim(),
             imageUrl: formData.imageUrl.trim(),
-            price: generateRandomPrice(),
             weather: "Unknown",
             lat,
             lng,
             seasons: getSeasonsByLat(lat),
-            tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean),
             rating: generateRandomRating(),
             category: formData.category,
             ownerId: "anonymous",
@@ -166,11 +160,6 @@ export default function CreatePlace() {
                             <option value="nature">Nature</option>
                             <option value="desert">Desert</option>
                         </select>
-                    </label>
-
-                    <label className="create-label">
-                        Tags (comma-separated):
-                        <input type="text" name="tags" value={formData.tags} onChange={handleChange} className="create-input" />
                     </label>
 
                     <button type="submit" className="create-btn" disabled={submitting}>

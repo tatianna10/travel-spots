@@ -1,116 +1,160 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router";
+import { createPlace } from "../../api/placesApi";
 
 
 export default function CreateSpotPage() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        title: "",
-        img: "",
-        desc: "",
-        longDesc: ""
+  const [formData, setFormData] = useState({
+    title: "",
+    imageUrl: "",
+    description: "",
+    longDescription: "",
+    category: "",
+    tags: ""
+  });
+
+  function handleChange(e) {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
+  }
 
-    const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const newSpot = {
+      title: formData.title,
+      imageUrl: formData.imageUrl,
+      description: formData.description,
+      longDescription: formData.longDescription,
+      category: formData.category,
+      tags: formData.tags.split(",").map(t => t.trim()).filter(Boolean),
+      likes: [],
+      comments: []
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    try {
+      await createPlace(newSpot);
+      navigate("/catalog");
+    } catch (err) {
+      alert("Failed to create spot: " + err.message);
+    }
+  }
 
-        console.log("New Spot Data:", formData);
-        // later: send POST to backend here
+  return (
+    <>
+      {/* HEADER */}
+      <header className="create-header">
+        <h1 className="create-header-title">Create Spot</h1>
 
-        navigate("/catalog");
-    };
+        <nav className="create-nav">
+          <Link to="/" className="create-nav-link">Home</Link>
+          <Link to="/catalog" className="create-nav-link">Catalog</Link>
+          <Link to="/login" className="create-nav-link">Login</Link>
+          <Link to="/register" className="create-nav-link">Register</Link>
+        </nav>
+      </header>
 
-    return (
-        <div className="create-spot-wrapper">
-            {/* Navigation */}
-            <header className="create-spot-header">
-                <h1 className="create-spot-logo">Create Spot</h1>
+      {/* PAGE CONTENT */}
+      <div className="create-wrapper">
+        <form className="create-form" onSubmit={handleSubmit}>
+          <h2 className="create-title">Add New Travel Spot</h2>
 
-                <nav className="create-spot-nav">
-                    <Link to="/" className="create-spot-nav-link">Home</Link>
-                    <Link to="/places" className="create-spot-nav-link">Catalog</Link>
-                    <Link to="/places/create" className="create-spot-nav-link">Create Spote</Link>
-                    <Link to="/logout" className="create-spot-nav-link">Logout</Link>
-                    <Link to="/login" className="create-spot-nav-link">Login</Link>
-                    <Link to="/register" className="create-spot-nav-link">Register</Link>
-                </nav>
-            </header>
+          {/* TITLE */}
+          <label className="create-label">
+            Title:
+            <input
+              type="text"
+              name="title"
+              className="create-input"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
+          </label>
 
-            {/* Main content */}
-            <main className="create-spot-main">
-                <div className="create-spot-form-wrapper">
-                    <form className="create-spot-card" onSubmit={handleSubmit}>
-                        <h2 className="create-spot-title">Add New Travel Spot</h2>
+          {/* IMAGE */}
+          <label className="create-label">
+            Image URL:
+            <input
+              type="text"
+              name="imageUrl"
+              className="create-input"
+              value={formData.imageUrl}
+              onChange={handleChange}
+              required
+            />
+          </label>
 
-                        <label className="create-spot-label">
-                            <span>Title</span>
-                            <input
-                                type="text"
-                                name="title"
-                                value={formData.title}
-                                onChange={handleChange}
-                                required
-                                className="create-spot-input"
-                                placeholder="Enter a name..."
-                            />
-                        </label>
+          {/* SHORT DESCRIPTION */}
+          <label className="create-label">
+            Short Description:
+            <input
+              type="text"
+              name="description"
+              className="create-input"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
+          </label>
 
-                        <label className="create-spot-label">
-                            <span>Image URL</span>
-                            <input
-                                type="text"
-                                name="img"
-                                value={formData.img}
-                                onChange={handleChange}
-                                required
-                                className="create-spot-input"
-                                placeholder="Paste an image URL..."
-                            />
-                        </label>
+          {/* LONG DESCRIPTION */}
+          <label className="create-label">
+            Long Description:
+            <textarea
+              name="longDescription"
+              className="create-textarea"
+              value={formData.longDescription}
+              onChange={handleChange}
+              rows="4"
+              required
+            ></textarea>
+          </label>
 
-                        <label className="create-spot-label">
-                            <span>Short Description</span>
-                            <input
-                                type="text"
-                                name="desc"
-                                value={formData.desc}
-                                onChange={handleChange}
-                                required
-                                className="create-spot-input"
-                                placeholder="Short description..."
-                            />
-                        </label>
+          {/* CATEGORY */}
+          <label className="create-label">
+            Category:
+            <select
+              name="category"
+              className="create-select"
+              value={formData.category}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select category...</option>
+              <option value="city">City</option>
+              <option value="beach">Beach</option>
+              <option value="historic">Historic</option>
+              <option value="culture">Culture</option>
+              <option value="modern">Modern</option>
+              <option value="nightlife">Nightlife</option>
+              <option value="romantic">Romantic</option>
+              <option value="tropical">Tropical</option>
+            </select>
+          </label>
 
-                        <label className="create-spot-label">
-                            <span>Long Description</span>
-                            <textarea
-                                name="longDesc"
-                                value={formData.longDesc}
-                                onChange={handleChange}
-                                required
-                                rows="4"
-                                className="create-spot-textarea"
-                                placeholder="Full details about the place..."
-                            ></textarea>
-                        </label>
+          {/* TAGS */}
+          <label className="create-label">
+            Tags (comma separated):
+            <input
+              type="text"
+              name="tags"
+              className="create-input"
+              value={formData.tags}
+              onChange={handleChange}
+              placeholder="city, modern, nightlife..."
+            />
+          </label>
 
-                        <button
-                            type="submit"
-                            className="create-spot-btn"
-                        >
-                            Add Spot
-                        </button>
-                    </form>
-                </div>
-            </main>
-        </div>
-    );
+          <button type="submit" className="create-btn">
+            Add Spot
+          </button>
+        </form>
+      </div>
+    </>
+  );
 }

@@ -1,6 +1,5 @@
 {
   "users": [],
-
   "places": [
     {
       "id": "78877795-98e5-4fd6-b90c-6a792dbbb1db",
@@ -15,7 +14,11 @@
       "lat": 48.8566,
       "lng": 2.3522,
       "seasons": "spring,summer,autumn",
-      "tags": ["romantic", "historic", "city"],
+      "tags": [
+        "romantic",
+        "historic",
+        "city"
+      ],
       "rating": 4.9,
       "category": "city",
       "ownerId": "USER-ID-1",
@@ -35,7 +38,11 @@
       "lat": 40.7128,
       "lng": -74.006,
       "seasons": "spring,autumn",
-      "tags": ["modern", "city", "nightlife"],
+      "tags": [
+        "modern",
+        "city",
+        "nightlife"
+      ],
       "rating": 4.8,
       "category": "city",
       "ownerId": "USER-ID-1",
@@ -55,7 +62,11 @@
       "lat": 35.6762,
       "lng": 139.6503,
       "seasons": "spring,autumn",
-      "tags": ["tech", "culture", "city"],
+      "tags": [
+        "tech",
+        "culture",
+        "city"
+      ],
       "rating": 4.7,
       "category": "city",
       "ownerId": "USER-ID-2",
@@ -75,7 +86,11 @@
       "lat": -33.8688,
       "lng": 151.2093,
       "seasons": "summer,autumn",
-      "tags": ["beach", "sunny", "nature"],
+      "tags": [
+        "beach",
+        "sunny",
+        "nature"
+      ],
       "rating": 4.6,
       "category": "beach",
       "ownerId": "USER-ID-3",
@@ -95,7 +110,10 @@
       "lat": 51.5074,
       "lng": -0.1278,
       "seasons": "spring,autumn,winter",
-      "tags": ["historic", "city"],
+      "tags": [
+        "historic",
+        "city"
+      ],
       "rating": 4.5,
       "category": "city",
       "ownerId": "USER-ID-2",
@@ -115,7 +133,11 @@
       "lat": 25.2048,
       "lng": 55.2708,
       "seasons": "winter",
-      "tags": ["luxury", "desert", "modern"],
+      "tags": [
+        "luxury",
+        "desert",
+        "modern"
+      ],
       "rating": 4.7,
       "category": "desert",
       "ownerId": "USER-ID-3",
@@ -135,7 +157,11 @@
       "lat": 45.4408,
       "lng": 12.3155,
       "seasons": "spring,summer",
-      "tags": ["romantic", "historic", "canals"],
+      "tags": [
+        "romantic",
+        "historic",
+        "canals"
+      ],
       "rating": 4.9,
       "category": "historic",
       "ownerId": "USER-ID-1",
@@ -155,7 +181,11 @@
       "lat": -22.9068,
       "lng": -43.1729,
       "seasons": "summer",
-      "tags": ["beach", "party", "tropical"],
+      "tags": [
+        "beach",
+        "party",
+        "tropical"
+      ],
       "rating": 4.6,
       "category": "beach",
       "ownerId": "USER-ID-3",
@@ -175,7 +205,11 @@
       "lat": 13.7563,
       "lng": 100.5018,
       "seasons": "winter",
-      "tags": ["exotic", "food", "culture"],
+      "tags": [
+        "exotic",
+        "food",
+        "culture"
+      ],
       "rating": 4.5,
       "category": "culture",
       "ownerId": "USER-ID-2",
@@ -195,7 +229,11 @@
       "lat": -33.9249,
       "lng": 18.4241,
       "seasons": "summer",
-      "tags": ["mountains", "nature", "beach"],
+      "tags": [
+        "mountains",
+        "nature",
+        "beach"
+      ],
       "rating": 4.8,
       "category": "nature",
       "ownerId": "USER-ID-1",
@@ -215,7 +253,11 @@
       "lat": 49.2827,
       "lng": -123.1207,
       "seasons": "spring,summer,autumn",
-      "tags": ["nature", "mountains", "city"],
+      "tags": [
+        "nature",
+        "mountains",
+        "city"
+      ],
       "rating": 4.7,
       "category": "nature",
       "ownerId": "USER-ID-2",
@@ -235,10 +277,28 @@
       "lat": 37.9838,
       "lng": 23.7275,
       "seasons": "spring,autumn",
-      "tags": ["historic", "culture", "sunny"],
+      "tags": [
+        "historic",
+        "culture",
+        "sunny"
+      ],
       "rating": 4.6,
       "category": "historic",
       "ownerId": "USER-ID-3",
+      "likes": [],
+      "comments": []
+    },
+    {
+      "id": "cf13c2c5-0d06-4ff6-9407-87f0aec4caf1",
+      "title": "Barcelona",
+      "imageUrl": "https://aws-tiqets-cdn.imgix.net/images/content/3e067e94f86d4aeebf8eaa95df34c0d4.jpg?auto=format%2Ccompress&dpr=2&fit=clip&h=695.2000122070312&q=30&w=null",
+      "description": "A vibrant Mediterranean city known for its beaches, Gaudí architecture, and lively cultural scene.",
+      "longDescription": "Barcelona blends stunning modernist architecture, golden beaches, rich Catalan culture, and world-famous cuisine. From the iconic Sagrada Família and Park Güell to the bustling La Rambla and historic Gothic Quarter, the city offers a unique mix of art, history, and coastal beauty. Whether you’re enjoying tapas in a local bar, watching a sunset along Barceloneta Beach, or exploring Gaudí’s fantastical creations, Barcelona delivers an unforgettable Mediterranean experience.",
+      "category": "modern",
+      "tags": [
+        "city",
+        "modern"
+      ],
       "likes": [],
       "comments": []
     }

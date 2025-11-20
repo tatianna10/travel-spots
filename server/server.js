@@ -16,13 +16,13 @@ const writeDB = (data) => fs.writeFileSync("db.json", JSON.stringify(data, null,
 app.use(cors());
 app.use(express.json());
 
-// -----------------------------
-// AUTH
-// -----------------------------
+/* ================================
+   AUTH REGISTER
+================================ */
 app.post("/users/register", async (req, res) => {
     const { email, password } = req.body;
-
     const db = readDB();
+
     if (db.users.some(u => u.email === email)) {
         return res.status(409).json({ message: "User already exists" });
     }
@@ -39,6 +39,9 @@ app.post("/users/register", async (req, res) => {
     res.json({ email, accessToken: token, _id: id });
 });
 
+/* ================================
+   AUTH LOGIN
+================================ */
 app.post("/users/login", async (req, res) => {
     const { email, password } = req.body;
     const db = readDB();
@@ -50,69 +53,84 @@ app.post("/users/login", async (req, res) => {
     if (!match) return res.status(403).json({ message: "Invalid login" });
 
     const token = jwt.sign({ id: user.id, email }, SECRET);
-
     res.json({ email, accessToken: token, _id: user.id });
 });
 
-// -----------------------------
-// PLACES CRUD
-// -----------------------------
+/* ================================
+   PLACES CRUD
+================================ */
 
-// GET ALL
+// GET all places
 app.get("/data/places", (req, res) => {
     const db = readDB();
     res.json(db.places);
 });
 
-// GET BY ID  ✔ ADDED
+// GET place by ID
 app.get("/data/places/:id", (req, res) => {
     const db = readDB();
     const place = db.places.find(p => p.id === req.params.id);
 
-    if (!place) return res.status(404).json({ message: "Place not found" });
+    if (!place) {
+        return res.status(404).json({ message: "Place not found" });
+    }
 
     res.json(place);
 });
 
-// CREATE
+// CREATE place
 app.post("/data/places", (req, res) => {
     const db = readDB();
-    const place = { id: uuid(), ...req.body };
-    db.places.push(place);
+    const newPlace = {
+        id: uuid(),
+        ...req.body,
+        likes: req.body.likes || [],
+        comments: req.body.comments || []
+    };
+
+    db.places.push(newPlace);
     writeDB(db);
 
-    res.json(place);
+    res.json(newPlace);
 });
 
-// UPDATE  ✔ ADDED
+// UPDATE place
 app.put("/data/places/:id", (req, res) => {
     const db = readDB();
-    const idx = db.places.findIndex(p => p.id === req.params.id);
+    const index = db.places.findIndex(p => p.id === req.params.id);
 
-    if (idx === -1) {
+    if (index === -1) {
         return res.status(404).json({ message: "Place not found" });
     }
 
-    db.places[idx] = { ...db.places[idx], ...req.body };
+    db.places[index] = {
+        ...db.places[index],
+        ...req.body
+    };
+
     writeDB(db);
 
-    res.json(db.places[idx]);
+    res.json(db.places[index]);
 });
 
-// DELETE  ✔ ADDED
+// DELETE place
 app.delete("/data/places/:id", (req, res) => {
     const db = readDB();
-    const idx = db.places.findIndex(p => p.id === req.params.id);
+    const index = db.places.findIndex(p => p.id === req.params.id);
 
-    if (idx === -1) {
+    if (index === -1) {
         return res.status(404).json({ message: "Place not found" });
     }
 
-    const removed = db.places.splice(idx, 1);
+    const deleted = db.places.splice(index, 1);
     writeDB(db);
 
-    res.json(removed[0]);
+    res.json({ message: "Deleted", deleted });
 });
 
-// -----------------------------
-app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+/* ================================
+   START SERVER
+================================ */
+app.listen(PORT, () =>
+    console.log(`Server running at http://localhost:${PORT}`)
+);

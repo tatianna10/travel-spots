@@ -9,7 +9,7 @@ export default function HomeMain() {
   useEffect(() => {
     getAllPlaces()
       .then(data => {
-        setPlaces(data.slice(0, ));
+        setPlaces(data.slice(0, 3));
         setLoading(false);
       })
       .catch(() => setLoading(false));

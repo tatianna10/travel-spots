@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate, useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import { getPlaceById, deletePlace } from "../../api/placesApi";
-import { getWeather } from "../../api/weatherApi";   // ⬅ NEW import
+import { getWeather } from "../../api/weatherApi"; // weather API
 
 export default function DetailsPage() {
   const { id } = useParams();
@@ -10,8 +10,8 @@ export default function DetailsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const [weather, setWeather] = useState(null);        // ⬅ NEW
-  const [weatherError, setWeatherError] = useState(""); // ⬅ NEW
+  const [weather, setWeather] = useState(null);
+  const [weatherError, setWeatherError] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,6 +30,18 @@ export default function DetailsPage() {
     if ([71, 73, 75].includes(code)) return "❄️";
     if ([95, 96, 99].includes(code)) return "⛈️";
     return "🌡️";
+  }
+
+  // Used for styling + animation type
+  function getWeatherType(code) {
+    if ([0].includes(code)) return "sunny";
+    if ([1, 2, 3].includes(code)) return "cloudy";
+    if ([45, 48].includes(code)) return "fog";
+    if ([51, 53, 55].includes(code)) return "drizzle";
+    if ([61, 63, 65, 80, 81, 82].includes(code)) return "rain";
+    if ([71, 73, 75].includes(code)) return "snow";
+    if ([95, 96, 99].includes(code)) return "storm";
+    return "default";
   }
 
   /* ===========================
@@ -91,6 +103,88 @@ export default function DetailsPage() {
   }, [place]);
 
   /* ===========================
+        CINEMATIC ANIMATIONS
+        (no @keyframes, JS only)
+     =========================== */
+  useEffect(() => {
+    if (!weather) return;
+
+    const boxNodes = Array.from(
+      document.querySelectorAll(".weather-box-anim")
+    );
+    const iconNodes = Array.from(
+      document.querySelectorAll(".weather-icon-anim")
+    );
+
+    let frameId;
+    const start = performance.now();
+
+    const animate = (now) => {
+      const t = (now - start) / 1000; // seconds
+
+      // floating boxes
+      boxNodes.forEach((box, index) => {
+        const floatOffset = Math.sin(t * 0.9 + index) * 4;
+        box.style.transform = "translateY(" + floatOffset + "px)";
+      });
+
+      // icons per weather type
+      iconNodes.forEach((icon) => {
+        const type = icon.getAttribute("data-weather-type");
+        let transform = "";
+        const baseFloat = Math.sin(t * 1.1) * 2;
+
+        if (type === "sunny") {
+          const rotateDeg = (t * 12) % 360;
+          const scale = 1 + 0.04 * Math.sin(t * 2.2);
+          transform =
+            "translateY(" +
+            baseFloat +
+            "px) rotate(" +
+            rotateDeg +
+            "deg) scale(" +
+            scale +
+            ")";
+        } else if (type === "cloudy") {
+          const driftX = Math.sin(t * 0.7) * 4;
+          const driftY = Math.sin(t * 0.9) * 1.5;
+          transform =
+            "translate(" + driftX + "px, " + (baseFloat + driftY) + "px)";
+        } else if (type === "rain" || type === "drizzle") {
+          const bounce = Math.abs(Math.sin(t * 2.2)) * 6;
+          transform = "translateY(" + (baseFloat + bounce) + "px)";
+        } else if (type === "storm") {
+          const jitterX = Math.sin(t * 6.0) * 1.5;
+          const jitterY = Math.cos(t * 5.3) * 1.5;
+          transform =
+            "translate(" +
+            jitterX +
+            "px, " +
+            (baseFloat + jitterY) +
+            "px) scale(1.02)";
+        } else if (type === "snow") {
+          const driftX = Math.sin(t * 0.6) * 2.5;
+          const driftY = Math.sin(t * 1.1) * 3;
+          transform =
+            "translate(" + driftX + "px, " + (baseFloat + driftY) + "px)";
+        } else {
+          transform = "translateY(" + baseFloat + "px)";
+        }
+
+        icon.style.transform = transform;
+      });
+
+      frameId = requestAnimationFrame(animate);
+    };
+
+    frameId = requestAnimationFrame(animate);
+
+    return () => {
+      if (frameId) cancelAnimationFrame(frameId);
+    };
+  }, [weather]);
+
+  /* ===========================
        LOADING / ERROR STATES
      =========================== */
   if (loading) {
@@ -119,11 +213,7 @@ export default function DetailsPage() {
     <div className="details-wrapper">
       <div className="details-card">
         {/* IMAGE */}
-        <img
-          src={place.imageUrl}
-          alt={place.title}
-          className="details-image"
-        />
+        <img src={place.imageUrl} alt={place.title} className="details-image" />
 
         {/* TITLE */}
         <h1 className="details-title">{place.title}</h1>
@@ -133,41 +223,32 @@ export default function DetailsPage() {
           {weather ? (
             <>
               {weather[0] && (
-                <div className="weather-box">
-                  <div className="weather-day">Today</div>
-                  <div className="weather-icon">
-                    {getWeatherIcon(weather[0].code)}
-                  </div>
-                  <div className="weather-temp">
-                    {Math.round(weather[0].temp)}°
-                  </div>
-                </div>
+                <WeatherBox
+                  label="Today"
+                  dayData={weather[0]}
+                  getWeatherIcon={getWeatherIcon}
+                  getWeatherType={getWeatherType}
+                />
               )}
               {weather[1] && (
-                <div className="weather-box">
-                  <div className="weather-day">Tomorrow</div>
-                  <div className="weather-icon">
-                    {getWeatherIcon(weather[1].code)}
-                  </div>
-                  <div className="weather-temp">
-                    {Math.round(weather[1].temp)}°
-                  </div>
-                </div>
+                <WeatherBox
+                  label="Tomorrow"
+                  dayData={weather[1]}
+                  getWeatherIcon={getWeatherIcon}
+                  getWeatherType={getWeatherType}
+                />
               )}
               {weather[2] && (
-                <div className="weather-box">
-                  <div className="weather-day">+2 Days</div>
-                  <div className="weather-icon">
-                    {getWeatherIcon(weather[2].code)}
-                  </div>
-                  <div className="weather-temp">
-                    {Math.round(weather[2].temp)}°
-                  </div>
-                </div>
+                <WeatherBox
+                  label="+2 Days"
+                  dayData={weather[2]}
+                  getWeatherIcon={getWeatherIcon}
+                  getWeatherType={getWeatherType}
+                />
               )}
             </>
           ) : (
-            <div className="weather-box">
+            <div className="weather-box weather-box-fallback">
               {weatherError ? (
                 weatherError
               ) : (
@@ -207,6 +288,28 @@ export default function DetailsPage() {
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+/* ===========================
+      WEATHER BOX SUBCOMPONENT
+   =========================== */
+function WeatherBox({ label, dayData, getWeatherIcon, getWeatherType }) {
+  const type = getWeatherType(dayData.code);
+  const icon = getWeatherIcon(dayData.code);
+
+  return (
+    <div className={"weather-box weather-box-anim " + type}>
+      <div className="weather-day">{label}</div>
+      <div
+        className="weather-icon weather-icon-anim"
+        data-weather-type={type}
+        aria-label={type}
+      >
+        {icon}
+      </div>
+      <div className="weather-temp">{Math.round(dayData.temp)}°</div>
     </div>
   );
 }

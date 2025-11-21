@@ -9,12 +9,12 @@ export default function HomeMain() {
   useEffect(() => {
     getAllPlaces()
       .then(data => {
-        setPlaces(data.slice(0, 3));
+        const sorted = [...data].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+        setPlaces(sorted.slice(0, 3));
         setLoading(false);
       })
       .catch(() => setLoading(false));
   }, []);
-
   if (loading) {
     return <p className="home-title">Loading...</p>;
   }

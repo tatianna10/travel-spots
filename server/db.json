@@ -23,7 +23,8 @@
       "category": "city",
       "ownerId": "USER-ID-1",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670005123
     },
     {
       "id": "3e74a23f-67a7-4ed5-8907-5df0297b40a5",
@@ -47,7 +48,8 @@
       "category": "city",
       "ownerId": "USER-ID-1",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670069874
     },
     {
       "id": "6fe7459c-96f1-4ab2-beae-fe4d9ea12f7e",
@@ -71,7 +73,8 @@
       "category": "city",
       "ownerId": "USER-ID-2",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670135529
     },
     {
       "id": "2c7bcd7c-5720-4d8e-b9e3-4f7a60697301",
@@ -95,7 +98,8 @@
       "category": "beach",
       "ownerId": "USER-ID-3",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670201441
     },
     {
       "id": "b3f929ee-30bc-4d40-8db0-4e6405d76c01",
@@ -118,7 +122,8 @@
       "category": "city",
       "ownerId": "USER-ID-2",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670267090
     },
     {
       "id": "b7c7857f-532f-4e8d-b431-96918b76baca",
@@ -142,7 +147,8 @@
       "category": "desert",
       "ownerId": "USER-ID-3",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670332887
     },
     {
       "id": "f5083aa6-d65d-4d80-9b68-3cb227769cd6",
@@ -166,7 +172,8 @@
       "category": "historic",
       "ownerId": "USER-ID-1",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670398552
     },
     {
       "id": "14d8b724-e639-4b82-a401-9ba7f266b9bb",
@@ -190,7 +197,8 @@
       "category": "beach",
       "ownerId": "USER-ID-3",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670464120
     },
     {
       "id": "9e1fb3b6-e9c2-46bb-8ae4-3f6aa95fe466",
@@ -214,7 +222,8 @@
       "category": "culture",
       "ownerId": "USER-ID-2",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670529778
     },
     {
       "id": "ebc257f8-2708-4adb-b1d3-a15cf78c6cf7",
@@ -238,7 +247,8 @@
       "category": "nature",
       "ownerId": "USER-ID-1",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670595450
     },
     {
       "id": "5a9b2f4e-4fe1-4de2-8b29-d6714e9cdfdd",
@@ -262,7 +272,8 @@
       "category": "nature",
       "ownerId": "USER-ID-2",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670661001
     },
     {
       "id": "7cc16866-46e2-427c-b378-2fbf54e2b41a",
@@ -286,7 +297,8 @@
       "category": "historic",
       "ownerId": "USER-ID-3",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670726694
     },
     {
       "id": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
@@ -309,7 +321,27 @@
       "category": "culture",
       "ownerId": "anonymous",
       "likes": [],
-      "comments": []
+      "comments": [],
+      "createdAt": 1763670792333
+    },
+    {
+      "id": "4be98a85-2f54-43ca-91ea-7754b76e8b19",
+      "title": "Rome, Italy",
+      "city": "Rome",
+      "country": "Italy",
+      "description": "Rome, the capital of Italy, is a vibrant city where ancient history and modern life blend seamlessly. Known as the “Eternal City,” it’s home to iconic landmarks like the Colosseum, the Vatican, and winding cobblestone streets full of culture and cuisine.",
+      "longDescription": "Rome is one of the world’s most historically rich cities, with over 2,500 years of art, architecture, and cultural influence. Founded according to legend by Romulus and Remus, it became the heart of the Roman Empire, shaping the politics, engineering, and philosophy of the Western world. Visitors can walk among ancient ruins such as the Roman Forum and the Colosseum, stand beneath the grandeur of the Pantheon, or explore the masterpieces of the Vatican Museums and St. Peter’s Basilica.",
+      "imageUrl": "https://colosseumrometickets.com/wp-content/uploads/2018/10/Aerial-view-of-Piazza-di-Spagna-and-the-Spanish-Steps-in-Rome.jpg",
+      "weather": "Unknown",
+      "lat": 41.8933203,
+      "lng": 12.4829321,
+      "seasons": "spring,summer,autumn",
+      "rating": 4.8,
+      "category": "historic",
+      "ownerId": "anonymous",
+      "likes": [],
+      "comments": [],
+      "createdAt": 1763670857992
     }
   ]
 }

@@ -89,7 +89,8 @@ export default function CreatePlace() {
             category: formData.category,
             ownerId: "anonymous",
             likes: [],
-            comments: []
+            comments: [],
+            createdAt: Date.now()
         };
 
 

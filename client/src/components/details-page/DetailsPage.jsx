@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getPlaceById, deletePlace } from "../../api/placesApi";
 import { getWeather } from "../../api/weatherApi";
 
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 

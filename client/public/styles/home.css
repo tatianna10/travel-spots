@@ -19,7 +19,7 @@
 .home-main {
     flex-grow: 1;
     max-width: 1200px;
-    width: 100%;        /* 🔥 THIS FIXES THE VERTICAL CARD ISSUE */
+    width: 100%;        
     margin: 0 auto;
     padding: 2rem 1rem;
 }

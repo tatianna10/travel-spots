@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { createPlace } from "../../api/placesApi";
 
@@ -14,35 +14,14 @@ export default function CreatePlace() {
         category: ""
     });
 
-
-    useEffect(() => {
-        setFormData({
-            city: "",
-            country: "",
-            imageUrl: "",
-            description: "",
-            longDescription: "",
-            category: ""
-        });
-    }, []);
-
     const [submitting, setSubmitting] = useState(false);
 
     function handleChange(e) {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
     function generateRandomRating() {
-        const value = Math.random() * 1.5 + 3.5;
-        return Number(value.toFixed(1));
-    }
-
-    function getSeasonsByLat(lat) {
-        if (!lat) return "";
-        return lat >= 0 ? "spring,summer,autumn" : "summer,autumn,winter";
+        return Number((Math.random() * 1.5 + 3.5).toFixed(1));
     }
 
     async function handleSubmit(e) {
@@ -54,26 +33,6 @@ export default function CreatePlace() {
         const city = formData.city.trim();
         const country = formData.country.trim();
 
-        let lat = null;
-        let lng = null;
-
-        try {
-            const geoRes = await fetch(
-                `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&format=json&limit=1`
-            );
-            if (geoRes.ok) {
-                const geoData = await geoRes.json();
-                if (geoData.length > 0) {
-                    lat = Number(geoData[0].lat);
-                    lng = Number(geoData[0].lon);
-                }
-            }
-        } catch (err) {
-            console.error("Geocoding failed:", err);
-            alert("Could not fetch coordinates for this city.");
-        }
-
-
         const newSpot = {
             title: `${city}, ${country}`,
             city,
@@ -81,10 +40,6 @@ export default function CreatePlace() {
             description: formData.description.trim(),
             longDescription: formData.longDescription.trim(),
             imageUrl: formData.imageUrl.trim(),
-            weather: "Unknown",
-            lat,
-            lng,
-            seasons: getSeasonsByLat(lat),
             rating: generateRandomRating(),
             category: formData.category,
             ownerId: "anonymous",
@@ -93,10 +48,8 @@ export default function CreatePlace() {
             createdAt: Date.now()
         };
 
-
         try {
             await createPlace(newSpot);
-
             navigate("/places");
         } catch (err) {
             alert("Failed to create spot: " + err.message);
@@ -143,14 +96,13 @@ export default function CreatePlace() {
 
                     <label className="create-label">
                         Long Description:
-                        <textarea name="longDescription" value={formData.longDescription} onChange={handleChange} className="create-textarea" rows="4" required></textarea>
+                        <textarea name="longDescription" value={formData.longDescription} onChange={handleChange} className="create-textarea" rows="4" required />
                     </label>
 
                     <label className="create-label">
                         Category:
                         <select name="category" value={formData.category} onChange={handleChange} className="create-select" required>
                             <option value="">Select category...</option>
-                            <option value="city">City</option>
                             <option value="beach">Beach</option>
                             <option value="historic">Historic</option>
                             <option value="culture">Culture</option>

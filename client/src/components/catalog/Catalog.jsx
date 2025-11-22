@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { getAllPlaces } from "../../api/placesApi.js";
-import PlaceCard from "../place-card/PlaceCard.jsx";
+import { getAllPlaces } from "../../api/placesApi";
+import PlaceCard from "../place-card/PlaceCard";
 
 export default function CatalogPage() {
   const [places, setPlaces] = useState([]);
@@ -12,12 +12,10 @@ export default function CatalogPage() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 
-
   useEffect(() => {
     getAllPlaces()
       .then((data) => {
         if (!Array.isArray(data)) {
-          console.error("Backend returned something else:", data);
           setError("Server returned invalid data format");
           setLoading(false);
           return;
@@ -28,7 +26,6 @@ export default function CatalogPage() {
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Fetch error:", err);
         setError(err.message || "Failed to load catalog");
         setLoading(false);
       });
@@ -40,19 +37,17 @@ export default function CatalogPage() {
 
     let result = [...places];
 
-    // SEARCH FILTER
-    const s = search.trim().toLowerCase();
-    if (s !== "") {
-      result = result.filter((place) =>
-        place.title?.toLowerCase().includes(s)
+    // SEARCH
+    if (search.trim() !== "") {
+      const s = search.trim().toLowerCase();
+      result = result.filter((p) =>
+        p.title?.toLowerCase().includes(s)
       );
     }
 
-    // CATEGORY FILTER (tags)
+    // CATEGORY
     if (category !== "") {
-      result = result.filter((place) =>
-        Array.isArray(place.tags) && place.tags.includes(category)
-      );
+      result = result.filter((p) => p.category === category);
     }
 
     setFilteredPlaces(result);
@@ -68,8 +63,7 @@ export default function CatalogPage() {
           <nav className="catalog-nav">
             <Link to="/" className="catalog-nav-link">Home</Link>
             <Link to="/places" className="catalog-nav-link">Catalog</Link>
-            <Link to="/places/create" className="catalog-nav-link">Create Spote</Link>
-            <Link to="/logout" className="catalog-nav-link">Logout</Link>
+            <Link to="/places/create" className="catalog-nav-link">Create Spot</Link>
             <Link to="/login" className="catalog-nav-link">Login</Link>
             <Link to="/register" className="catalog-nav-link">Register</Link>
           </nav>
@@ -81,6 +75,7 @@ export default function CatalogPage() {
 
           {/* FILTERS */}
           <div className="catalog-filters">
+
             <input
               type="text"
               placeholder="Search..."
@@ -95,7 +90,6 @@ export default function CatalogPage() {
               onChange={(e) => setCategory(e.target.value)}
             >
               <option value="">All categories</option>
-              <option value="city">City</option>
               <option value="beach">Beach</option>
               <option value="historic">Historic</option>
               <option value="culture">Culture</option>
@@ -103,6 +97,8 @@ export default function CatalogPage() {
               <option value="nightlife">Nightlife</option>
               <option value="romantic">Romantic</option>
               <option value="tropical">Tropical</option>
+              <option value="nature">Nature</option>
+              <option value="desert">Desert</option>
             </select>
           </div>
 
@@ -119,6 +115,7 @@ export default function CatalogPage() {
               <PlaceCard key={place.id} place={place} />
             ))}
           </div>
+
         </main>
       </div>
     </div>

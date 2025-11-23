@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { getAllPlaces } from "../../api/placesApi";
 import PlaceCard from "../place-card/PlaceCard";
+import ScrollToTop from "../scrolltotop/ScrollToTop.jsx";
 
 export default function CatalogPage() {
   const [places, setPlaces] = useState([]);
@@ -117,6 +118,8 @@ export default function CatalogPage() {
           </div>
 
         </main>
+        <ScrollToTop />
+
       </div>
     </div>
   );

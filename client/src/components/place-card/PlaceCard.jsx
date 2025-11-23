@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 
+<button id="scrollToTop">↑</button>
 
 export default function PlaceCard({ place }) {
     return (

@@ -125,3 +125,11 @@
   transform: translateY(-3px);
 }
 
+.home-no-spots {
+  color: white;
+  font-size: 1.3rem;
+  text-shadow: 0 0 6px #000;
+  text-align: center;
+  padding: 2rem 0;
+  grid-column: 1 / -1; /* centers across whole grid */
+}

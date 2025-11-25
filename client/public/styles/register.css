@@ -1,0 +1,133 @@
+/* Background container */
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+/* ===== HEADER ===== */
+.register-header {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+
+/* Glassmorphism card */
+.register-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  padding: 2rem;
+  width: 100%;
+  max-width: 28rem;
+
+  border-radius: 1rem;
+  color: white;
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* Title */
+.register-title {
+  text-align: center;
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+
+  text-shadow: 0 0 20px #1e90ff;
+}
+
+.register-nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+/* Form spacing */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Labels */
+.label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+/* Inputs */
+.input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: white;
+
+  border-radius: 0.5rem;
+  outline: none;
+
+  transition: box-shadow 0.2s ease, border 0.2s ease;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.input:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 2px #60a5fa;
+}
+
+/* Submit button */
+.register-btn {
+  width: 100%;
+  padding: 0.5rem 0;
+
+  background: rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(147, 197, 253, 0.4);
+
+  backdrop-filter: blur(6px);
+  color: white;
+
+  font-weight: 600;
+  border-radius: 0.5rem;
+
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  text-shadow: 0 0 10px #1e90ff;
+}
+
+.register-btn:hover {
+  background: rgba(59, 130, 246, 0.3);
+}
+
+/* Login link */
+.login-text {
+  text-align: center;
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.login-link {
+  color: #93c5fd;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}

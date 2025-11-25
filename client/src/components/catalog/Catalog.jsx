@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
 import { getAllPlaces } from "../../api/placesApi";
 import PlaceCard from "../place-card/PlaceCard";
 import ScrollToTop from "../scrolltotop/ScrollToTop.jsx";
+import Header from "../header/Header";
 
 export default function CatalogPage() {
   const [places, setPlaces] = useState([]);
@@ -38,15 +38,11 @@ export default function CatalogPage() {
 
     let result = [...places];
 
-    // SEARCH
     if (search.trim() !== "") {
       const s = search.trim().toLowerCase();
-      result = result.filter((p) =>
-        p.title?.toLowerCase().includes(s)
-      );
+      result = result.filter((p) => p.title?.toLowerCase().includes(s));
     }
 
-    // CATEGORY
     if (category !== "") {
       result = result.filter((p) => p.category === category);
     }
@@ -58,17 +54,8 @@ export default function CatalogPage() {
     <div className="catalog-wrapper">
       <div className="catalog-inner">
 
-        <header className="catalog-header">
-          <h1 className="catalog-title">Catalog</h1>
 
-          <nav className="catalog-nav">
-            <Link to="/" className="catalog-nav-link">Home</Link>
-            <Link to="/places" className="catalog-nav-link">Catalog</Link>
-            <Link to="/places/create" className="catalog-nav-link">Create Spot</Link>
-            <Link to="/login" className="catalog-nav-link">Login</Link>
-            <Link to="/register" className="catalog-nav-link">Register</Link>
-          </nav>
-        </header>
+        <Header />
 
         <main className="catalog-main">
 
@@ -118,8 +105,8 @@ export default function CatalogPage() {
           </div>
 
         </main>
-        <ScrollToTop />
 
+        <ScrollToTop />
       </div>
     </div>
   );

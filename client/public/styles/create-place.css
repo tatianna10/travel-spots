@@ -1,55 +1,24 @@
-/* PAGE BACKGROUND */
+/* PAGE BACKGROUND — matches Catalog */
 .create-wrapper {
     min-height: 100vh;
     background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80");
     background-size: cover;
     background-position: center;
-    display: flex;
-    justify-content: center;
-    padding-top: 140px;
-    padding-left: 1rem;
-    padding-right: 1rem;
     font-family: sans-serif;
 }
 
-/* HEADER */
+/* Inner blurred layer — same as Catalog */
+.create-inner {
+    min-height: 100vh;
+    backdrop-filter: blur(3px);
+    padding: 2.5rem 1.5rem 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* REMOVE these broken styles */
 .create-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    z-index: 50;
-}
-
-.create-header-title {
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
-    text-shadow: 0 0 10px #000;
-}
-
-.create-nav {
-    display: flex;
-    gap: 1.5rem;
-}
-
-.create-nav-link {
-    color: white;
-    font-weight: 600;
-    text-shadow: 0 0 6px #000;
-    transition: 0.3s;
-}
-
-.create-nav-link:hover {
-    color: #a3d4ff;
+    display: none;
 }
 
 /* FORM CONTAINER */
@@ -98,15 +67,7 @@
     box-shadow: 0 0 12px rgba(0,0,0,0.4);
 }
 
-/* Placeholder color */
-.create-input::placeholder,
-.create-textarea::placeholder {
-    color: rgba(255,255,255,0.9);
-}
-
-.create-select option {
-    color: black;
-}
+.create-select option { color: black; }
 
 /* BUTTON */
 .create-btn {

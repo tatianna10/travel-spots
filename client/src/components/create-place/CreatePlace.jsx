@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router";
 import { createPlace } from "../../api/placesApi";
+import { AuthContext } from "../../contexts/AuthContext";
+import Header from "../header/Header.jsx";
 
 export default function CreatePlace() {
     const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
 
     const [formData, setFormData] = useState({
         city: "",
@@ -16,40 +19,39 @@ export default function CreatePlace() {
 
     const [submitting, setSubmitting] = useState(false);
 
-    function handleChange(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (!user) {
+        return (
+            <div className="create-wrapper">
+                <Header />
+                <div className="create-inner">
+                    <h2 className="create-title">You must be logged in to create a spot.</h2>
+                    <Link to="/login" className="create-btn">Go to Login</Link>
+                </div>
+            </div>
+        );
     }
 
-    function generateRandomRating() {
-        return Number((Math.random() * 1.5 + 3.5).toFixed(1));
+    function handleChange(e) {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
     async function handleSubmit(e) {
         e.preventDefault();
         if (submitting) return;
 
-        setSubmitting(true);
-
-        const city = formData.city.trim();
-        const country = formData.country.trim();
-
         const newSpot = {
-            title: `${city}, ${country}`,
-            city,
-            country,
-            description: formData.description.trim(),
-            longDescription: formData.longDescription.trim(),
-            imageUrl: formData.imageUrl.trim(),
-            rating: generateRandomRating(),
-            category: formData.category,
-            ownerId: "anonymous",
+            title: `${formData.city}, ${formData.country}`,
+            ...formData,
+            ownerId: user.id,
             likes: [],
             comments: [],
             createdAt: Date.now()
         };
 
+        setSubmitting(true);
+
         try {
-            await createPlace(newSpot);
+            await createPlace(newSpot, user.accessToken);
             navigate("/places");
         } catch (err) {
             alert("Failed to create spot: " + err.message);
@@ -59,49 +61,37 @@ export default function CreatePlace() {
     }
 
     return (
-        <>
-            <header className="create-header">
-                <h1 className="create-header-title">Create Spot</h1>
-                <nav className="create-nav">
-                    <Link to="/" className="create-nav-link">Home</Link>
-                    <Link to="/places" className="create-nav-link">Catalog</Link>
-                    <Link to="/login" className="create-nav-link">Login</Link>
-                    <Link to="/register" className="create-nav-link">Register</Link>
-                </nav>
-            </header>
+        <div className="create-wrapper">
+            <Header />
 
-            <div className="create-wrapper">
+            <div className="create-inner">
                 <form className="create-form" onSubmit={handleSubmit}>
                     <h2 className="create-title">Add New Travel Spot</h2>
 
-                    <label className="create-label">
-                        City:
-                        <input type="text" name="city" value={formData.city} onChange={handleChange} className="create-input" required />
+                    {/* INPUT FIELDS */}
+                    <label className="create-label">City:
+                        <input className="create-input" name="city" onChange={handleChange} required />
                     </label>
 
-                    <label className="create-label">
-                        Country:
-                        <input type="text" name="country" value={formData.country} onChange={handleChange} className="create-input" required />
+                    <label className="create-label">Country:
+                        <input className="create-input" name="country" onChange={handleChange} required />
                     </label>
 
-                    <label className="create-label">
-                        Image URL:
-                        <input type="text" name="imageUrl" value={formData.imageUrl} onChange={handleChange} className="create-input" required />
+                    <label className="create-label">Image URL:
+                        <input className="create-input" name="imageUrl" onChange={handleChange} required />
                     </label>
 
-                    <label className="create-label">
-                        Short Description:
-                        <input type="text" name="description" value={formData.description} onChange={handleChange} className="create-input" required />
+                    <label className="create-label">Short Description:
+                        <input className="create-input" name="description" onChange={handleChange} required />
                     </label>
 
-                    <label className="create-label">
-                        Long Description:
-                        <textarea name="longDescription" value={formData.longDescription} onChange={handleChange} className="create-textarea" rows="4" required />
+                    <label className="create-label">Long Description:
+                        <textarea className="create-textarea" name="longDescription" rows="4" onChange={handleChange} required />
                     </label>
 
                     <label className="create-label">
                         Category:
-                        <select name="category" value={formData.category} onChange={handleChange} className="create-select" required>
+                        <select className="create-select" name="category" onChange={handleChange} required>
                             <option value="">Select category...</option>
                             <option value="beach">Beach</option>
                             <option value="historic">Historic</option>
@@ -115,11 +105,11 @@ export default function CreatePlace() {
                         </select>
                     </label>
 
-                    <button type="submit" className="create-btn" disabled={submitting}>
+                    <button className="create-btn" disabled={submitting}>
                         {submitting ? "Adding..." : "Add Spot"}
                     </button>
                 </form>
             </div>
-        </>
+        </div>
     );
 }

@@ -36,7 +36,7 @@ app.post("/users/register", async (req, res) => {
 
     const token = jwt.sign({ id, email }, SECRET);
 
-    res.json({ email, accessToken: token, _id: id });
+    res.json({ email, accessToken: token, id: id });
 });
 
 /* ================================
@@ -53,7 +53,7 @@ app.post("/users/login", async (req, res) => {
     if (!match) return res.status(403).json({ message: "Invalid login" });
 
     const token = jwt.sign({ id: user.id, email }, SECRET);
-    res.json({ email, accessToken: token, _id: user.id });
+    res.json({ email, accessToken: token, id: user.id });
 });
 
 /* ================================

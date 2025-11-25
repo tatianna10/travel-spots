@@ -14,38 +14,54 @@ async function handleResponse(res) {
   return res.json();
 }
 
+// ============= GET ALL =============
 export async function getAllPlaces() {
   const res = await fetch(baseUrl);
-  return handleResponse(res);   
+  return handleResponse(res);
 }
 
+// ============= GET BY ID ============
 export async function getPlaceById(id) {
   const res = await fetch(`${baseUrl}/${id}`);
   return handleResponse(res);
 }
 
-export async function createPlace(placeData) {
+// ============= CREATE =============
+// MUST include token and ownerId
+export async function createPlace(placeData, token) {
   const res = await fetch(baseUrl, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "X-Authorization": token
+    },
     body: JSON.stringify(placeData),
   });
   return handleResponse(res);
 }
 
-export async function updatePlace(id, placeData) {
+// ============= UPDATE =============
+export async function updatePlace(id, placeData, token) {
   const res = await fetch(`${baseUrl}/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "X-Authorization": token
+    },
     body: JSON.stringify(placeData),
   });
   return handleResponse(res);
 }
 
-export async function deletePlace(id) {
+// ============= DELETE =============
+export async function deletePlace(id, token) {
   const res = await fetch(`${baseUrl}/${id}`, {
     method: "DELETE",
+    headers: {
+      "X-Authorization": token
+    }
   });
+
   await handleResponse(res);
   return true;
 }

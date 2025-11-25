@@ -43,6 +43,7 @@
     gap: 1.5rem;
     font-weight: 600;
     color: white;
+    align-items: center;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
 }
 
@@ -55,3 +56,42 @@
 .header-nav a:hover {
     color: #93C5FD; 
 }
+
+/* ===== USER GREETING ===== */
+.header-user {
+    color: #e0eaff;
+    font-weight: 600;
+    margin-left: 0.5rem;
+    text-shadow: 0 0 10px rgba(30, 144, 255, 0.7);
+}
+
+/* ===== LOGOUT BUTTON ===== */
+.logout-btn {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0.3rem 0.75rem;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+
+    backdrop-filter: blur(4px);
+    transition: all 0.25s ease;
+}
+
+.logout-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    color: #93C5FD;
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Keeps layout aligned when brand is hidden */
+.header-placeholder {
+    visibility: hidden;
+    width: 200px; 
+}
+
+.site-header {
+    height: 80px; /* SAME height as header on Home */
+}
+

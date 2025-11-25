@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="home-wrapper">
       <div className="home-inner">
-        <Header />
+        <Header showBrand={true} />
         <HomeMain />
         <Footer />
       </div>

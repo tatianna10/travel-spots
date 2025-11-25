@@ -1,5 +1,26 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "63922898-9b14-4d88-97d3-9dc6bc0057ec",
+      "email": "tikitak@abv.bg",
+      "password": "$2b$10$TxetTa86CFCkwl4p9FO54.Cu9tzyv1X///vU0g8fS2m0PuiYzW3Ci"
+    },
+    {
+      "id": "3be320b5-d7f6-4509-a6cd-15ed1b0690cf",
+      "email": "scott@yahoo.com",
+      "password": "$2b$10$zSWBqtFV4RBlBZtgqywuTeXIl92UCDJgJq3j5U7qbd2shqakjq3qS"
+    },
+    {
+      "id": "e96bd201-f9e8-422d-9831-791d9367096a",
+      "email": "mikimak@yahoo.com",
+      "password": "$2b$10$mx0XA13EG27p.89bh1ZEG.7Pb15.B7whaWxsYBifg3NiW.2LnOCcu"
+    },
+    {
+      "id": "c292e8a7-d488-4f25-a6c8-ac36fd99530b",
+      "email": "tikitak@yahoo.com",
+      "password": "$2b$10$UK7oqk.nheN3QXbZvR9quOn1plaoIKJT62Yu9N82N/TD8pASXSZcC"
+    }
+  ],
   "places": [
     {
       "id": "78877795-98e5-4fd6-b90c-6a792dbbb1db",
@@ -10,7 +31,7 @@
       "longDescription": "Paris is known for the Eiffel Tower, rich culture, museums, fashion, luxury cafes, and historic architecture.",
       "imageUrl": "https://images2.alphacoders.com/561/thumb-1920-561115.jpg",
       "category": "romantic",
-      "ownerId": "USER-ID-1",
+      "ownerId": "3be320b5-d7f6-4509-a6cd-15ed1b0690cf",
       "likes": [],
       "comments": [],
       "createdAt": 1763670005123
@@ -24,7 +45,7 @@
       "longDescription": "New York City has skyscrapers, Central Park, Broadway, Wall Street, luxury shopping, museums, and endless nightlife.",
       "imageUrl": "https://lh3.googleusercontent.com/places/AAcXr8oELGjp26s1mDaTs07ebLQ05ZdAOICFWmQbHv3Hy43Gy7VfuzRCgQUw_kCNbfVsFexY0QfO4wuj6kOGrSy3UJXakGAadOvQJCM=s1600-w612",
       "category": "modern",
-      "ownerId": "USER-ID-1",
+      "ownerId": "3be320b5-d7f6-4509-a6cd-15ed1b0690cf",
       "likes": [],
       "comments": [],
       "createdAt": 1763670069874
@@ -38,7 +59,7 @@
       "longDescription": "Tokyo is famous for anime culture, Shibuya Crossing, technology, temples, cherry blossoms, and unique cuisine.",
       "imageUrl": "https://images.contentstack.io/v3/assets/blt06f605a34f1194ff/blt0db69fde9a0f6d98/675e125faf051ba02b13ded4/japan-725347-Header_Desktop.jpg",
       "category": "city",
-      "ownerId": "USER-ID-2",
+      "ownerId": "e96bd201-f9e8-422d-9831-791d9367096a",
       "likes": [],
       "comments": [],
       "createdAt": 1763670135529
@@ -52,7 +73,7 @@
       "longDescription": "Sydney offers Bondi Beach, the Opera House, the Harbour Bridge, wildlife parks, and coastal walks.",
       "imageUrl": "https://images5.alphacoders.com/555/thumb-1920-555090.jpg",
       "category": "beach",
-      "ownerId": "USER-ID-3",
+      "ownerId": "e96bd201-f9e8-422d-9831-791d9367096a",
       "likes": [],
       "comments": [],
       "createdAt": 1763670201441
@@ -66,7 +87,7 @@
       "longDescription": "London features Big Ben, Buckingham Palace, the Thames, museums, theaters, and multicultural cuisine.",
       "imageUrl": "https://images.ctfassets.net/szez98lehkfm/15BqGrxg9mJrHYLhQEZObo/7db404e41a288b7f7e34c9684b0bd3a8/MyIC_Article123611?w=1106&h=622&fm=webp&fit=fill",
       "category": "historic",
-      "ownerId": "USER-ID-2",
+      "ownerId": "e96bd201-f9e8-422d-9831-791d9367096a",
       "likes": [],
       "comments": [],
       "createdAt": 1763670267090
@@ -80,7 +101,7 @@
       "longDescription": "Dubai offers Burj Khalifa, desert safaris, luxury malls, pristine beaches, and vibrant nightlife.",
       "imageUrl": "https://etimg.etb2bimg.com/photo/87053505.cms",
       "category": "desert",
-      "ownerId": "USER-ID-3",
+      "ownerId": "3be320b5-d7f6-4509-a6cd-15ed1b0690cf",
       "likes": [],
       "comments": [],
       "createdAt": 1763670332887
@@ -94,7 +115,7 @@
       "longDescription": "Venice is famous for gondolas, canals, Renaissance architecture, and Italian cuisine.",
       "imageUrl": "https://w0.peakpx.com/wallpaper/867/706/HD-wallpaper-venice-r-grand-canal-gondolas-italy-venice-at-summer-europe-italian-cities.jpg",
       "category": "romantic",
-      "ownerId": "USER-ID-1",
+      "ownerId": "63922898-9b14-4d88-97d3-9dc6bc0057ec",
       "likes": [],
       "comments": [],
       "createdAt": 1763670398552
@@ -108,7 +129,7 @@
       "longDescription": "Rio offers Copacabana, Christ the Redeemer, samba, and breathtaking nature.",
       "imageUrl": "https://www.thetimes.com/imageserver/image/%2Fmethode%2Ftimes%2Fprod%2Fweb%2Fbin%2F592f4514-2e05-11e9-b50c-c6da8f614c54.jpg?crop=4300%2C2419%2C0%2C224&format=webp&quality=9&resize=1500",
       "category": "tropical",
-      "ownerId": "USER-ID-3",
+      "ownerId": "63922898-9b14-4d88-97d3-9dc6bc0057ec",
       "likes": [],
       "comments": [],
       "createdAt": 1763670464120
@@ -122,7 +143,7 @@
       "longDescription": "Bangkok is known for floating markets, spicy cuisine, temples, and nightlife.",
       "imageUrl": "https://www.thailand-reiseprofis.com/wp-content/bilder/wat-arun-bangkok.jpg",
       "category": "culture",
-      "ownerId": "USER-ID-2",
+      "ownerId": "c292e8a7-d488-4f25-a6c8-ac36fd99530b",
       "likes": [],
       "comments": [],
       "createdAt": 1763670529778
@@ -136,7 +157,7 @@
       "longDescription": "Cape Town offers Table Mountain, penguins, wine regions, and dramatic nature.",
       "imageUrl": "https://boomers-daily.com/wp-content/uploads/2021/05/aerial-views-cape-town-south-africa-video-may-10-2021.jpg?w=1024&h=567&crop=1",
       "category": "nature",
-      "ownerId": "USER-ID-1",
+      "ownerId": "c292e8a7-d488-4f25-a6c8-ac36fd99530b",
       "likes": [],
       "comments": [],
       "createdAt": 1763670595450
@@ -150,7 +171,7 @@
       "longDescription": "Vancouver is known for Stanley Park, skiing, multicultural food, and nature.",
       "imageUrl": "https://cyclingmagazine.ca/wp-content/uploads/2019/06/Vancouver-AerialView-01014_201809_AlbertNormandin_False-CreekVancouverDowntownCityAerial.jpg",
       "category": "nightlife",
-      "ownerId": "USER-ID-2",
+      "ownerId": "c292e8a7-d488-4f25-a6c8-ac36fd99530b",
       "likes": [],
       "comments": [],
       "createdAt": 1763670661001
@@ -164,7 +185,7 @@
       "longDescription": "Athens offers Acropolis, Mediterranean cuisine, nightlife, and coastal beauty.",
       "imageUrl": "https://images7.alphacoders.com/134/thumb-1920-1341836.jpeg",
       "category": "historic",
-      "ownerId": "USER-ID-3",
+      "ownerId": "63922898-9b14-4d88-97d3-9dc6bc0057ec",
       "likes": [],
       "comments": [],
       "createdAt": 1763670726694
@@ -178,7 +199,7 @@
       "longDescription": "Sofia, the capital of Bulgaria, is one of Europe’s oldest cities, offering a unique mix of Roman ruins, historic Orthodox churches, mineral springs, lively boulevards, and a growing modern culture. Nestled at the foot of Vitosha Mountain, the city gives visitors the rare chance to enjoy museums, nightlife, and architecture — then be hiking or skiing within minutes. With affordable dining, friendly locals, and a blend of Eastern and Western influences, Sofia is a welcoming destination for both culture lovers and adventurers.",
       "imageUrl": "https://assets.vogue.com/photos/66cf9fcf8e300baeca058f80/4:3/w_1920,c_limit/1303587513",
       "category": "culture",
-      "ownerId": "anonymous",
+      "ownerId": "c292e8a7-d488-4f25-a6c8-ac36fd99530b",
       "likes": [],
       "comments": [],
       "createdAt": 1763670792333
@@ -192,7 +213,7 @@
       "longDescription": "Rome is one of the world’s most historically rich cities, with over 2,500 years of art, architecture, and cultural influence. Founded according to legend by Romulus and Remus, it became the heart of the Roman Empire, shaping the politics, engineering, and philosophy of the Western world. Visitors can walk among ancient ruins such as the Roman Forum and the Colosseum, stand beneath the grandeur of the Pantheon, or explore the masterpieces of the Vatican Museums and St. Peter’s Basilica.",
       "imageUrl": "https://colosseumrometickets.com/wp-content/uploads/2018/10/Aerial-view-of-Piazza-di-Spagna-and-the-Spanish-Steps-in-Rome.jpg",
       "category": "historic",
-      "ownerId": "anonymous",
+      "ownerId": "63922898-9b14-4d88-97d3-9dc6bc0057ec",
       "likes": [],
       "comments": [],
       "createdAt": 1763670857992

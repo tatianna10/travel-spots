@@ -7,6 +7,7 @@ import Register from "./components/register/Register";
 import Login from "./components/login/Login";
 import PrivateRoute from "./guards/PrivateRoute";
 import GuestRoute from "./guards/GuestRoute";
+import EditPlace from "./components/edit-page/EditPlace.jsx";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
       {/* private routes */}
       <Route element={<PrivateRoute />}>
         <Route path="/places/create" element={<CreatePlace />} />
+        <Route path="/places/:id/edit" element={<EditPlace />} />
       </Route>
 
     </Routes>

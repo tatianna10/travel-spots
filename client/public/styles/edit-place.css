@@ -1,0 +1,90 @@
+/* Background container */
+.edit-place-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Card styling */
+.edit-card {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 0 30px rgba(30, 144, 255, 0.4);
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 480px;
+  color: white;
+}
+
+/* Title */
+.edit-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 24px;
+  filter: drop-shadow(0 0 18px #1e90ff);
+}
+
+/* Form layout */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.edit-label {
+  font-weight: 600;
+}
+
+.edit-input,
+.edit-textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  outline: none;
+}
+
+.edit-input:focus,
+.edit-textarea:focus {
+  box-shadow: 0 0 8px #1e90ff;
+  border-color: #1e90ff;
+}
+
+.edit-btn {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(30, 144, 255, 0.25);
+  border: 1px solid rgba(30, 144, 255, 0.4);
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  color: white;
+  text-transform: uppercase;
+}
+
+.edit-btn:hover {
+  background: rgba(30, 144, 255, 0.35);
+  box-shadow: 0 0 10px #1e90ff;
+}
+
+/* Loading / Errors */
+.edit-loading,
+.edit-error {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-top: 3rem;
+}
+
+.edit-error {
+  color: #ff6b6b;
+  font-weight: bold;
+}

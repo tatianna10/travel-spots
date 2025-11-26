@@ -5,10 +5,13 @@ import '/index.css';
 import { AuthProvider } from './contexts/AuthContext.jsx';
 
 
+
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <AuthProvider>
+
       <App />
+
     </AuthProvider>
   </BrowserRouter>
 

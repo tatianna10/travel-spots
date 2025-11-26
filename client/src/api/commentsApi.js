@@ -8,25 +8,20 @@ async function handleRes(res) {
   return res.json();
 }
 
-
 export async function getCommentsByPlace(placeId) {
-  const query = `?where=placeId%3D%22${placeId}%22`;
-  const res = await fetch(baseUrl + query);
+  const res = await fetch(`${baseUrl}?placeId=${encodeURIComponent(placeId)}`);
   return handleRes(res);
 }
 
-
-export async function createComment(placeId, text) {
-  const commentData = {
-    placeId,
-    text,
-    createdAt: new Date().toISOString(),
-  };
-
+export async function createComment(placeId, text, user) {
   const res = await fetch(baseUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(commentData),
+    body: JSON.stringify({
+      placeId,
+      text: text.trim(),
+      authorId: user.id, 
+    }),
   });
 
   return handleRes(res);

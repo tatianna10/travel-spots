@@ -8,6 +8,7 @@ export default function Register() {
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
+        fullName: "",     
         email: "",
         password: "",
         repass: "",
@@ -17,35 +18,49 @@ export default function Register() {
         setForm(state => ({ ...state, [e.target.name]: e.target.value }));
     }
 
-    async function onSubmit(e) {
-        e.preventDefault();
+  async function onSubmit(e) {
+    e.preventDefault();
 
-        if (form.password !== form.repass) {
-            alert("Passwords do not match!");
-            return;
-        }
-
-        try {
-            await register({
-                email: form.email.trim(),
-                password: form.password.trim(),
-            });
-
-            navigate("/"); 
-        } catch (err) {
-            alert(err.message);
-        }
+    if (form.password !== form.repass) {
+        alert("Passwords do not match!");
+        return;
     }
+
+    try {
+        await register({
+            email: form.email.trim(),
+            fullName: form.fullName.trim(), // 👈 Updated
+            password: form.password.trim(),
+        });
+
+        navigate("/");
+    } catch (err) {
+        alert(err.message);
+    }
+}
 
     return (
         <div className="register-page">
-            <Header /> 
+            <Header />
 
             <div className="register-center">
                 <div className="register-card">
                     <h2 className="register-title">Create Account</h2>
 
                     <form onSubmit={onSubmit} className="register-form">
+
+                    
+                        <label className="label" htmlFor="fullName">Full Name (optional)</label>
+                        <input
+                            className="input"
+                            type="text"
+                            name="fullName"
+                            id="fullName"
+                            placeholder="John Travolta"
+                            value={form.fullName}
+                            onChange={onChange}
+                        />
+
                         <label className="label" htmlFor="email">Email</label>
                         <input
                             className="input"
@@ -88,8 +103,7 @@ export default function Register() {
                     </form>
 
                     <p className="login-text">
-                        Already have an account?
-                        {" "}
+                        Already have an account?{" "}
                         <Link className="login-link" to="/login">
                             Login
                         </Link>

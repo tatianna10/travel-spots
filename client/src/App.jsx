@@ -8,6 +8,7 @@ import Login from "./components/login/Login";
 import PrivateRoute from "./guards/PrivateRoute";
 import GuestRoute from "./guards/GuestRoute";
 import EditPlace from "./components/edit-page/EditPlace.jsx";
+import NotFound from "./components/not-found/NotFound.jsx";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/places/:id/edit" element={<EditPlace />} />
       </Route>
 
+      <Route path="*" element={<NotFound />} />
     </Routes>
 
   );

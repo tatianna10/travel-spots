@@ -5,8 +5,27 @@ import { getCommentsByPlace, createComment } from "../../api/commentsApi";
 import { getUserById } from "../../api/userApi";
 import { AuthContext } from "../../contexts/AuthContext";
 
+function getDisplayName(user) {
+  if (!user) return "Unknown user";
+
+  if (user.fullName && user.fullName.trim() !== "") {
+    return user.fullName;
+  }
+
+  if (user.email && user.email.includes("@")) {
+    return user.email.split("@")[0];
+  }
+
+  return "Unknown user";
+}
+
 function formatRelativeTime(timestamp) {
-  const diff = Date.now() - timestamp;
+  if (!timestamp) return "";
+
+  const time =
+    typeof timestamp === "string" ? new Date(timestamp).getTime() : timestamp;
+
+  const diff = Date.now() - time;
   const sec = Math.floor(diff / 1000);
   const min = Math.floor(sec / 60);
   const hrs = Math.floor(min / 60);
@@ -33,33 +52,31 @@ export default function DetailsPage() {
 
   const isOwner = user?.id === place?.ownerId;
 
+  const loadComments = async (placeId) => {
+    const commentsData = await getCommentsByPlace(placeId);
+
+    const processedComments = await Promise.all(
+      commentsData.map(async (c) => {
+        let authorName = "Unknown user";
+        try {
+          const author = await getUserById(c.authorId);
+          authorName = getDisplayName(author);
+        } catch {
+          // If user fetch fails, leave default
+        }
+        return { ...c, authorName };
+      })
+    );
+
+    setComments(processedComments);
+  };
+
   useEffect(() => {
     async function loadData() {
       try {
-        const [placeData, commentsData] = await Promise.all([
-          getPlaceById(id),
-          getCommentsByPlace(id),
-        ]);
-
-        const processedComments = await Promise.all(
-          commentsData.map(async (c) => {
-            let authorName = "Unknown user";
-            try {
-              const author = await getUserById(c.authorId);
-              authorName =
-                author.fullName && author.fullName.trim() !== ""
-                  ? author.fullName
-                  : author.email.split("@")[0];
-            } catch (err) {
-              //
-            }
-
-            return { ...c, authorName };
-          })
-        );
-
+        const placeData = await getPlaceById(id);
         setPlace(placeData);
-        setComments(processedComments);
+        await loadComments(id);
       } finally {
         setLoading(false);
       }
@@ -72,17 +89,9 @@ export default function DetailsPage() {
     if (!commentText.trim() || !user) return;
 
     try {
-      const newComment = await createComment(id, commentText, user);
+      await createComment(id, commentText, user);
 
-      const authorName =
-        user.fullName && user.fullName.trim() !== ""
-          ? user.fullName
-          : user.email.split("@")[0];
-
-      setComments((prev) => [
-        ...prev,
-        { ...newComment, authorName }
-      ]);
+      await loadComments(id);
 
       setCommentText("");
     } catch (err) {
@@ -102,7 +111,6 @@ export default function DetailsPage() {
   return (
     <div className="details-wrapper">
       <div className="details-card">
-
         <img className="details-image" src={place.imageUrl} alt={place.title} />
         <h1 className="details-title">{place.title}</h1>
         <p className="details-extra">{place.longDescription}</p>
@@ -122,8 +130,12 @@ export default function DetailsPage() {
 
           {isAuthenticated && isOwner && (
             <>
-              <Link to={`/places/${id}/edit`} className="details-btn edit">Edit</Link>
-              <button className="details-btn delete" onClick={handleDelete}>Delete</button>
+              <Link to={`/places/${id}/edit`} className="details-btn edit">
+                Edit
+              </Link>
+              <button className="details-btn delete" onClick={handleDelete}>
+                Delete
+              </button>
             </>
           )}
         </div>
@@ -140,7 +152,6 @@ export default function DetailsPage() {
               <li key={c.id} className="details-comment-item">
                 <span className="details-comment-author">{c.authorName}:</span>{" "}
                 {c.text}
-
                 {c.createdAt && (
                   <span className="details-comment-date">
                     • {formatRelativeTime(c.createdAt)}
@@ -152,7 +163,9 @@ export default function DetailsPage() {
 
           {!isAuthenticated && (
             <p className="details-login-msg">
-              <Link to="/login" className="details-login-link">Login</Link>{" "}
+              <Link to="/login" className="details-login-link">
+                Login
+              </Link>{" "}
               to post comments or like this place.
             </p>
           )}

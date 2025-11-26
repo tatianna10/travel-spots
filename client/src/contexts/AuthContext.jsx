@@ -1,23 +1,22 @@
 import { createContext, useState } from "react";
 import { loginAPI, registerAPI, logoutAPI } from "../api/authAPI";
+import { getUserById } from "../api/userApi";
 
 export const AuthContext = createContext();
 
 const USER_KEY = "travelspots-user";
 
 export function AuthProvider({ children }) {
-  // Load logged-in user from localStorage
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem(USER_KEY);
     return saved ? JSON.parse(saved) : null;
   });
 
-  // Save user to both React state and localStorage
   function saveUser(apiUser) {
-    // Extract ONLY the fields we use (clean & safe)
     const cleanUser = {
+      id: apiUser.id,
       email: apiUser.email,
-      id: apiUser.id,               // your backend uses "id"
+      fullName: apiUser.fullName ?? null,
       accessToken: apiUser.accessToken,
     };
 
@@ -25,21 +24,36 @@ export function AuthProvider({ children }) {
     setUser(cleanUser);
   }
 
-  // LOGIN
   async function login(credentials) {
-    const result = await loginAPI(credentials);
-    saveUser(result);
-    return result;
+    const authData = await loginAPI(credentials);
+
+    const profile = await getUserById(authData.id);
+
+    saveUser({
+      id: authData.id,
+      email: authData.email,
+      fullName: profile.fullName || authData.fullName || null,
+      accessToken: authData.accessToken,
+    });
+
+    return authData;
   }
 
-  // REGISTER
   async function register(credentials) {
-    const result = await registerAPI(credentials);
-    saveUser(result);
-    return result;
+    const authData = await registerAPI(credentials);
+
+    const profile = await getUserById(authData.id);
+
+    saveUser({
+      id: authData.id,
+      email: authData.email,
+      fullName: profile.fullName || authData.fullName || null,
+      accessToken: authData.accessToken,
+    });
+
+    return authData;
   }
 
-  // LOGOUT
   async function logout() {
     try {
       if (user?.accessToken) {
@@ -47,7 +61,6 @@ export function AuthProvider({ children }) {
       }
     } catch (err) {
       console.warn("Logout API failed:", err.message);
-      // We still log out locally!
     }
 
     localStorage.removeItem(USER_KEY);
@@ -55,16 +68,12 @@ export function AuthProvider({ children }) {
   }
 
   const value = {
-    user,                      // { email, id, accessToken }
-    isAuthenticated: !!user,   // boolean
+    user,
+    isAuthenticated: !!user,
     login,
     register,
     logout,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

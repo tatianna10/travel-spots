@@ -1,54 +1,6 @@
 {
   "users": [
     {
-      "id": "63922898-9b14-4d88-97d3-9dc6bc0057ec",
-      "email": "tikitak@abv.bg",
-      "fullName": "Tiki Takov",
-      "password": "$2b$10$TxetTa86CFCkwl4p9FO54.Cu9tzyv1X///vU0g8fS2m0PuiYzW3Ci"
-    },
-    {
-      "id": "3be320b5-d7f6-4509-a6cd-15ed1b0690cf",
-      "email": "scott@yahoo.com",
-      "fullName": "Scott Morrison",
-      "password": "$2b$10$zSWBqtFV4RBlBZtgqywuTeXIl92UCDJgJq3j5U7qbd2shqakjq3qS"
-    },
-    {
-      "id": "e96bd201-f9e8-422d-9831-791d9367096a",
-      "email": "mikimak@yahoo.com",
-      "fullName": "Miki Makov",
-      "password": "$2b$10$mx0XA13EG27p.89bh1ZEG.7Pb15.B7whaWxsYBifg3NiW.2LnOCcu"
-    },
-    {
-      "id": "c292e8a7-d488-4f25-a6c8-ac36fd99530b",
-      "email": "tikitak@yahoo.com",
-      "fullName": "Tiki Takov Jr",
-      "password": "$2b$10$UK7oqk.nheN3QXbZvR9quOn1plaoIKJT62Yu9N82N/TD8pASXSZcC"
-    },
-    {
-      "id": "e83ca4c2-14a0-4b7f-922e-971f9a962feb",
-      "email": "tannygg@hotmail.com",
-      "fullName": "Tanny Greg",
-      "password": "$2b$10$c8tBs/fHkI5SH9UXIEm0T.SL7kEEp9w8L0P56T43miLyRZgSlHlLO"
-    },
-    {
-      "id": "da8f242d-f94f-4178-bedc-c3526900023f",
-      "email": "vixy@abv.bg",
-      "fullName": "Vicky Stoyanova",
-      "password": "$2b$10$jff1GGxVFxtWw3VnOl5sR./Z/GImyxDFSJ66eGY3NvXXNXF2TY5jm"
-    },
-    {
-      "id": "1edb006e-225f-4b3b-8881-239881330616",
-      "email": "vixy5@abv.bg",
-      "fullName": "Vicky Stoyan",
-      "password": "$2b$10$H3xzH.BCml5DJ9sKfkWOp.x8s4P3KV1FkxWCtjiTZjCXAGtRlfgo."
-    },
-    {
-      "id": "f2123ed0-f01e-474a-8758-325311397cf1",
-      "email": "vixy6@abv.bg",
-      "fullName": "Vicky Six",
-      "password": "$2b$10$5NMZwb72gWEm8L2RyjCmgedFWXgy/m3P6zuUA33Y2b.ZwsNZslk22"
-    },
-    {
       "id": "2c275e75-a025-457c-8db5-26369db7c11d",
       "email": "vixy23@abv.bg",
       "fullName": "Donna Tompson",
@@ -239,25 +191,11 @@
   ],
   "comments": [
     {
-      "id": "fd20d289-d318-4c02-b147-54ae4c1b1a0c",
-      "placeId": "4be98a85-2f54-43ca-91ea-7754b76e8b19",
-      "text": "nice city!",
-      "authorId": "f2123ed0-f01e-474a-8758-325311397cf1",
-      "createdAt": 1764173402724
-    },
-    {
       "id": "5a86e567-c80e-4249-8973-ef4e0af9c6fa",
       "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
       "text": "Great Place! :)",
       "authorId": "2c275e75-a025-457c-8db5-26369db7c11d",
       "createdAt": 1764174260459
-    },
-    {
-      "id": "d1d2ebe9-2dab-4a26-a191-74dd90eaca15",
-      "placeId": "7cc16866-46e2-427c-b378-2fbf54e2b41a",
-      "text": "hi",
-      "authorId": "1196316b-f606-4094-a84a-73810b123382",
-      "createdAt": 1764174665463
     },
     {
       "id": "c962a11c-1fbc-4a5e-8921-6ae530859647",
@@ -267,32 +205,74 @@
       "createdAt": 1764175183852
     },
     {
-      "id": "3ec3b81c-ae92-4e71-af06-5dea801d0ccd",
-      "placeId": "7cc16866-46e2-427c-b378-2fbf54e2b41a",
-      "text": "uu",
-      "authorId": "1196316b-f606-4094-a84a-73810b123382",
-      "createdAt": 1764175255712
-    },
-    {
-      "id": "ea5925c0-7991-44ee-8116-197288018975",
-      "placeId": "7cc16866-46e2-427c-b378-2fbf54e2b41a",
-      "text": "mik",
-      "authorId": "1196316b-f606-4094-a84a-73810b123382",
-      "createdAt": 1764175549956
-    },
-    {
-      "id": "da1fee79-a213-4092-bb5c-ded3b8cac80e",
-      "placeId": "7cc16866-46e2-427c-b378-2fbf54e2b41a",
-      "text": "d",
-      "authorId": "1196316b-f606-4094-a84a-73810b123382",
-      "createdAt": 1764175769269
-    },
-    {
       "id": "f6e01912-0938-4317-b193-12c9a33c5a02",
       "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
       "text": "Wonderful place!",
       "authorId": "b5042f58-6a11-4e1b-81f8-4b447da01348",
       "createdAt": 1764175958180
+    },
+    {
+      "id": "7a44bea6-1bb4-40ec-a049-18ba62f09931",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "text": "I love it!",
+      "authorId": "2c275e75-a025-457c-8db5-26369db7c11d",
+      "createdAt": 1764177972095
+    },
+    {
+      "id": "1e3b3449-231c-4ac5-9416-44ac658b4436",
+      "placeId": "7cc16866-46e2-427c-b378-2fbf54e2b41a",
+      "text": "wow, so nice",
+      "authorId": "b5042f58-6a11-4e1b-81f8-4b447da01348",
+      "createdAt": 1764192223702
+    },
+    {
+      "id": "c1f2efbc-9cc3-435d-a9c0-e9d74028ec5e",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "text": "io",
+      "authorId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764192260622
+    },
+    {
+      "id": "d6a35fd1-dc90-40e4-b038-4edbbb71c489",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "text": "a",
+      "authorId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764192298905
+    },
+    {
+      "id": "86743f9e-db87-4ae4-b614-2b10a24148c5",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "text": "p",
+      "authorId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764192346149
+    },
+    {
+      "id": "9f6122d2-be30-4294-aa7a-0ba7b569a60e",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "text": "io",
+      "authorId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764192813312
+    },
+    {
+      "id": "ccfae17f-22b2-4c99-ad17-f2b21ec4cb36",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "text": "s",
+      "authorId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764193147599
+    },
+    {
+      "id": "1353fa2e-a6a0-4f76-bb2c-9c1a5ae15d8e",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "text": "a",
+      "authorId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764193460665
+    },
+    {
+      "id": "920fd941-132b-4afd-ad8d-f1ddc8105dde",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "text": "s",
+      "authorId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764193586022
     }
   ],
   "likes": []

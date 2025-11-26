@@ -1,15 +1,13 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
+import Header from "../header/Header.jsx";
 
 export default function Login() {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const [form, setForm] = useState({
-        email: "",
-        password: "",
-    });
+    const [form, setForm] = useState({ email: "", password: "" });
 
     function onChange(e) {
         setForm(state => ({ ...state, [e.target.name]: e.target.value }));
@@ -17,14 +15,9 @@ export default function Login() {
 
     async function onSubmit(e) {
         e.preventDefault();
-
         try {
-            await login({
-                email: form.email,
-                password: form.password,
-            });
-
-            navigate("/"); // redirect after login
+            await login(form);
+            navigate("/"); 
         } catch (err) {
             alert(err.message);
         }
@@ -32,39 +25,41 @@ export default function Login() {
 
     return (
         <div className="login-page">
-            <div className="login-card">
-                <h2 className="login-title">Login</h2>
+            <Header /> 
 
-                <form onSubmit={onSubmit} className="login-form">
-                    <label className="label" htmlFor="email">Email</label>
-                    <input
-                        className="input"
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="Your Email"
-                        value={form.email}
-                        onChange={onChange}
-                    />
+            <div className="login-center">
+                <div className="login-card">
+                    <h2 className="login-title">Login</h2>
 
-                    <label className="label" htmlFor="password">Password</label>
-                    <input
-                        className="input"
-                        type="password"
-                        name="password"
-                        id="password"
-                        placeholder="Password"
-                        value={form.password}
-                        onChange={onChange}
-                    />
+                    <form onSubmit={onSubmit} className="login-form">
+                        <label className="label">Email</label>
+                        <input
+                            className="input"
+                            type="email"
+                            name="email"
+                            placeholder="Your Email"
+                            value={form.email}
+                            onChange={onChange}
+                        />
 
-                    <button className="login-btn" type="submit">Login</button>
-                </form>
+                        <label className="label">Password</label>
+                        <input
+                            className="input"
+                            type="password"
+                            name="password"
+                            placeholder="Password"
+                            value={form.password}
+                            onChange={onChange}
+                        />
 
-                <p className="register-text">
-                    Don't have an account?{" "}
-                    <a className="register-link" href="/register">Register</a>
-                </p>
+                        <button className="login-btn" type="submit">Login</button>
+                    </form>
+
+                    <p className="register-text">
+                        Don't have an account?
+                        <Link className="register-link" to="/register"> Register</Link>
+                    </p>
+                </div>
             </div>
         </div>
     );

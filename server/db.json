@@ -19,6 +19,16 @@
       "id": "c292e8a7-d488-4f25-a6c8-ac36fd99530b",
       "email": "tikitak@yahoo.com",
       "password": "$2b$10$UK7oqk.nheN3QXbZvR9quOn1plaoIKJT62Yu9N82N/TD8pASXSZcC"
+    },
+    {
+      "id": "e83ca4c2-14a0-4b7f-922e-971f9a962feb",
+      "email": "tannygg@hotmail.com",
+      "password": "$2b$10$c8tBs/fHkI5SH9UXIEm0T.SL7kEEp9w8L0P56T43miLyRZgSlHlLO"
+    },
+    {
+      "id": "da8f242d-f94f-4178-bedc-c3526900023f",
+      "email": "vixy@abv.bg",
+      "password": "$2b$10$jff1GGxVFxtWw3VnOl5sR./Z/GImyxDFSJ66eGY3NvXXNXF2TY5jm"
     }
   ],
   "places": [

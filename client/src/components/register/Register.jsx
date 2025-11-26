@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
+import Header from "../header/Header";
 
 export default function Register() {
     const { register } = useContext(AuthContext);
@@ -26,11 +27,11 @@ export default function Register() {
 
         try {
             await register({
-                email: form.email,
-                password: form.password,
+                email: form.email.trim(),
+                password: form.password.trim(),
             });
 
-            navigate("/");
+            navigate("/"); 
         } catch (err) {
             alert(err.message);
         }
@@ -38,51 +39,62 @@ export default function Register() {
 
     return (
         <div className="register-page">
-            <div className="register-card">
-                <h2 className="register-title">Create Account</h2>
+            <Header /> 
 
-                <form onSubmit={onSubmit} className="register-form">
+            <div className="register-center">
+                <div className="register-card">
+                    <h2 className="register-title">Create Account</h2>
 
-                    <label className="label" htmlFor="email">Email</label>
-                    <input
-                        className="input"
-                        type="email"
-                        name="email"
-                        id="email"
-                        placeholder="Your Email"
-                        value={form.email}
-                        onChange={onChange}
-                    />
+                    <form onSubmit={onSubmit} className="register-form">
+                        <label className="label" htmlFor="email">Email</label>
+                        <input
+                            className="input"
+                            type="email"
+                            name="email"
+                            id="email"
+                            placeholder="Your Email"
+                            value={form.email}
+                            onChange={onChange}
+                            required
+                        />
 
-                    <label className="label" htmlFor="register-password">Password</label>
-                    <input
-                        className="input"
-                        type="password"
-                        name="password"
-                        id="register-password"
-                        placeholder="Password"
-                        value={form.password}
-                        onChange={onChange}
-                    />
+                        <label className="label" htmlFor="register-password">Password</label>
+                        <input
+                            className="input"
+                            type="password"
+                            name="password"
+                            id="register-password"
+                            placeholder="Password"
+                            value={form.password}
+                            onChange={onChange}
+                            required
+                        />
 
-                    <label className="label" htmlFor="confirm-password">Confirm Password</label>
-                    <input
-                        className="input"
-                        type="password"
-                        name="repass"
-                        id="confirm-password"
-                        placeholder="Repeat Password"
-                        value={form.repass}
-                        onChange={onChange}
-                    />
+                        <label className="label" htmlFor="confirm-password">Confirm Password</label>
+                        <input
+                            className="input"
+                            type="password"
+                            name="repass"
+                            id="confirm-password"
+                            placeholder="Repeat Password"
+                            value={form.repass}
+                            onChange={onChange}
+                            required
+                        />
 
-                    <button className="register-btn" type="submit">Register</button>
-                </form>
+                        <button className="register-btn" type="submit">
+                            Register
+                        </button>
+                    </form>
 
-                <p className="login-text">
-                    Already have an account?{" "}
-                    <a className="login-link" href="/login">Login</a>
-                </p>
+                    <p className="login-text">
+                        Already have an account?
+                        {" "}
+                        <Link className="login-link" to="/login">
+                            Login
+                        </Link>
+                    </p>
+                </div>
             </div>
         </div>
     );

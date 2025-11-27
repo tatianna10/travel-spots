@@ -2,46 +2,45 @@ const baseUrl = "http://localhost:3030/data/likes";
 
 async function handleResponse(res) {
   if (!res.ok) {
-    let err;
+    let message = "Server error";
     try {
-      err = await res.json();
+      const error = await res.json();
+      if (error?.message) message = error.message;
     } catch {
-      err = { message: "Server error" };
+      /* ignore */
     }
-    throw new Error(err.message || "Request failed");
+    throw new Error(message);
   }
-
   return res.json();
 }
 
-export async function getLikesCount(placeId) {
-  const res = await fetch(`${baseUrl}?placeId=${encodeURIComponent(placeId)}`);
-  return handleResponse(res);
+export async function getLikes(placeId) {
+  const res = await fetch(`${baseUrl}?placeId=${placeId}`);
+  const data = await handleResponse(res);
+  return data.count; 
 }
 
 export async function checkUserLike(placeId, userId) {
+  if (!userId) return { liked: false, likeId: null };
+
   const res = await fetch(
-    `${baseUrl}/check?placeId=${encodeURIComponent(
-      placeId
-    )}&userId=${encodeURIComponent(userId)}`
+    `${baseUrl}/check?placeId=${placeId}&userId=${userId}`
   );
   return handleResponse(res); 
 }
 
-// POST /data/likes
 export async function likePlace(placeId, userId) {
-  const res = await fetch(baseUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ placeId, userId }),
-  });
-  return handleResponse(res); // returns like object with id
+  return handleResponse(
+    await fetch(baseUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ placeId, userId }),
+    })
+  );
 }
 
-// DELETE /data/likes/:id
 export async function unlikePlace(likeId) {
-  const res = await fetch(`${baseUrl}/${likeId}`, {
-    method: "DELETE",
-  });
-  return handleResponse(res);
+  return handleResponse(
+    await fetch(`${baseUrl}/${likeId}`, { method: "DELETE" })
+  );
 }

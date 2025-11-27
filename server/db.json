@@ -17,6 +17,12 @@
       "email": "dino@gmail.com",
       "fullName": "",
       "password": "$2b$10$o9bWNuFgCqZ2Y7kP5VB/r.XdicFkfBu1MZ0GUrMDX/oroUFGefRtS"
+    },
+    {
+      "id": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
+      "email": "tikitak@abv.bg",
+      "fullName": "Lora Ivanova",
+      "password": "$2b$10$J6IZimrQLDjt2RsoEoyxIuCLgDkOx1aVyt7jiLjRFXXuSVXv7Gx0i"
     }
   ],
   "places": [
@@ -82,7 +88,7 @@
     },
     {
       "id": "b7c7857f-532f-4e8d-b431-96918b76baca",
-      "title": "Dubai, United Arab Emirates",
+      "title": "Dubai, UAE",
       "city": "Dubai",
       "country": "United Arab Emirates",
       "description": "Luxury desert city known for futuristic skyscrapers.",
@@ -181,8 +187,8 @@
       "title": "Rome, Italy",
       "city": "Rome",
       "country": "Italy",
-      "description": "Rome, the capital of Italy, is a vibrant city...",
-      "longDescription": "Rome is one of the world's most historically rich cities...",
+      "description": "Rome is the capital city of Italy, known for its rich history, ancient architecture, and major landmarks such as the Colosseum, the Roman Forum, and Vatican City.",
+      "longDescription": "Rome, often called The Eternal City, is the capital of Italy and one of the most historically significant cities in the world. Founded in antiquity, Rome was the heart of the Roman Empire, which shaped Western civilization in law, politics, architecture, and culture. Its landscape is a blend of ancient ruins, Renaissance palaces, Baroque churches, and modern urban life. The city is home to iconic landmarks such as the Colosseum, the Pantheon, and the Roman Forum, which reflect its imperial past. Rome also hosts Vatican City—the spiritual and administrative center of the Roman Catholic Church—containing St. Peter’s Basilica and the Sistine Chapel, famous for Michelangelo’s masterpieces. Today, Rome remains a vibrant metropolis known for its art, cuisine, fashion, and cultural heritage, attracting millions of visitors each year. It stands as a living museum where centuries of history coexist with contemporary Italian life.",
       "imageUrl": "https://colosseumrometickets.com/wp-content/uploads/2018/10/Aerial-view-of-Piazza-di-Spagna-and-the-Spanish-Steps-in-Rome.jpg",
       "category": "historic",
       "ownerId": "1196316b-f606-4094-a84a-73810b123382",
@@ -191,12 +197,68 @@
   ],
   "comments": [
     {
-      "id": "02942100-58af-4f2a-8978-2c8bd8d619da",
+      "id": "d1cd8396-a5fa-4583-a11a-05108c503d97",
+      "placeId": "7cc16866-46e2-427c-b378-2fbf54e2b41a",
+      "text": "nice",
+      "authorId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
+      "createdAt": 1764268027547
+    },
+    {
+      "id": "2bbf050e-d720-4df5-8b1a-46efac5d79ed",
       "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
-      "text": "Nice place to visit!",
-      "authorId": "b5042f58-6a11-4e1b-81f8-4b447da01348",
-      "createdAt": 1764202532574
+      "text": "great place!",
+      "authorId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
+      "createdAt": 1764268056491
     }
   ],
-  "likes": []
+  "likes": [
+    {
+      "id": "51b04d16-119d-49cc-a134-31416e4fecbc",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "userId": "b5042f58-6a11-4e1b-81f8-4b447da01348",
+      "createdAt": 1764252989828
+    },
+    {
+      "id": "a676f313-e716-4495-9632-15eadfdc636a",
+      "placeId": "4be98a85-2f54-43ca-91ea-7754b76e8b19",
+      "userId": "b5042f58-6a11-4e1b-81f8-4b447da01348",
+      "createdAt": 1764252996643
+    },
+    {
+      "id": "bcfccbda-ca9f-4dc4-b252-763d3939ca51",
+      "placeId": "9e1fb3b6-e9c2-46bb-8ae4-3f6aa95fe466",
+      "userId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764260832368
+    },
+    {
+      "id": "d5fe9a02-7810-4979-a895-6ca11de295f3",
+      "placeId": "2c7bcd7c-5720-4d8e-b9e3-4f7a60697301",
+      "userId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764262280662
+    },
+    {
+      "id": "38debcfb-7253-467d-9f22-70a9b24f91ed",
+      "placeId": "6fe7459c-96f1-4ab2-beae-fe4d9ea12f7e",
+      "userId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764265588923
+    },
+    {
+      "id": "aaed9b24-c080-4523-97d1-cd70f0707de4",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "userId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764266547684
+    },
+    {
+      "id": "48215f58-5d16-46d7-9143-a44be27442bd",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "userId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
+      "createdAt": 1764270915646
+    },
+    {
+      "id": "4cb95ec2-dcb6-4969-9615-cf390704a311",
+      "placeId": "7cc16866-46e2-427c-b378-2fbf54e2b41a",
+      "userId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
+      "createdAt": 1764270921680
+    }
+  ]
 }

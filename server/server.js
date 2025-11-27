@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 
 const app = express();
 const PORT = 3030;
-const SECRET = "softuni_secret";
+const SECRET = "s3cRET_xA9Q#P2!0cm@4bR7%wZl"; 
 
 // ---------- DB HELPERS ----------
 const readDB = () => JSON.parse(fs.readFileSync("db.json"));
@@ -68,7 +68,6 @@ app.get("/data/users/:id", (req, res) => {
 
   if (!user) return res.status(404).json({ message: "User not found" });
 
-  // Return full user object, including fullName
   res.json({
     id: user.id,
     email: user.email,
@@ -117,7 +116,7 @@ app.delete("/data/places/:id", (req, res) => {
   res.json({ message: "Deleted", deleted });
 });
 
-// ---------- COMMENTS CRUD ----------
+// ---------- COMMENTS ----------
 app.get("/data/comments", (req, res) => {
   const db = readDB();
   const { placeId } = req.query;
@@ -150,7 +149,7 @@ app.post("/data/comments", (req, res) => {
   res.json(comment);
 });
 
-// ---------- LIKES CRUD ----------
+// ---------- LIKES ----------
 app.get("/data/likes", (req, res) => {
   const db = readDB();
   const { placeId } = req.query;
@@ -165,6 +164,7 @@ app.get("/data/likes/check", (req, res) => {
   const like = db.likes.find(
     (l) => l.placeId === placeId && l.userId === userId
   );
+
   res.json({ liked: !!like, likeId: like?.id ?? null });
 });
 

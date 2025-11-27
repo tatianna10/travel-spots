@@ -1,87 +1,118 @@
 import { useParams, Link, useNavigate, useLocation } from "react-router";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useMemo } from "react";
+
 import { getPlaceById, deletePlace } from "../../api/placesApi";
 import { getCommentsByPlace, createComment } from "../../api/commentsApi";
+import { getLikes, checkUserLike, likePlace, unlikePlace } from "../../api/likesApi";
 import { getUserById } from "../../api/userApi";
 import { AuthContext } from "../../contexts/AuthContext";
 
 function getDisplayName(user) {
   if (!user) return "Unknown user";
-  if (user.fullName && user.fullName.trim() !== "") return user.fullName;
-  if (user.email && user.email.includes("@")) return user.email.split("@")[0];
+  if (user.fullName?.trim()) return user.fullName;
+  if (user.email?.includes("@")) return user.email.split("@")[0];
   return "Unknown user";
 }
 
 function formatRelativeTime(timestamp) {
   if (!timestamp) return "";
-  const time = typeof timestamp === "string" ? new Date(timestamp).getTime() : timestamp;
-  const diff = Date.now() - time;
-  const sec = Math.floor(diff / 1000);
-  const min = Math.floor(sec / 60);
-  const hrs = Math.floor(min / 60);
-  const days = Math.floor(hrs / 24);
-  if (sec < 60) return "just now";
+  const diff = Date.now() - timestamp;
+  const min = Math.floor(diff / 60000);
+  const hr = Math.floor(min / 60);
+  const day = Math.floor(hr / 24);
+  if (min < 1) return "just now";
   if (min < 60) return `${min} minute${min !== 1 ? "s" : ""} ago`;
-  if (hrs < 24) return `${hrs} hour${hrs !== 1 ? "s" : ""} ago`;
-  return `${days} day${days !== 1 ? "s" : ""} ago`;
+  if (hr < 24) return `${hr} hour${hr !== 1 ? "s" : ""} ago`;
+  return `${day} day${day !== 1 ? "s" : ""} ago`;
 }
 
 export default function DetailsPage() {
   const { id } = useParams();
   const { user, isAuthenticated } = useContext(AuthContext);
-
-  const [place, setPlace] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [commentText, setCommentText] = useState("");
-
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from ?? "catalog";
 
-  const isOwner = user?.id === place?.ownerId;
+  
+  const [place, setPlace] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [likesCount, setLikesCount] = useState(0);
+  const [liked, setLiked] = useState(false);
+  const [likeId, setLikeId] = useState(null);
+  const [commentText, setCommentText] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  const loadComments = async (placeId) => {
-    const commentsData = await getCommentsByPlace(placeId);
-    const processed = await Promise.all(
-      commentsData.map(async (c) => {
-        let authorName = "Unknown user";
+  const isOwner = useMemo(() => place && user?.id === place.ownerId, [place, user]);
+
+  const loadComments = async () => {
+    const data = await getCommentsByPlace(id);
+    const mapped = await Promise.all(
+      data.map(async (c) => {
         try {
-          const author = await getUserById(c.authorId);
-          authorName = getDisplayName(author);
-        } catch {}
-        return { ...c, authorName };
+          const u = await getUserById(c.authorId);
+          return { ...c, authorName: getDisplayName(u) };
+        } catch {
+          return { ...c, authorName: "Unknown user" };
+        }
       })
     );
-    setComments(processed);
+    setComments(mapped);
+  };
+
+  const loadLikes = async () => {
+    const count = await getLikes(id);
+    setLikesCount(count);
+
+    if (user) {
+      const status = await checkUserLike(id, user.id);
+      setLiked(status.liked);
+      setLikeId(status.likeId);
+    } else {
+      setLiked(false);
+      setLikeId(null);
+    }
   };
 
   useEffect(() => {
-    async function loadData() {
+    async function load() {
       try {
-        const placeData = await getPlaceById(id);
-        setPlace(placeData);
-        await loadComments(id);
+        const p = await getPlaceById(id);
+        setPlace(p);
+        await Promise.all([loadComments(), loadLikes()]);
+      } catch (err) {
+        console.error(err);
       } finally {
         setLoading(false);
       }
     }
-    loadData();
+    load();
   }, [id]);
+
+  const handleLikeClick = async () => {
+    if (!isAuthenticated) return alert("Please login first!");
+    if (isOwner) return;
+
+    try {
+      liked && likeId ? await unlikePlace(likeId) : await likePlace(id, user.id);
+      await loadLikes();
+    } catch (err) {
+      alert(err.message || "Error updating like");
+    }
+  };
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    if (!commentText.trim() || !user) return;
+    if (!commentText.trim()) return;
 
     await createComment(id, commentText, user);
-    await loadComments(id);
     setCommentText("");
+    await loadComments();
   };
 
   const handleDelete = async () => {
     if (!window.confirm(`Delete: ${place.title}?`)) return;
     await deletePlace(id, user.accessToken);
-    navigate("/places");
+    navigate("/");
   };
 
   if (loading) return <h1 className="details-notfound">Loading...</h1>;
@@ -91,6 +122,7 @@ export default function DetailsPage() {
     <div className="details-wrapper">
       <div className="details-card">
         <img className="details-image" src={place.imageUrl} alt={place.title} />
+
         <h1 className="details-title">{place.title}</h1>
         <p className="details-extra">{place.longDescription}</p>
 
@@ -107,17 +139,23 @@ export default function DetailsPage() {
             {from === "home" ? "Back to Home" : "Back to Catalog"}
           </button>
 
+          <button
+            className={`details-like-btn ${liked ? "liked" : ""}`}
+            onClick={handleLikeClick}
+            disabled={!isAuthenticated || isOwner}
+          >
+            {isOwner
+              ? `❤️ ${likesCount} Like${likesCount !== 1 ? "s" : ""}`
+              : liked
+                ? `💔 Dislike ${likesCount}`
+                : `👍 Like ${likesCount}`}
+          </button>
+
           {isAuthenticated && isOwner && (
             <>
-              {/* FIXED: Pass state so EditPlace knows where we came from */}
-              <Link
-                to={`/places/${id}/edit`}
-                state={{ from }}
-                className="details-btn edit"
-              >
+              <Link className="details-btn edit" to={`/places/${id}/edit`} state={{ from }}>
                 Edit
               </Link>
-
               <button className="details-btn delete" onClick={handleDelete}>
                 Delete
               </button>
@@ -127,16 +165,14 @@ export default function DetailsPage() {
 
         <section className="details-comments-box">
           <h3 className="details-comments-title">Comments</h3>
-          {comments.length === 0 && <p className="details-no-comments">No comments yet.</p>}
+
+          {!comments.length && <p className="details-no-comments">No comments yet.</p>}
 
           <ul className="details-comments-list">
             {comments.map((c) => (
               <li key={c.id} className="details-comment-item">
-                <span className="details-comment-author">{c.authorName}:</span>{" "}
-                {c.text}{" "}
-                {c.createdAt && (
-                  <span className="details-comment-date">• {formatRelativeTime(c.createdAt)}</span>
-                )}
+                <strong>{c.authorName}:</strong> {c.text}
+                <span className="details-comment-date">• {formatRelativeTime(c.createdAt)}</span>
               </li>
             ))}
           </ul>
@@ -148,15 +184,16 @@ export default function DetailsPage() {
               </Link>{" "}
               to post comments or like this place.
             </p>
+
           )}
 
           {isAuthenticated && !isOwner && (
             <form className="details-comment-form" onSubmit={handleCommentSubmit}>
               <input
                 className="details-comment-input"
-                placeholder="Add a comment..."
                 value={commentText}
                 onChange={(e) => setCommentText(e.target.value)}
+                placeholder="Add a comment..."
               />
               <button className="details-comment-btn">Post</button>
             </form>

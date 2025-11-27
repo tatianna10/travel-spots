@@ -33,9 +33,11 @@
 
 /* ===== EMPTY STATE ===== */
 .myplaces-empty {
-  font-size: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 30px;
   text-align: center;
-  opacity: 0.85;
+  text-shadow: 0 0 10px #1e90ff;
 }
 
 /* ===== GRID ===== */

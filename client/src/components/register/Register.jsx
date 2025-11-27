@@ -29,7 +29,7 @@ export default function Register() {
     try {
         await register({
             email: form.email.trim(),
-            fullName: form.fullName.trim(), // 👈 Updated
+            fullName: form.fullName.trim(), 
             password: form.password.trim(),
         });
 

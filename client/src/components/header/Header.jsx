@@ -8,7 +8,6 @@ export default function Header({ showBrand = false }) {
     return (
         <header className="site-header">
 
-            {/* BRAND AREA */}
             {showBrand ? (
                 <div className="header-left">
                     <img
@@ -19,11 +18,9 @@ export default function Header({ showBrand = false }) {
                     <h1 className="header-title">TRAVEL SPOTS</h1>
                 </div>
             ) : (
-                // Invisible placeholder keeps nav aligned to the right
                 <div className="header-left header-placeholder"></div>
             )}
 
-            {/* NAVIGATION */}
             <nav className="header-nav">
                 <Link to="/">Home</Link>
                 <Link to="/places">Catalog</Link>
@@ -31,8 +28,16 @@ export default function Header({ showBrand = false }) {
                 {isAuthenticated ? (
                     <>
                         <Link to="/places/create">Create Spot</Link>
-                        <span className="header-user">Hello, {user.email}</span>
-                        <button className="logout-btn" onClick={logout}>Logout</button>
+
+                        <Link to="/places/my-places">My Places</Link>
+
+                        <span className="header-user">
+                            Hello, {user.fullName?.trim() || user.email.split("@")[0]}
+                        </span>
+
+                        <button className="logout-btn" onClick={logout}>
+                            Logout
+                        </button>
                     </>
                 ) : (
                     <>
@@ -41,7 +46,6 @@ export default function Header({ showBrand = false }) {
                     </>
                 )}
             </nav>
-
         </header>
     );
 }

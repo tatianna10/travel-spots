@@ -7,30 +7,19 @@ import { AuthContext } from "../../contexts/AuthContext";
 
 function getDisplayName(user) {
   if (!user) return "Unknown user";
-
-  if (user.fullName && user.fullName.trim() !== "") {
-    return user.fullName;
-  }
-
-  if (user.email && user.email.includes("@")) {
-    return user.email.split("@")[0];
-  }
-
+  if (user.fullName && user.fullName.trim() !== "") return user.fullName;
+  if (user.email && user.email.includes("@")) return user.email.split("@")[0];
   return "Unknown user";
 }
 
 function formatRelativeTime(timestamp) {
   if (!timestamp) return "";
-
-  const time =
-    typeof timestamp === "string" ? new Date(timestamp).getTime() : timestamp;
-
+  const time = typeof timestamp === "string" ? new Date(timestamp).getTime() : timestamp;
   const diff = Date.now() - time;
   const sec = Math.floor(diff / 1000);
   const min = Math.floor(sec / 60);
   const hrs = Math.floor(min / 60);
   const days = Math.floor(hrs / 24);
-
   if (sec < 60) return "just now";
   if (min < 60) return `${min} minute${min !== 1 ? "s" : ""} ago`;
   if (hrs < 24) return `${hrs} hour${hrs !== 1 ? "s" : ""} ago`;
@@ -48,27 +37,23 @@ export default function DetailsPage() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from;
+  const from = location.state?.from ?? "catalog";
 
   const isOwner = user?.id === place?.ownerId;
 
   const loadComments = async (placeId) => {
     const commentsData = await getCommentsByPlace(placeId);
-
-    const processedComments = await Promise.all(
+    const processed = await Promise.all(
       commentsData.map(async (c) => {
         let authorName = "Unknown user";
         try {
           const author = await getUserById(c.authorId);
           authorName = getDisplayName(author);
-        } catch {
-          // If user fetch fails, leave default
-        }
+        } catch {}
         return { ...c, authorName };
       })
     );
-
-    setComments(processedComments);
+    setComments(processed);
   };
 
   useEffect(() => {
@@ -88,15 +73,9 @@ export default function DetailsPage() {
     e.preventDefault();
     if (!commentText.trim() || !user) return;
 
-    try {
-      await createComment(id, commentText, user);
-
-      await loadComments(id);
-
-      setCommentText("");
-    } catch (err) {
-      alert(err.message);
-    }
+    await createComment(id, commentText, user);
+    await loadComments(id);
+    setCommentText("");
   };
 
   const handleDelete = async () => {
@@ -130,9 +109,15 @@ export default function DetailsPage() {
 
           {isAuthenticated && isOwner && (
             <>
-              <Link to={`/places/${id}/edit`} className="details-btn edit">
+              {/* FIXED: Pass state so EditPlace knows where we came from */}
+              <Link
+                to={`/places/${id}/edit`}
+                state={{ from }}
+                className="details-btn edit"
+              >
                 Edit
               </Link>
+
               <button className="details-btn delete" onClick={handleDelete}>
                 Delete
               </button>
@@ -142,20 +127,15 @@ export default function DetailsPage() {
 
         <section className="details-comments-box">
           <h3 className="details-comments-title">Comments</h3>
-
-          {comments.length === 0 && (
-            <p className="details-no-comments">No comments yet.</p>
-          )}
+          {comments.length === 0 && <p className="details-no-comments">No comments yet.</p>}
 
           <ul className="details-comments-list">
             {comments.map((c) => (
               <li key={c.id} className="details-comment-item">
                 <span className="details-comment-author">{c.authorName}:</span>{" "}
-                {c.text}
+                {c.text}{" "}
                 {c.createdAt && (
-                  <span className="details-comment-date">
-                    • {formatRelativeTime(c.createdAt)}
-                  </span>
+                  <span className="details-comment-date">• {formatRelativeTime(c.createdAt)}</span>
                 )}
               </li>
             ))}
@@ -183,9 +163,7 @@ export default function DetailsPage() {
           )}
 
           {isAuthenticated && isOwner && (
-            <p className="details-owner-msg">
-              You can’t comment on your own place.
-            </p>
+            <p className="details-owner-msg">You can’t comment on your own place.</p>
           )}
         </section>
       </div>

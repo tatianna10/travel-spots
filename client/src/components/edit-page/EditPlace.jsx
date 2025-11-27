@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router";
+import { useParams, useNavigate, useLocation, Link } from "react-router";
 import { getPlaceById, updatePlace } from "../../api/placesApi";
 import { AuthContext } from "../../contexts/AuthContext";
 import Header from "../header/Header.jsx";
@@ -7,7 +7,10 @@ import Header from "../header/Header.jsx";
 export default function EditPlace() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
     const { user } = useContext(AuthContext);
+
+    const cameFrom = location.state?.from; 
 
     const [formData, setFormData] = useState({
         city: "",
@@ -24,7 +27,6 @@ export default function EditPlace() {
     useEffect(() => {
         getPlaceById(id)
             .then(place => {
-
                 if (place.ownerId !== user.id) {
                     alert("You are not allowed to edit this spot.");
                     navigate("/places");
@@ -66,7 +68,13 @@ export default function EditPlace() {
 
         try {
             await updatePlace(id, updatedSpot, user.accessToken);
-            navigate(`/places/${id}/details`);
+
+            const redirectPath =
+                cameFrom === "myplaces"
+                    ? "/places/my-places"
+                    : `/places/${id}/details`;
+
+            navigate(redirectPath);
         } catch (err) {
             alert("Failed to update spot: " + err.message);
         } finally {
@@ -87,7 +95,7 @@ export default function EditPlace() {
     }
 
     if (loading) {
-        return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
+        return <h2 style={{ textAlign: "center", color: "white" }}>Loading...</h2>;
     }
 
     return (

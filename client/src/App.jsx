@@ -9,6 +9,7 @@ import PrivateRoute from "./guards/PrivateRoute";
 import GuestRoute from "./guards/GuestRoute";
 import EditPlace from "./components/edit-page/EditPlace.jsx";
 import NotFound from "./components/not-found/NotFound.jsx";
+import MyPlaces from "./components/my-places/MyPlaces.jsx";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
       <Route element={<PrivateRoute />}>
         <Route path="/places/create" element={<CreatePlace />} />
         <Route path="/places/:id/edit" element={<EditPlace />} />
+        <Route path="/places/my-places" element={<MyPlaces />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

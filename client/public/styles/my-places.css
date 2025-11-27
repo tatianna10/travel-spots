@@ -1,0 +1,136 @@
+/* ===== PAGE BACKGROUND ===== */
+.myplaces-wrapper {
+  min-height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  font-family: sans-serif;
+}
+
+.myplaces-inner {
+  min-height: 100vh;
+  backdrop-filter: blur(3px);
+  padding-top: 120px;
+  padding-bottom: 60px;
+}
+
+/* ===== CONTAINER ===== */
+.myplaces-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===== TITLE ===== */
+.myplaces-title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 35px;
+  text-align: center;
+  text-shadow: 0 0 20px #1e90ff;
+}
+
+/* ===== EMPTY STATE ===== */
+.myplaces-empty {
+  font-size: 20px;
+  text-align: center;
+  opacity: 0.85;
+}
+
+/* ===== GRID ===== */
+.myplaces-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ===== CARDS ===== */
+.place-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.place-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(100, 149, 237, 0.4);
+}
+
+/* ===== IMAGE ===== */
+.place-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* ===== CONTENT ===== */
+.place-content {
+  padding: 16px;
+  text-align: center;
+}
+
+.place-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  margin-bottom: 6px;
+}
+
+.place-desc {
+  font-size: 16px;
+  color: white;
+  opacity: 0.9;
+  height: 44px;
+  overflow: hidden;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.place-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 0;
+}
+
+/* BUTTON BASE */
+.btn-edit,
+.btn-delete {
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: white;
+  transition: 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+/* EDIT BUTTON */
+.btn-edit {
+  background: rgba(34, 197, 94, 0.25);
+}
+
+.btn-edit:hover {
+  background: rgba(34, 197, 94, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(34, 197, 94, 0.55);
+}
+
+/* DELETE BUTTON */
+.btn-delete {
+  background: rgba(220, 38, 38, 0.35);
+}
+
+.btn-delete:hover {
+  background: rgba(220, 38, 38, 0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(220, 38, 38, 0.6);
+}

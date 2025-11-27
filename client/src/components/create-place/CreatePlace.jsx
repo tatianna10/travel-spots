@@ -52,7 +52,7 @@ export default function CreatePlace() {
 
         try {
             await createPlace(newSpot, user.accessToken);
-            navigate("/places");
+            navigate("/places/my-places");
         } catch (err) {
             alert("Failed to create spot: " + err.message);
         } finally {

@@ -1,5 +1,5 @@
 # Travel Spots  
-**TravelSpots** is a modern React web application that allows users to discover, share, and manage interesting places around the world. The platform includes a public catalog, user authentication, full CRUD operations, likes/comments, maps integration, and protected routes.
+**TravelSpots** is a modern React web application that allows users to discover, share, and manage interesting places around the world. The platform includes a public catalog, user authentication, full CRUD operations, likes/comments and protected routes.
 
 ---
 
@@ -8,7 +8,7 @@
 ###  Public Area
 - Home / Landing page  
 - Catalog of all places  
-- Place details (image, description, map)  
+- Place details (image, description, commnets, likes)  
 - Login / Register pages  
 
 ###  Private Area
@@ -17,7 +17,6 @@
 - Delete your own places  
 - My Places page  
 - Like & comment on other users’ places  
-- Optional: Profile page  
 
 ###  Route Guards
 - **PrivateRoute** — accessible only for authenticated users  
@@ -29,37 +28,109 @@
 
 ### Collection: `places`
 ```json
-{
-  "_id": "string",
-  "title": "string",
-  "description": "string",
-  "imageUrl": "string",
-  "location": {
-    "lat": 42.6977,
-    "lng": 23.3219,
-    "address": "Sofia, Bulgaria"
-  },
-  "createdAt": "string",
-  "ownerId": "string",
-  "likes": ["userId1", "userId2"],
-  "comments": [
-    { "userId": "123", "text": "Nice place!", "createdAt": "2024-03-10" }
-  ]
-}
+  "places": [
+    {
+      "id": "78877795-98e5-4fd6-b90c-6a792dbbb1db",
+      "title": "Paris, France",
+      "city": "Paris",
+      "country": "France",
+      "description": "The romantic capital of the world.",
+      "longDescription": "Paris is known for the Eiffel Tower, rich culture, museums, fashion, luxury cafes, and historic architecture.",
+      "imageUrl": "https://images2.alphacoders.com/561/thumb-1920-561115.jpg",
+      "category": "romantic",
+      "ownerId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1763670005123
+    }
+]
 ```
 
-### API Endpoints
-- GET /api/places  
-- GET /api/places/:id  
-- POST /api/places (authenticated)  
-- PUT /api/places/:id (owner only)  
-- DELETE /api/places/:id (owner only)  
+### Collection: `users`
+```json
+  "users": [
+   {
+      "id": "1196316b-f606-4094-a84a-73810b123382",
+      "email": "mick@abv.bg",
+      "fullName": "Mick James",
+      "password": "$2b$10$SU.4peE.Wl68DJK/TFGsieluRACd9RMY4rfXPMMP/Z3sbri1kDGiW"
+    }
+]
+```
+
+### Collection: `comments`
+```json
+  "comments": [
+      {
+      "id": "d1cd8396-a5fa-4583-a11a-05108c503d97",
+      "placeId": "7cc16866-46e2-427c-b378-2fbf54e2b41a",
+      "text": "nice",
+      "authorId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
+      "createdAt": 1764268027547
+    }
+]
+```
+
+### Collection: `likes`
+```json
+  "likes": [
+     {
+      "id": "51b04d16-119d-49cc-a134-31416e4fecbc",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "userId": "b5042f58-6a11-4e1b-81f8-4b447da01348",
+      "createdAt": 1764252989828
+    }
+]
+```
+
+
+## Backend API 
 
 ### Authentication
 - POST /api/users/login  
 - POST /api/users/register  
 - JWT token stored in `localStorage`  
 - Sent via `Authorization: Bearer <token>`  
+
+### Places
+| Method | Endpoint | Access | Description |
+|-------|----------|--------|-------------|
+| GET | `/data/places` | Public | Retrieve all places |
+| GET | `/data/places/:id` | Public | Retrieve a single place |
+| POST | `/data/places` | Authenticated | Create a new place |
+| PUT | `/data/places/:id` | Owner only | Edit an existing place |
+| DELETE | `/data/places/:id` | Owner only | Delete your place |
+
+---
+
+### Comments
+| Method | Endpoint | Access | Description |
+|-------|----------|--------|-------------|
+| GET | `/data/comments?placeId=:id` | Public | Fetch comments for a place |
+| POST | `/data/comments` | Authenticated | Add a comment |
+
+[x] **Owners cannot comment on their own place**  
+[x] Comments sorted newest first
+
+---
+
+### Likes
+| Method | Endpoint | Access | Description |
+|-------|----------|--------|-------------|
+| GET | `/data/likes?placeId=:id` | Public | Get total likes count |
+| GET | `/data/likes/check?placeId=:id&userId=:id` | Authenticated | Check if user liked a place |
+| POST | `/data/likes` | Authenticated | Like a place |
+| DELETE | `/data/likes/:id` | Authenticated | Unlike a place |
+
+[x] One like per user  
+[x] Owner cannot like own place
+
+---
+
+## Authentication
+
+| Method | Endpoint | Description |
+|-------|----------|-------------|
+| POST | `/users/login` | Login user |
+| POST | `/users/register` | Create a new account |
 
 ---
 
@@ -70,17 +141,13 @@
 - React Router v6  
 - Context API (AuthContext)  
 - Custom hooks (useAuth, useForm)  
-- External CSS / SCSS  
+- Tailwind-based design, exported to standalone CSS (no Tailwind runtime)
 
-Optional:  
-- Redux Toolkit  
-- Google Maps API  
-- Cloudinary / Firebase Storage  
 
 ### Backend (any working backend)
-- Firebase  
-- Node.js + Express + MongoDB  
-- ASP.NET / Spring / Symfony  
+- Node.js + Express 
+- Custom JSON storage (`db.json`) used as a lightweight database
+ 
 
 ---
 
@@ -90,39 +157,48 @@ src/
   api/
     authApi.js
     placesApi.js
+    commentsApi.js
+    likesApi.js
+    userApi.js
+
   components/
-    Header/
-    Footer/
-    PlaceCard/
-    PlaceForm/
-    CommentList/
-    Map/
+    header/
+      Header.jsx
+      header.css
+    place-card/
+      PlaceCard.jsx
+      place-card.css
+    protected-route/
+      PrivateRoute.jsx
+      GuestRoute.jsx
+
   contexts/
     AuthContext.jsx
-  store/
-    placesSlice.js
+
   hooks/
-    useAuth.js
-    useForm.js
+    usePersistedState.js
+
   pages/
     Home.jsx
     Catalog.jsx
-    PlaceDetails.jsx
+    DetailsPage.jsx
     CreatePlace.jsx
     EditPlace.jsx
     MyPlaces.jsx
     Login.jsx
     Register.jsx
     NotFound.jsx
-  guards/
-    PrivateRoute.jsx
-    GuestRoute.jsx
+
   styles/
-    global.css
-    form.css
-    header.css
+    index.css
+    details.css
+    login.css
+    register.css
+    catalog.css
+    home.css
+
   App.jsx
-  index.jsx
+  main.jsx
 ```
 
 ---
@@ -139,11 +215,6 @@ npm install
 npm run dev
 ```
 
-### Build for production
-```bash
-npm run build
-```
-
 ### Start backend (example for Node.js)
 ```bash
 npm run server
@@ -152,12 +223,16 @@ npm run server
 ---
 
 ##  Authentication Flow
-1. User logs in or registers  
-2. Server returns a JWT token  
-3. Token is stored in `localStorage`  
-4. AuthContext stores user & auth functions  
-5. Protected requests include the Authorization header  
-6. PrivateRoute blocks unauthenticated access  
+
+1. User registers or logs in with email and password
+2. The backend creates a signed JWT token using `jsonwebtoken`
+3. The token is returned to the client and stored in `localStorage`
+4. `AuthContext` reads the token and user data and exposes login/logout functions
+5. The token is used to keep the user logged in between page refreshes
+6. React guards protect client routes:
+   - **PrivateRoute** — only for authenticated users
+   - **GuestRoute** — only for guests
+7. The backend does not validate the JWT on each request; route protection happens on the frontend
 
 ---
 
@@ -182,33 +257,30 @@ Route protection:
 ---
 
 ##  React Concepts Covered
-- useState  
-- useEffect  
-- useContext  
-- Controlled components (forms)  
-- Synthetic events (onClick, onSubmit, onChange)  
-- Component lifecycle via useEffect  
-- Stateless & stateful components  
-- External CSS styling  
+
+- useState
+- useEffect
+- useContext
+- Context API
+- Controlled components
+- Synthetic events
+- Stateless components
+- Stateful components
+- Client-side routing
+- Route guards
+- Conditional rendering
+- External CSS styling
+
 
 ---
 
-##  Optional Bonuses
-- Redux Toolkit for global state  
-- Google Maps integration  
+##  Optional Bonuses 
 - Image upload (Cloudinary/Firebase)  
-- Weather API  
 - Deployment (Netlify, Vercel, Firebase Hosting)  
 
 ---
 
-##  Development Plan (Example)
-**Day 1–2:** Layout, routing, Home/Catalog (mock data)  
-**Day 3–4:** Auth + Guards + API connection  
-**Day 5–6:** CRUD operations, MyPlaces, Likes/Comments  
-**Day 7+:** Maps, file upload, Redux, styling, README  
-
----
-
 ##  License
-MIT License (or any license you prefer)
+MIT License
+
+

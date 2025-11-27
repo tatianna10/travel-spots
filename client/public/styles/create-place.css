@@ -1,4 +1,4 @@
-/* PAGE BACKGROUND — matches Catalog */
+/* PAGE BACKGROUND */
 .create-wrapper {
     min-height: 100vh;
     background-image: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80");
@@ -7,7 +7,7 @@
     font-family: sans-serif;
 }
 
-/* Inner blurred layer — same as Catalog */
+/* Inner blurred layer */
 .create-inner {
     min-height: 100vh;
     backdrop-filter: blur(3px);
@@ -16,7 +16,7 @@
     justify-content: center;
 }
 
-/* REMOVE these broken styles */
+
 .create-header {
     display: none;
 }

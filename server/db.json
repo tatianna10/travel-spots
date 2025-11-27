@@ -76,7 +76,7 @@
     },
     {
       "id": "b3f929ee-30bc-4d40-8db0-4e6405d76c01",
-      "title": "London, UK",
+      "title": "London, United Kingdom",
       "city": "London",
       "country": "United Kingdom",
       "description": "Historic streets, famous monuments, and rainy charm.",
@@ -140,7 +140,7 @@
       "city": "Cape Town",
       "country": "South Africa",
       "description": "Beautiful beaches, mountains, and wildlife.",
-      "longDescription": "Cape Town offers Table Mountain..., and dramatic nature.",
+      "longDescription": "Cape Town offers Table Mountain, penguins, wine regions, and dramatic nature.",
       "imageUrl": "https://boomers-daily.com/wp-content/uploads/2021/05/aerial-views-cape-town-south-africa-video-may-10-2021.jpg?w=1024&h=567&crop=1",
       "category": "nature",
       "ownerId": "2c275e75-a025-457c-8db5-26369db7c11d",
@@ -176,7 +176,7 @@
       "city": "Sofia",
       "country": "Bulgulia",
       "description": "A vibrant European capital blending ancient history, cultural landmarks, mountain views, and modern city life.",
-      "longDescription": "Sofia, the capital of Bulgaria, is one of Europe's oldest cities...",
+      "longDescription": "Sofia, the capital of Bulgaria, is one of Europe’s oldest cities, offering a unique mix of Roman ruins, historic Orthodox churches, mineral springs, lively boulevards, and a growing modern culture. Nestled at the foot of Vitosha Mountain, the city gives visitors the rare chance to enjoy museums, nightlife, and architecture — then be hiking or skiing within minutes. With affordable dining, friendly locals, and a blend of Eastern and Western influences, Sofia is a welcoming destination for both culture lovers and adventurers.",
       "imageUrl": "https://assets.vogue.com/photos/66cf9fcf8e300baeca058f80/4:3/w_1920,c_limit/1303587513",
       "category": "culture",
       "ownerId": "2c275e75-a025-457c-8db5-26369db7c11d",
@@ -188,7 +188,7 @@
       "city": "Rome",
       "country": "Italy",
       "description": "Rome is the capital city of Italy, known for its rich history, ancient architecture, and major landmarks such as the Colosseum, the Roman Forum, and Vatican City.",
-      "longDescription": "Rome, often called The Eternal City, is the capital of Italy and one of the most historically significant cities in the world. Founded in antiquity, Rome was the heart of the Roman Empire, which shaped Western civilization in law, politics, architecture, and culture. Its landscape is a blend of ancient ruins, Renaissance palaces, Baroque churches, and modern urban life. The city is home to iconic landmarks such as the Colosseum, the Pantheon, and the Roman Forum, which reflect its imperial past. Rome also hosts Vatican City—the spiritual and administrative center of the Roman Catholic Church—containing St. Peter’s Basilica and the Sistine Chapel, famous for Michelangelo’s masterpieces. Today, Rome remains a vibrant metropolis known for its art, cuisine, fashion, and cultural heritage, attracting millions of visitors each year. It stands as a living museum where centuries of history coexist with contemporary Italian life.",
+      "longDescription": "Rome is one of the world’s most historically rich cities, with over 2,500 years of art, architecture, and cultural influence. Founded according to legend by Romulus and Remus, it became the heart of the Roman Empire, shaping the politics, engineering, and philosophy of the Western world. Visitors can walk among ancient ruins such as the Roman Forum and the Colosseum, stand beneath the grandeur of the Pantheon, or explore the masterpieces of the Vatican Museums and St. Peter’s Basilica.",
       "imageUrl": "https://colosseumrometickets.com/wp-content/uploads/2018/10/Aerial-view-of-Piazza-di-Spagna-and-the-Spanish-Steps-in-Rome.jpg",
       "category": "historic",
       "ownerId": "1196316b-f606-4094-a84a-73810b123382",
@@ -209,6 +209,13 @@
       "text": "great place!",
       "authorId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
       "createdAt": 1764268056491
+    },
+    {
+      "id": "1e42ae71-aee6-4aeb-879f-5cc7af361865",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "text": "I like visiting..",
+      "authorId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
+      "createdAt": 1764275708570
     }
   ],
   "likes": [

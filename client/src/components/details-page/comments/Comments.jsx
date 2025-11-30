@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import { useState } from "react";
 
 export default function Comments({
@@ -8,12 +7,24 @@ export default function Comments({
   onCreateComment,
 }) {
   const [text, setText] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!text.trim()) return;
-    await onCreateComment(text);
-    setText("");
+
+    setError(""); 
+
+    if (!text.trim()) {
+      setError("Comment cannot be empty.");
+      return;
+    }
+
+    try {
+      await onCreateComment(text);
+      setText("");
+    } catch (err) {
+      setError(err.message || "Failed to post comment.");
+    }
   };
 
   return (
@@ -31,19 +42,15 @@ export default function Comments({
         ))}
       </ul>
 
-      {!isAuthenticated && (
-        <p className="details-login-msg">
-          <Link to="/login" className="details-login-link">Login</Link> to comment.
-        </p>
-      )}
+      {error && <p className="details-error-msg">{error}</p>}
 
       {isAuthenticated && !isOwner && (
         <form className="details-comment-form" onSubmit={handleSubmit}>
           <input
             className="details-comment-input"
-            placeholder="Add a comment..."
             value={text}
             onChange={(e) => setText(e.target.value)}
+            placeholder="Add a comment..."
           />
           <button className="details-comment-btn">Post</button>
         </form>

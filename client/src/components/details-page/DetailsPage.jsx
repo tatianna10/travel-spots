@@ -8,11 +8,10 @@ import { getCommentsByPlace, createComment } from "../../api/commentsApi";
 import { getLikes, checkUserLike, likePlace, unlikePlace } from "../../api/likesApi";
 import { getUserById } from "../../api/userApi";
 
-import Likes from "./Likes";
-import Comments from "./Comments";
+import Likes from "./likes/Likes";
+import Comments from "./comments/Comments";
 
-import { getDisplayName } from "../../utils/formatters";
-
+import { getDisplayName, formatRelativeTime } from "../../utils/formatters";
 
 export default function DetailsPage() {
   const { id } = useParams();
@@ -34,18 +33,26 @@ export default function DetailsPage() {
   const loadComments = async () => {
     const data = await getCommentsByPlace(id);
 
-    const result = await Promise.all(
+    const mapped = await Promise.all(
       data.map(async (c) => {
         try {
-          const creator = await getUserById(c.authorId);
-          return { ...c, authorName: getDisplayName(creator) };
+          const u = await getUserById(c.authorId);
+          return {
+            ...c,
+            authorName: getDisplayName(u),
+            createdAtFormatted: formatRelativeTime(c.createdAt),
+          };
         } catch {
-          return { ...c, authorName: "Unknown user" };
+          return {
+            ...c,
+            authorName: "Unknown user",
+            createdAtFormatted: formatRelativeTime(c.createdAt),
+          };
         }
       })
     );
 
-    setComments(result);
+    setComments(mapped);
   };
 
   const loadLikes = async () => {
@@ -67,7 +74,6 @@ export default function DetailsPage() {
       try {
         const p = await getPlaceById(id);
         setPlace(p);
-
         await Promise.all([loadComments(), loadLikes()]);
       } catch (err) {
         console.error(err);
@@ -83,10 +89,7 @@ export default function DetailsPage() {
     if (!isAuthenticated) return alert("Please login first!");
     if (isOwner) return;
 
-    liked && likeId
-      ? await unlikePlace(likeId)
-      : await likePlace(id, user.id);
-
+    liked && likeId ? await unlikePlace(likeId) : await likePlace(id, user.id);
     await loadLikes();
   };
 
@@ -154,6 +157,14 @@ export default function DetailsPage() {
           onCreateComment={handleCommentCreate}
         />
 
+        {!isAuthenticated && (
+          <p className="details-login-msg">
+            <Link to="/login" className="details-login-link">
+              Login
+            </Link>{" "}
+            to post comments or like this place.
+          </p>
+        )}
       </div>
     </div>
   );

@@ -60,7 +60,7 @@ export function AuthProvider({ children }) {
         await logoutAPI(user.accessToken);
       }
     } catch (err) {
-      console.warn("Logout API failed:", err.message);
+      console.warn("Logout failed:", err.message);
     }
 
     localStorage.removeItem(USER_KEY);

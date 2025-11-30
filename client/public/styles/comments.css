@@ -19,8 +19,8 @@
 .details-login-msg {
     opacity: 0.85;
     font-size: 1rem;
-    text-align: center;
     margin-top: 0.5rem;
+    text-align: center;
 }
 
 /* COMMENTS LIST */
@@ -34,6 +34,9 @@
 }
 
 .details-comment-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
     background: rgba(0, 0, 0, 0.32);
     border: 1px solid rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(12px);
@@ -41,14 +44,12 @@
     border-radius: 14px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.55);
     font-size: 1.05rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
 }
 
 .details-comment-date {
     font-size: 0.85rem;
     opacity: 0.75;
+    margin-left: 4px;
 }
 
 /* COMMENT FORM */
@@ -64,9 +65,11 @@
     border-radius: 12px;
     border: 2px solid rgba(255, 255, 255, 0.35);
     background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
     color: white;
     outline: none;
     transition: 0.28s ease;
+    font-size: 1rem;
 }
 
 .details-comment-input::placeholder {
@@ -86,11 +89,13 @@
     color: white;
     font-weight: 600;
     cursor: pointer;
+    box-shadow: 0 0 12px rgba(30, 144, 255, 0.4);
     transition: 0.28s ease;
 }
 
 .details-comment-btn:hover {
     background: rgba(30, 144, 255, 0.45);
+    box-shadow: 0 0 18px rgba(30, 144, 255, 0.7);
 }
 
 /* OWNER MESSAGE */
@@ -101,3 +106,35 @@
     text-align: center;
     color: #d1d5db;
 }
+
+/* LOGIN LINK */
+.details-login-link {
+    color: #93c5fd;
+    font-weight: 700;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 0.25s ease-in-out;
+    text-shadow: 0 0 6px rgba(6, 83, 170, 0.75);
+}
+
+.details-login-link:hover {
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(147, 197, 253, 1);
+    transform: translateY(-1px);
+}
+
+/* ===============================
+   ERROR MESSAGE
+================================ */
+.details-error-msg {
+  color: #ffb4b4;
+  background: rgba(255, 0, 0, 0.12);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 0.8rem;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+}
+

@@ -5,25 +5,18 @@ import { getPlaceById, deletePlace } from "../../api/placesApi";
 import { getCommentsByPlace, createComment } from "../../api/commentsApi";
 import { getLikes, checkUserLike, likePlace, unlikePlace } from "../../api/likesApi";
 import { getUserById } from "../../api/userApi";
+
 import { AuthContext } from "../../contexts/AuthContext";
+
+import Likes from "./Likes";
+import Comments from "./Comments";
+
 
 function getDisplayName(user) {
   if (!user) return "Unknown user";
   if (user.fullName?.trim()) return user.fullName;
   if (user.email?.includes("@")) return user.email.split("@")[0];
   return "Unknown user";
-}
-
-function formatRelativeTime(timestamp) {
-  if (!timestamp) return "";
-  const diff = Date.now() - timestamp;
-  const min = Math.floor(diff / 60000);
-  const hr = Math.floor(min / 60);
-  const day = Math.floor(hr / 24);
-  if (min < 1) return "just now";
-  if (min < 60) return `${min} minute${min !== 1 ? "s" : ""} ago`;
-  if (hr < 24) return `${hr} hour${hr !== 1 ? "s" : ""} ago`;
-  return `${day} day${day !== 1 ? "s" : ""} ago`;
 }
 
 export default function DetailsPage() {
@@ -33,13 +26,11 @@ export default function DetailsPage() {
   const location = useLocation();
   const from = location.state?.from ?? "catalog";
 
-  
   const [place, setPlace] = useState(null);
   const [comments, setComments] = useState([]);
   const [likesCount, setLikesCount] = useState(0);
   const [liked, setLiked] = useState(false);
   const [likeId, setLikeId] = useState(null);
-  const [commentText, setCommentText] = useState("");
   const [loading, setLoading] = useState(true);
 
   const isOwner = useMemo(() => place && user?.id === place.ownerId, [place, user]);
@@ -74,7 +65,7 @@ export default function DetailsPage() {
   };
 
   useEffect(() => {
-    async function load() {
+    async function loadData() {
       try {
         const p = await getPlaceById(id);
         setPlace(p);
@@ -85,27 +76,20 @@ export default function DetailsPage() {
         setLoading(false);
       }
     }
-    load();
+
+    loadData();
   }, [id]);
 
-  const handleLikeClick = async () => {
+  const handleLikeToggle = async () => {
     if (!isAuthenticated) return alert("Please login first!");
     if (isOwner) return;
 
-    try {
-      liked && likeId ? await unlikePlace(likeId) : await likePlace(id, user.id);
-      await loadLikes();
-    } catch (err) {
-      alert(err.message || "Error updating like");
-    }
+    liked && likeId ? await unlikePlace(likeId) : await likePlace(id, user.id);
+    await loadLikes();
   };
 
-  const handleCommentSubmit = async (e) => {
-    e.preventDefault();
-    if (!commentText.trim()) return;
-
-    await createComment(id, commentText, user);
-    setCommentText("");
+  const handleCommentCreate = async (text) => {
+    await createComment(id, text, user);
     await loadComments();
   };
 
@@ -121,6 +105,7 @@ export default function DetailsPage() {
   return (
     <div className="details-wrapper">
       <div className="details-card">
+
         <img className="details-image" src={place.imageUrl} alt={place.title} />
 
         <h1 className="details-title">{place.title}</h1>
@@ -139,17 +124,13 @@ export default function DetailsPage() {
             {from === "home" ? "Back to Home" : "Back to Catalog"}
           </button>
 
-          <button
-            className={`details-like-btn ${liked ? "liked" : ""}`}
-            onClick={handleLikeClick}
-            disabled={!isAuthenticated || isOwner}
-          >
-            {isOwner
-              ? `❤️ ${likesCount} Like${likesCount !== 1 ? "s" : ""}`
-              : liked
-                ? `💔 Dislike ${likesCount}`
-                : `👍 Like ${likesCount}`}
-          </button>
+          <Likes
+            likesCount={likesCount}
+            liked={liked}
+            isOwner={isOwner}
+            isAuthenticated={isAuthenticated}
+            onLikeToggle={handleLikeToggle}
+          />
 
           {isAuthenticated && isOwner && (
             <>
@@ -163,46 +144,13 @@ export default function DetailsPage() {
           )}
         </div>
 
-        <section className="details-comments-box">
-          <h3 className="details-comments-title">Comments</h3>
+        <Comments
+          comments={comments}
+          isOwner={isOwner}
+          isAuthenticated={isAuthenticated}
+          onCreateComment={handleCommentCreate}
+        />
 
-          {!comments.length && <p className="details-no-comments">No comments yet.</p>}
-
-          <ul className="details-comments-list">
-            {comments.map((c) => (
-              <li key={c.id} className="details-comment-item">
-                <strong>{c.authorName}:</strong> {c.text}
-                <span className="details-comment-date">• {formatRelativeTime(c.createdAt)}</span>
-              </li>
-            ))}
-          </ul>
-
-          {!isAuthenticated && (
-            <p className="details-login-msg">
-              <Link to="/login" className="details-login-link">
-                Login
-              </Link>{" "}
-              to post comments or like this place.
-            </p>
-
-          )}
-
-          {isAuthenticated && !isOwner && (
-            <form className="details-comment-form" onSubmit={handleCommentSubmit}>
-              <input
-                className="details-comment-input"
-                value={commentText}
-                onChange={(e) => setCommentText(e.target.value)}
-                placeholder="Add a comment..."
-              />
-              <button className="details-comment-btn">Post</button>
-            </form>
-          )}
-
-          {isAuthenticated && isOwner && (
-            <p className="details-owner-msg">You can’t comment on your own place.</p>
-          )}
-        </section>
       </div>
     </div>
   );

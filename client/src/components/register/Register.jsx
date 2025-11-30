@@ -8,7 +8,7 @@ export default function Register() {
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
-        fullName: "",     
+        fullName: "",
         email: "",
         password: "",
         repass: "",
@@ -18,26 +18,30 @@ export default function Register() {
         setForm(state => ({ ...state, [e.target.name]: e.target.value }));
     }
 
-  async function onSubmit(e) {
-    e.preventDefault();
+    async function onSubmit(e) {
+        e.preventDefault();
 
-    if (form.password !== form.repass) {
-        alert("Passwords do not match!");
-        return;
+        if (!form.email || !form.password) {
+            return alert("Email and password are required!");
+        }
+
+        if (form.password !== form.repass) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        try {
+            await register({
+                email: form.email.trim(),
+                fullName: form.fullName.trim(),
+                password: form.password.trim(),
+            });
+
+            navigate("/");
+        } catch (err) {
+            alert(err.message);
+        }
     }
-
-    try {
-        await register({
-            email: form.email.trim(),
-            fullName: form.fullName.trim(), 
-            password: form.password.trim(),
-        });
-
-        navigate("/");
-    } catch (err) {
-        alert(err.message);
-    }
-}
 
     return (
         <div className="register-page">
@@ -49,7 +53,7 @@ export default function Register() {
 
                     <form onSubmit={onSubmit} className="register-form">
 
-                    
+
                         <label className="label" htmlFor="fullName">Full Name (optional)</label>
                         <input
                             className="input"

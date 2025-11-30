@@ -1,0 +1,36 @@
+/* ===============================
+   LIKE SYSTEM
+================================ */
+
+/* OWNER BADGE */
+.details-like-owner {
+    background: rgba(255, 235, 240, 0.32);
+    border: 2px solid rgba(255, 110, 128, 0.6);
+    color: #ff758f;
+    padding: 0.55rem 1.4rem;
+    border-radius: 28px;
+    font-weight: 600;
+    user-select: none;
+    backdrop-filter: blur(10px);
+}
+
+/* USER LIKE BUTTON */
+.details-like-btn {
+    border-radius: 28px;
+    background: rgba(59, 130, 246, 0.28);
+    border: 2px solid rgba(96, 165, 250, 0.45);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.details-like-btn:hover:not(:disabled) {
+    background: rgba(59, 130, 246, 0.45);
+    transform: translateY(-2px);
+}
+
+.details-like-btn.liked {
+    background: rgba(239, 68, 68, 0.35);
+    border-color: rgba(239, 68, 68, 0.55);
+}

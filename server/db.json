@@ -216,6 +216,13 @@
       "text": "I like visiting..",
       "authorId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
       "createdAt": 1764275708570
+    },
+    {
+      "id": "4250a094-7972-4b8a-b57d-0effdbb572f3",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "text": "Nice one!",
+      "authorId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764505465525
     }
   ],
   "likes": [
@@ -250,12 +257,6 @@
       "createdAt": 1764265588923
     },
     {
-      "id": "aaed9b24-c080-4523-97d1-cd70f0707de4",
-      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
-      "userId": "1196316b-f606-4094-a84a-73810b123382",
-      "createdAt": 1764266547684
-    },
-    {
       "id": "48215f58-5d16-46d7-9143-a44be27442bd",
       "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
       "userId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
@@ -266,6 +267,12 @@
       "placeId": "7cc16866-46e2-427c-b378-2fbf54e2b41a",
       "userId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
       "createdAt": 1764270921680
+    },
+    {
+      "id": "f24d9a97-fb57-4484-b488-d462a138af5d",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "userId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764505470378
     }
   ]
 }

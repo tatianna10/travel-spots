@@ -1,29 +1,25 @@
 import { useParams, Link, useNavigate, useLocation } from "react-router";
 import { useContext, useEffect, useState, useMemo } from "react";
 
+import { AuthContext } from "../../contexts/AuthContext";
+
 import { getPlaceById, deletePlace } from "../../api/placesApi";
 import { getCommentsByPlace, createComment } from "../../api/commentsApi";
 import { getLikes, checkUserLike, likePlace, unlikePlace } from "../../api/likesApi";
 import { getUserById } from "../../api/userApi";
 
-import { AuthContext } from "../../contexts/AuthContext";
-
 import Likes from "./Likes";
 import Comments from "./Comments";
 
+import { getDisplayName } from "../../utils/formatters";
 
-function getDisplayName(user) {
-  if (!user) return "Unknown user";
-  if (user.fullName?.trim()) return user.fullName;
-  if (user.email?.includes("@")) return user.email.split("@")[0];
-  return "Unknown user";
-}
 
 export default function DetailsPage() {
   const { id } = useParams();
-  const { user, isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const { user, isAuthenticated } = useContext(AuthContext);
+
   const from = location.state?.from ?? "catalog";
 
   const [place, setPlace] = useState(null);
@@ -37,17 +33,19 @@ export default function DetailsPage() {
 
   const loadComments = async () => {
     const data = await getCommentsByPlace(id);
-    const mapped = await Promise.all(
+
+    const result = await Promise.all(
       data.map(async (c) => {
         try {
-          const u = await getUserById(c.authorId);
-          return { ...c, authorName: getDisplayName(u) };
+          const creator = await getUserById(c.authorId);
+          return { ...c, authorName: getDisplayName(creator) };
         } catch {
           return { ...c, authorName: "Unknown user" };
         }
       })
     );
-    setComments(mapped);
+
+    setComments(result);
   };
 
   const loadLikes = async () => {
@@ -69,6 +67,7 @@ export default function DetailsPage() {
       try {
         const p = await getPlaceById(id);
         setPlace(p);
+
         await Promise.all([loadComments(), loadLikes()]);
       } catch (err) {
         console.error(err);
@@ -84,11 +83,15 @@ export default function DetailsPage() {
     if (!isAuthenticated) return alert("Please login first!");
     if (isOwner) return;
 
-    liked && likeId ? await unlikePlace(likeId) : await likePlace(id, user.id);
+    liked && likeId
+      ? await unlikePlace(likeId)
+      : await likePlace(id, user.id);
+
     await loadLikes();
   };
 
   const handleCommentCreate = async (text) => {
+    if (!text.trim()) return;
     await createComment(id, text, user);
     await loadComments();
   };

@@ -68,7 +68,6 @@ export default function CreatePlace() {
                 <form className="create-form" onSubmit={handleSubmit}>
                     <h2 className="create-title">Add New Travel Spot</h2>
 
-                    {/* INPUT FIELDS */}
                     <label className="create-label">City:
                         <input className="create-input" name="city" onChange={handleChange} required />
                     </label>

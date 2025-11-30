@@ -239,22 +239,10 @@
       "createdAt": 1764252996643
     },
     {
-      "id": "bcfccbda-ca9f-4dc4-b252-763d3939ca51",
-      "placeId": "9e1fb3b6-e9c2-46bb-8ae4-3f6aa95fe466",
-      "userId": "1196316b-f606-4094-a84a-73810b123382",
-      "createdAt": 1764260832368
-    },
-    {
       "id": "d5fe9a02-7810-4979-a895-6ca11de295f3",
       "placeId": "2c7bcd7c-5720-4d8e-b9e3-4f7a60697301",
       "userId": "1196316b-f606-4094-a84a-73810b123382",
       "createdAt": 1764262280662
-    },
-    {
-      "id": "48215f58-5d16-46d7-9143-a44be27442bd",
-      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
-      "userId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
-      "createdAt": 1764270915646
     },
     {
       "id": "4cb95ec2-dcb6-4969-9615-cf390704a311",
@@ -273,6 +261,18 @@
       "placeId": "6fe7459c-96f1-4ab2-beae-fe4d9ea12f7e",
       "userId": "1196316b-f606-4094-a84a-73810b123382",
       "createdAt": 1764506098332
+    },
+    {
+      "id": "48362f44-9d6b-4287-b5df-056998f9fe3e",
+      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
+      "userId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
+      "createdAt": 1764506598611
+    },
+    {
+      "id": "13f28634-1f0c-431e-8f23-180cdbfaee96",
+      "placeId": "9e1fb3b6-e9c2-46bb-8ae4-3f6aa95fe466",
+      "userId": "1196316b-f606-4094-a84a-73810b123382",
+      "createdAt": 1764506622844
     }
   ]
 }

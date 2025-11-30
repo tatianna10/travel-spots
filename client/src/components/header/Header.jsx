@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import { getDisplayName } from "../../utils/formatters"; 
 
 export default function Header({ showBrand = false }) {
     const { isAuthenticated, user, logout } = useContext(AuthContext);
@@ -28,11 +29,10 @@ export default function Header({ showBrand = false }) {
                 {isAuthenticated ? (
                     <>
                         <Link to="/places/create">Create Spot</Link>
-
                         <Link to="/places/my-places">My Places</Link>
 
                         <span className="header-user">
-                            Hello, {user.fullName?.trim() || user.email.split("@")[0]}
+                            Hello, {getDisplayName(user)}
                         </span>
 
                         <button className="logout-btn" onClick={logout}>

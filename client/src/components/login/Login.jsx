@@ -15,31 +15,45 @@ export default function Login() {
 
     async function onSubmit(e) {
         e.preventDefault();
+        const formElement = e.target;
+        const passwordInput = formElement.querySelector('input[name="password"]');
+
         try {
-            await login(form);
-            navigate("/"); 
+            await login({
+                email: form.email.trim(),
+                password: form.password.trim(),
+            });
+
+            navigate("/");
         } catch (err) {
-            alert(err.message);
+            passwordInput.setCustomValidity("Invalid email or password!");
+            passwordInput.reportValidity();
+
+            passwordInput.addEventListener("input", () =>
+                passwordInput.setCustomValidity("")
+            );
         }
     }
 
     return (
         <div className="login-page">
-            <Header /> 
+            <Header />
 
             <div className="login-center">
                 <div className="login-card">
                     <h2 className="login-title">Login</h2>
 
                     <form onSubmit={onSubmit} className="login-form">
+
                         <label className="label">Email</label>
                         <input
                             className="input"
-                            type="email"
+                            type="text"
                             name="email"
                             placeholder="Your Email"
                             value={form.email}
                             onChange={onChange}
+                            required
                         />
 
                         <label className="label">Password</label>
@@ -50,9 +64,13 @@ export default function Login() {
                             placeholder="Password"
                             value={form.password}
                             onChange={onChange}
+                            required
+                            minLength={4}
                         />
 
-                        <button className="login-btn" type="submit">Login</button>
+                        <button className="login-btn" type="submit">
+                            Login
+                        </button>
                     </form>
 
                     <p className="register-text">

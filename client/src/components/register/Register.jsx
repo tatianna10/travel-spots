@@ -14,19 +14,38 @@ export default function Register() {
         repass: "",
     });
 
+    const [error, setError] = useState("");
+
     function onChange(e) {
         setForm(state => ({ ...state, [e.target.name]: e.target.value }));
+        setError(""); 
     }
 
     async function onSubmit(e) {
         e.preventDefault();
 
-        if (!form.email || !form.password) {
-            return alert("Email and password are required!");
+        // ===== Email validation =====
+        const emailPattern = /.+@.+\..+/;
+        if (!emailPattern.test(form.email)) {
+            setError("Please enter a valid email address.");
+            return;
         }
 
+        // ===== Required fields =====
+        if (!form.email.trim() || !form.password.trim()) {
+            setError("Email and password are required!");
+            return;
+        }
+
+        // ===== Password length =====
+        if (form.password.length < 4) {
+            setError("Password must be at least 4 characters long.");
+            return;
+        }
+
+        // ===== Password match =====
         if (form.password !== form.repass) {
-            alert("Passwords do not match!");
+            setError("Passwords do not match!");
             return;
         }
 
@@ -39,7 +58,7 @@ export default function Register() {
 
             navigate("/");
         } catch (err) {
-            alert(err.message);
+            setError(err.message);
         }
     }
 
@@ -53,8 +72,9 @@ export default function Register() {
 
                     <form onSubmit={onSubmit} className="register-form">
 
-
-                        <label className="label" htmlFor="fullName">Full Name (optional)</label>
+                        <label className="label" htmlFor="fullName">
+                            Full Name (optional)
+                        </label>
                         <input
                             className="input"
                             type="text"
@@ -77,7 +97,9 @@ export default function Register() {
                             required
                         />
 
-                        <label className="label" htmlFor="register-password">Password</label>
+                        <label className="label" htmlFor="register-password">
+                            Password
+                        </label>
                         <input
                             className="input"
                             type="password"
@@ -89,7 +111,9 @@ export default function Register() {
                             required
                         />
 
-                        <label className="label" htmlFor="confirm-password">Confirm Password</label>
+                        <label className="label" htmlFor="confirm-password">
+                            Confirm Password
+                        </label>
                         <input
                             className="input"
                             type="password"
@@ -105,6 +129,8 @@ export default function Register() {
                             Register
                         </button>
                     </form>
+
+                    {error && <p className="form-error">{error}</p>}
 
                     <p className="login-text">
                         Already have an account?{" "}

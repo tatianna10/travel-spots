@@ -274,12 +274,6 @@ Route protection:
 
 ---
 
-## Bonuses 
-- Image upload (Cloudinary)  
-- Deployment (Netlify, Vercel, Firebase Hosting)  
-
----
-
 ##  License
 MIT License
 

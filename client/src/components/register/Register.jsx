@@ -14,39 +14,28 @@ export default function Register() {
         repass: "",
     });
 
-    const [error, setError] = useState("");
-
     function onChange(e) {
         setForm(state => ({ ...state, [e.target.name]: e.target.value }));
-        setError(""); 
+
+        if (e.target.name === "repass") {
+            const confirm = e.target;
+            if (confirm.value !== form.password) {
+                confirm.setCustomValidity("Passwords do not match!");
+            } else {
+                confirm.setCustomValidity("");
+            }
+        }
     }
 
     async function onSubmit(e) {
         e.preventDefault();
 
-        // ===== Email validation =====
-        const emailPattern = /.+@.+\..+/;
-        if (!emailPattern.test(form.email)) {
-            setError("Please enter a valid email address.");
-            return;
-        }
-
-        // ===== Required fields =====
-        if (!form.email.trim() || !form.password.trim()) {
-            setError("Email and password are required!");
-            return;
-        }
-
-        // ===== Password length =====
         if (form.password.length < 4) {
-            setError("Password must be at least 4 characters long.");
+            e.target.password.setCustomValidity("Password must be at least 4 characters long!");
+            e.target.password.reportValidity();
             return;
-        }
-
-        // ===== Password match =====
-        if (form.password !== form.repass) {
-            setError("Passwords do not match!");
-            return;
+        } else {
+            e.target.password.setCustomValidity("");
         }
 
         try {
@@ -58,7 +47,7 @@ export default function Register() {
 
             navigate("/");
         } catch (err) {
-            setError(err.message);
+            alert(err.message);
         }
     }
 
@@ -72,53 +61,45 @@ export default function Register() {
 
                     <form onSubmit={onSubmit} className="register-form">
 
-                        <label className="label" htmlFor="fullName">
-                            Full Name (optional)
-                        </label>
+                        <label className="label">Full Name (optional)</label>
                         <input
                             className="input"
                             type="text"
                             name="fullName"
-                            id="fullName"
                             placeholder="John Travolta"
                             value={form.fullName}
                             onChange={onChange}
                         />
 
-                        <label className="label" htmlFor="email">Email</label>
+                        <label className="label">Email</label>
                         <input
                             className="input"
                             type="email"
                             name="email"
-                            id="email"
                             placeholder="Your Email"
                             value={form.email}
                             onChange={onChange}
                             required
                         />
 
-                        <label className="label" htmlFor="register-password">
-                            Password
-                        </label>
+                        <label className="label">Password</label>
                         <input
                             className="input"
                             type="password"
                             name="password"
-                            id="register-password"
                             placeholder="Password"
+                            minLength={4}                       
+                            title="Password must be at least 4 characters long"
                             value={form.password}
                             onChange={onChange}
                             required
                         />
 
-                        <label className="label" htmlFor="confirm-password">
-                            Confirm Password
-                        </label>
+                        <label className="label">Confirm Password</label>
                         <input
                             className="input"
                             type="password"
                             name="repass"
-                            id="confirm-password"
                             placeholder="Repeat Password"
                             value={form.repass}
                             onChange={onChange}
@@ -130,13 +111,9 @@ export default function Register() {
                         </button>
                     </form>
 
-                    {error && <p className="form-error">{error}</p>}
-
                     <p className="login-text">
-                        Already have an account?{" "}
-                        <Link className="login-link" to="/login">
-                            Login
-                        </Link>
+                        Already have an account?
+                        <Link className="login-link" to="/login"> Login</Link>
                     </p>
                 </div>
             </div>

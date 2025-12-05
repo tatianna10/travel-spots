@@ -217,7 +217,7 @@ npm run dev
 
 ### Start backend (example for Node.js)
 ```bash
-npm run server
+node .\server.js
 ```
 
 ---
@@ -274,8 +274,8 @@ Route protection:
 
 ---
 
-##  Optional Bonuses 
-- Image upload (Cloudinary/Firebase)  
+## Bonuses 
+- Image upload (Cloudinary)  
 - Deployment (Netlify, Vercel, Firebase Hosting)  
 
 ---

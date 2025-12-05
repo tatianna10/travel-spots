@@ -16,26 +16,32 @@ export default function Register() {
 
     function onChange(e) {
         setForm(state => ({ ...state, [e.target.name]: e.target.value }));
-
-        if (e.target.name === "repass") {
-            const confirm = e.target;
-            if (confirm.value !== form.password) {
-                confirm.setCustomValidity("Passwords do not match!");
-            } else {
-                confirm.setCustomValidity("");
-            }
-        }
     }
 
     async function onSubmit(e) {
         e.preventDefault();
+        const formElement = e.target;
+
+        const emailInput = formElement.querySelector('input[name="email"]');
+        const passwordInput = formElement.querySelector('input[name="password"]');
+        const repassInput = formElement.querySelector('input[name="repass"]');
+
+        emailInput.setCustomValidity("");
+        passwordInput.setCustomValidity("");
+        repassInput.setCustomValidity("");
 
         if (form.password.length < 4) {
-            e.target.password.setCustomValidity("Password must be at least 4 characters long!");
-            e.target.password.reportValidity();
+            passwordInput.setCustomValidity("Password must be at least 4 characters long");
+            passwordInput.reportValidity();
+            passwordInput.addEventListener("input", () => passwordInput.setCustomValidity(""));
             return;
-        } else {
-            e.target.password.setCustomValidity("");
+        }
+
+        if (form.password !== form.repass) {
+            repassInput.setCustomValidity("Passwords do not match!");
+            repassInput.reportValidity();
+            repassInput.addEventListener("input", () => repassInput.setCustomValidity(""));
+            return;
         }
 
         try {
@@ -47,7 +53,9 @@ export default function Register() {
 
             navigate("/");
         } catch (err) {
-            alert(err.message);
+            emailInput.setCustomValidity(err.message || "Registration failed!");
+            emailInput.reportValidity();
+            emailInput.addEventListener("input", () => emailInput.setCustomValidity(""));
         }
     }
 
@@ -61,45 +69,51 @@ export default function Register() {
 
                     <form onSubmit={onSubmit} className="register-form">
 
-                        <label className="label">Full Name (optional)</label>
+                        <label className="label" htmlFor="fullName">Full Name (optional)</label>
                         <input
                             className="input"
                             type="text"
                             name="fullName"
+                            id="fullName"
                             placeholder="John Travolta"
                             value={form.fullName}
                             onChange={onChange}
                         />
 
-                        <label className="label">Email</label>
+                        <label className="label" htmlFor="email">Email</label>
                         <input
                             className="input"
-                            type="email"
+                            type="text"
                             name="email"
+                            id="email"
                             placeholder="Your Email"
                             value={form.email}
                             onChange={onChange}
                             required
+                            pattern="^[^@\s]+@[^@\s]+\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})*$"
+                            title="Enter a valid email like name@example.com"
                         />
 
-                        <label className="label">Password</label>
+                        <label className="label" htmlFor="register-password">Password</label>
                         <input
                             className="input"
                             type="password"
                             name="password"
+                            id="register-password"
                             placeholder="Password"
-                            minLength={4}                       
-                            title="Password must be at least 4 characters long"
                             value={form.password}
                             onChange={onChange}
                             required
+                            minLength={4}
+                            title="Password must be at least 4 characters long"
                         />
 
-                        <label className="label">Confirm Password</label>
+                        <label className="label" htmlFor="confirm-password">Confirm Password</label>
                         <input
                             className="input"
                             type="password"
                             name="repass"
+                            id="confirm-password"
                             placeholder="Repeat Password"
                             value={form.repass}
                             onChange={onChange}

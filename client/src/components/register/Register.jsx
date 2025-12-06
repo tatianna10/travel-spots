@@ -87,6 +87,7 @@ export default function Register() {
                             name="email"
                             id="email"
                             placeholder="Your Email"
+                            autoComplete="email"
                             value={form.email}
                             onChange={onChange}
                             required
@@ -99,8 +100,10 @@ export default function Register() {
                             className="input"
                             type="password"
                             name="password"
+                            autocomplete="new-password"
                             id="register-password"
                             placeholder="Password"
+
                             value={form.password}
                             onChange={onChange}
                             required
@@ -113,6 +116,7 @@ export default function Register() {
                             className="input"
                             type="password"
                             name="repass"
+                            autocomplete="new-password"
                             id="confirm-password"
                             placeholder="Repeat Password"
                             value={form.repass}

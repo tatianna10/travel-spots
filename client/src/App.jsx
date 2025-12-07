@@ -22,7 +22,7 @@ function App() {
       <Route path="/places" element={<Catalog />} />
       <Route path="/places/:id/details" element={<DetailsPage />} />
 
-      {/* gues-only routes */}
+      {/* guest-only routes */}
       <Route element={<GuestRoute />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

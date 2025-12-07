@@ -153,52 +153,54 @@
 
 ##  Project Structure
 ```
-src/
-  api/
-    authApi.js
-    placesApi.js
-    commentsApi.js
-    likesApi.js
-    userApi.js
-
-  components/
-    header/
-      Header.jsx
-      header.css
-    place-card/
-      PlaceCard.jsx
-      place-card.css
-    protected-route/
-      PrivateRoute.jsx
-      GuestRoute.jsx
-
-  contexts/
-    AuthContext.jsx
-
-  hooks/
-    usePersistedState.js
-
-  pages/
-    Home.jsx
-    Catalog.jsx
-    DetailsPage.jsx
-    CreatePlace.jsx
-    EditPlace.jsx
-    MyPlaces.jsx
-    Login.jsx
-    Register.jsx
-    NotFound.jsx
-
-  styles/
-    index.css
-    details.css
-    login.css
-    register.css
-    catalog.css
-    home.css
-
-  App.jsx
-  main.jsx
+📦src
+ ┣ 📂api
+ ┃ ┣ 📜authAPI.js
+ ┃ ┣ 📜commentsApi.js
+ ┃ ┣ 📜likesApi.js
+ ┃ ┣ 📜placesApi.js
+ ┃ ┗ 📜userApi.js
+ ┣ 📂components
+ ┃ ┣ 📂catalog
+ ┃ ┃ ┗ 📜Catalog.jsx
+ ┃ ┣ 📂create-place
+ ┃ ┃ ┗ 📜CreatePlace.jsx
+ ┃ ┣ 📂details-page
+ ┃ ┃ ┣ 📂comments
+ ┃ ┃ ┃ ┗ 📜Comments.jsx
+ ┃ ┃ ┣ 📂likes
+ ┃ ┃ ┃ ┗ 📜Likes.jsx
+ ┃ ┃ ┗ 📜DetailsPage.jsx
+ ┃ ┣ 📂edit-page
+ ┃ ┃ ┗ 📜EditPlace.jsx
+ ┃ ┣ 📂footer
+ ┃ ┃ ┗ 📜Footer.jsx
+ ┃ ┣ 📂header
+ ┃ ┃ ┗ 📜Header.jsx
+ ┃ ┣ 📂home
+ ┃ ┃ ┣ 📜Home.jsx
+ ┃ ┃ ┗ 📜HomeMain.jsx
+ ┃ ┣ 📂login
+ ┃ ┃ ┗ 📜Login.jsx
+ ┃ ┣ 📂my-places
+ ┃ ┃ ┗ 📜MyPlaces.jsx
+ ┃ ┣ 📂not-found
+ ┃ ┃ ┗ 📜NotFound.jsx
+ ┃ ┣ 📂place-card
+ ┃ ┃ ┗ 📜PlaceCard.jsx
+ ┃ ┣ 📂register
+ ┃ ┃ ┗ 📜Register.jsx
+ ┃ ┗ 📂scrolltotop
+ ┃ ┃ ┗ 📜ScrollToTop.jsx
+ ┣ 📂contexts
+ ┃ ┗ 📜AuthContext.jsx
+ ┣ 📂guards
+ ┃ ┣ 📜GuestRoute.jsx
+ ┃ ┗ 📜PrivateRoute.jsx
+ ┣ 📂utils
+ ┃ ┗ 📜formatters.js
+ ┣ 📜App.jsx
+ ┗ 📜main.jsx
 ```
 
 ---

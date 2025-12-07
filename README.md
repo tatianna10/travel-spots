@@ -88,7 +88,7 @@
 - POST /api/users/login  
 - POST /api/users/register  
 - JWT token stored in `localStorage`  
-- Sent via `Authorization: Bearer <token>`  
+- Sent via `X-Authorization`  
 
 ### Places
 | Method | Endpoint | Access | Description |
@@ -140,8 +140,7 @@
 - React 18+  
 - React Router v6  
 - Context API (AuthContext)  
-- Custom hooks (useAuth, useForm)  
-- Tailwind-based design, exported to standalone CSS (no Tailwind runtime)
+- Tailwind-based design, exported to standalone CSS 
 
 
 ### Backend (any working backend)

@@ -51,7 +51,6 @@ export default function Login() {
                             type="text"
                             name="email"
                             placeholder="Your Email"
-                            autoComplete="username"
                             value={form.email}
                             onChange={onChange}
                             required
@@ -62,7 +61,6 @@ export default function Login() {
                             className="input"
                             type="password"
                             name="password"
-                            autocomplete="current-password"
                             value={form.password}
                             onChange={onChange}
                             required

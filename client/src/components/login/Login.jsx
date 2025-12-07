@@ -61,6 +61,7 @@ export default function Login() {
                             className="input"
                             type="password"
                             name="password"
+                            placeholder="Password"
                             value={form.password}
                             onChange={onChange}
                             required

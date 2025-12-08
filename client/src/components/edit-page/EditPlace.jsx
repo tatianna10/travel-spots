@@ -10,7 +10,7 @@ export default function EditPlace() {
     const location = useLocation();
     const { user } = useContext(AuthContext);
 
-    const cameFrom = location.state?.from; 
+    const cameFrom = location.state?.from;
 
     const [formData, setFormData] = useState({
         city: "",
@@ -60,8 +60,7 @@ export default function EditPlace() {
 
         const updatedSpot = {
             title: `${formData.city}, ${formData.country}`,
-            ...formData,
-            ownerId: user.id
+            ...formData
         };
 
         setSubmitting(true);

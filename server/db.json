@@ -23,6 +23,12 @@
       "email": "tikitak@abv.bg",
       "fullName": "Lora Ivanova",
       "password": "$2b$10$J6IZimrQLDjt2RsoEoyxIuCLgDkOx1aVyt7jiLjRFXXuSVXv7Gx0i"
+    },
+    {
+      "id": "acb3a1c0-127a-4e08-bde2-6a98326f0c71",
+      "email": "maria@gmail.com",
+      "fullName": "Maria Todorova",
+      "password": "$2b$10$Y3QXOqWHTXQ3xLGdqjkImOnAiBYOhrpOohDA6YZOWt43KZBVejY2i"
     }
   ],
   "places": [
@@ -193,6 +199,18 @@
       "category": "historic",
       "ownerId": "1196316b-f606-4094-a84a-73810b123382",
       "createdAt": 1763670857992
+    },
+    {
+      "id": "c62532dd-280b-470c-ada6-7492a087edcc",
+      "title": "Stuttgart, Germany",
+      "city": "Stuttgart",
+      "country": "Germany",
+      "imageUrl": "https://www.reise-idee.de/wp-content/uploads/Schlossplatz_View_mit-Dorotheen-Quartier_079054_c-SMG-Werner-Dieterich-scaled.jpg",
+      "description": "Stuttgart is a modern German city known for its green parks, car industry heritage, and vibrant cultural scene.",
+      "longDescription": "\nStuttgart, the capital of the Baden-Württemberg region in Germany, is famous for its automotive legacy as the home of Mercedes-Benz and Porsche. The city combines modern innovation with historic charm, surrounded by hills, vineyards, and large green parks that give it a unique landscape. Stuttgart offers world-class museums, architectural landmarks, diverse cuisine, and a dynamic cultural atmosphere, making it an attractive destination for travelers who enjoy exploring both technology and tradition.\n",
+      "category": "modern",
+      "ownerId": "acb3a1c0-127a-4e08-bde2-6a98326f0c71",
+      "createdAt": 1765194777556
     }
   ],
   "comments": [

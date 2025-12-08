@@ -38,15 +38,13 @@ export default function CreatePlace() {
     async function handleSubmit(e) {
         e.preventDefault();
         if (submitting) return;
-
         const newSpot = {
             title: `${formData.city}, ${formData.country}`,
             ...formData,
             ownerId: user.id,
-            likes: [],
-            comments: [],
             createdAt: Date.now()
         };
+
 
         setSubmitting(true);
 

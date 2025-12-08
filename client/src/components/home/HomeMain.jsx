@@ -9,7 +9,7 @@ export default function HomeMain() {
   useEffect(() => {
     getAllPlaces()
       .then(data => {
-        const sorted = [...data].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+        const sorted = [...data].sort((a, b) => b.createdAt - a.createdAt);
         setPlaces(sorted.slice(0, 3));
         setLoading(false);
       })

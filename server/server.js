@@ -7,7 +7,7 @@ import { v4 as uuid } from "uuid";
 
 const app = express();
 const PORT = 3030;
-const SECRET = "s3cRET_xA9Q#P2!0cm@4bR7%wZl"; 
+const SECRET = "s3cRET_xA9Q#P2!0cm@4bR7%wZl";
 
 // ---------- DB HELPERS ----------
 const readDB = () => JSON.parse(fs.readFileSync("db.json"));
@@ -33,7 +33,11 @@ app.post("/users/register", async (req, res) => {
   db.users.push(user);
   writeDB(db);
 
-  const token = jwt.sign({ id, email, fullName: user.fullName }, SECRET);
+
+  const token = jwt.sign({ id, email, fullName: user.fullName },
+    SECRET,
+    { algorithm: "HS256", expiresIn: "2h" }
+  );
   res.json({ id, email, fullName: user.fullName, accessToken: token });
 });
 
@@ -50,7 +54,8 @@ app.post("/users/login", async (req, res) => {
 
   const token = jwt.sign(
     { id: user.id, email: user.email, fullName: user.fullName },
-    SECRET
+    SECRET,
+    { algorithm: "HS256", expiresIn: "2h" }
   );
 
   res.json({

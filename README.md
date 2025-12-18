@@ -81,7 +81,6 @@
 ]
 ```
 
-
 ## Backend API 
 
 ### Authentication
@@ -140,14 +139,12 @@
 - React 18+  
 - React Router v6  
 - Context API (AuthContext)  
-- Tailwind-based design, exported to standalone CSS 
-
+- Custom component-based styling using external CSS files
 
 ### Backend (any working backend)
 - Node.js + Express 
 - Custom JSON storage (`db.json`) used as a lightweight database
  
-
 ---
 
 ##  Project Structure
@@ -161,7 +158,6 @@
  ┣ 📜App.jsx
  ┗ 📜main.jsx
 ```
-
 ---
 
 ##  Getting Started
@@ -218,7 +214,6 @@ Route protection:
 ---
 
 ##  React Concepts Covered
-
 - useState
 - useEffect
 - useContext
@@ -232,9 +227,7 @@ Route protection:
 - Conditional rendering
 - External CSS styling
 
-
 ---
-
 
 ## Bonus Functionality
 

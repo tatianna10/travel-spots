@@ -1,4 +1,4 @@
-/* index.css reset to replace Tailwind Preflight */
+/* Base styles and CSS reset */
 
 *,
 *::before,
@@ -14,7 +14,7 @@ html, body, #root {
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background-color: #FFFFFF; /* or whatever works with your design */
+  background-color: #FFFFFF; 
 }
 a {
   text-decoration: none;

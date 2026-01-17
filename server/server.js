@@ -4,10 +4,30 @@ import fs from "fs";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { v4 as uuid } from "uuid";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+
+dotenv.config();
 
 const app = express();
-const PORT = 3030;
-const SECRET = "s3cRET_xA9Q#P2!0cm@4bR7%wZl"; 
+app.use(cors());
+app.use(express.json());
+
+// connect once (serverless: reuse connection if already open)
+const MONGODB_URI = process.env.MONGODB_URI;
+if (!MONGODB_URI) throw new Error("Missing MONGODB_URI");
+
+if (mongoose.connection.readyState === 0) {
+  await mongoose.connect(MONGODB_URI);
+}
+
+
+
+
+// const app = express();
+// const PORT = 3030;
+// const SECRET = "s3cRET_xA9Q#P2!0cm@4bR7%wZl"; 
 
 // ---------- DB HELPERS ----------
 const readDB = () => JSON.parse(fs.readFileSync("db.json"));

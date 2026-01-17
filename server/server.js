@@ -46,7 +46,7 @@ app.post("/users/register", async (req, res) => {
     return res.status(409).json({ message: "User already exists" });
   }
 
-  const hashed = await bcrypt.hash(password, 10);
+  const hashed = await bcrypt.hash(password, 12);
   const id = uuid();
   const user = { id, email, fullName: fullName || "", password: hashed };
 

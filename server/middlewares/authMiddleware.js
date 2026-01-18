@@ -11,7 +11,6 @@ export function auth(req, res, next) {
 
   try {
     const payload = jwt.verify(token, JWT_SECRET);
-    // payload should contain: _id, email, fullName (based on your login/register)
     req.user = payload;
     next();
   } catch (err) {

@@ -41,12 +41,20 @@ router.post(
         return res.status(401).json({ message: 'Invalid or missing user id' });
       }
 
+      const email = req.user?.email || '';
+      const usernameFromEmail = email.split('@')[0];
+
+      const displayName =
+        (req.user?.fullName && req.user.fullName.trim()) ||
+        usernameFromEmail ||
+        'Unknown user';
+
       const comment = await Comment.create({
         placeId: new Types.ObjectId(String(placeId)),
         text: String(text).trim(),
         authorId: new Types.ObjectId(String(userId)),
-        authorEmail: req.user?.email ?? '',
-        authorName: req.user?.fullName ?? req.user?.email ?? 'Unknown user',
+        authorEmail: email,
+        authorName: displayName,
       });
 
       res.status(201).json(comment);
@@ -55,5 +63,6 @@ router.post(
     }
   }
 );
+
 
 export default router;

@@ -1,10 +1,9 @@
-import { createContext, useState } from "react";
-import { loginAPI, registerAPI, logoutAPI } from "../api/authAPI";
-import { getUserById } from "../api/userApi";
+import { createContext, useState } from 'react';
+import { loginAPI, registerAPI } from '../api/authAPI';
 
 export const AuthContext = createContext();
 
-const USER_KEY = "travelspots-user";
+const USER_KEY = 'travelspots-user';
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
@@ -14,7 +13,7 @@ export function AuthProvider({ children }) {
 
   function saveUser(apiUser) {
     const cleanUser = {
-      id: apiUser.id,
+      _id: apiUser._id,
       email: apiUser.email,
       fullName: apiUser.fullName ?? null,
       accessToken: apiUser.accessToken,
@@ -26,43 +25,17 @@ export function AuthProvider({ children }) {
 
   async function login(credentials) {
     const authData = await loginAPI(credentials);
-
-    const profile = await getUserById(authData.id);
-
-    saveUser({
-      id: authData.id,
-      email: authData.email,
-      fullName: profile.fullName || authData.fullName || null,
-      accessToken: authData.accessToken,
-    });
-
+    saveUser(authData);
     return authData;
   }
 
   async function register(credentials) {
     const authData = await registerAPI(credentials);
-
-    const profile = await getUserById(authData.id);
-
-    saveUser({
-      id: authData.id,
-      email: authData.email,
-      fullName: profile.fullName || authData.fullName || null,
-      accessToken: authData.accessToken,
-    });
-
+    saveUser(authData);
     return authData;
   }
 
-  async function logout() {
-    try {
-      if (user?.accessToken) {
-        await logoutAPI(user.accessToken);
-      }
-    } catch (err) {
-      console.warn("Logout failed:", err.message);
-    }
-
+  function logout() {
     localStorage.removeItem(USER_KEY);
     setUser(null);
   }

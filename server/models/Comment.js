@@ -1,29 +1,28 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const commentSchema = new Schema({
-    _id: {
-        type: String,
-        required: true
-    },
+const commentSchema = new Schema(
+  {
     placeId: {
-        type: String,
-        required: true
-    },
-    text: {
-        type: String,
-        required: true,
-        minlength: 1
+      type: Schema.Types.ObjectId,
+      ref: "Place",
+      required: true,
+      index: true,
     },
     authorId: {
-        type: String,
-        required: true
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
     },
-    createdAt: { 
-        type: Number, 
-        required: true }
-});
+    text: {
+      type: String,
+      required: true,
+      minlength: 1,
+      trim: true,
+    },
+  },
+  { timestamps: true } // adds createdAt & updatedAt automatically
+);
 
-const Comment = model('Comment', commentSchema);
-
+const Comment = model("Comment", commentSchema);
 export default Comment;
-

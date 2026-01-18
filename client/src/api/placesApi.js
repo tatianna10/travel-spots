@@ -21,8 +21,8 @@ export async function getAllPlaces() {
 }
 
 // ============= GET BY ID ============
-export async function getPlaceById(_id) {
-  const res = await fetch(`${baseUrl}/${_}`);
+export async function getPlaceById(id) {
+  const res = await fetch(`${baseUrl}/${id}`);
   return handleResponse(res);
 }
 
@@ -42,7 +42,7 @@ export async function createPlace(placeData, token) {
 
 // ============= UPDATE =============
 export async function updatePlace(_id, placeData, token) {
-  const res = await fetch(`${baseUrl}/${id}`, {
+  const res = await fetch(`${baseUrl}/${_id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

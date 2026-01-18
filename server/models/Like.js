@@ -1,23 +1,25 @@
-import { Schema, model, Types } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const likeSchema = new Schema({
-    _id: {
-        type: String,
-        required: true
-    },
+const likeSchema = new Schema(
+  {
     placeId: {
-        type: String,
-        required: true
+      type: Schema.Types.ObjectId,
+      ref: "Place",
+      required: true,
+      index: true,
     },
     userId: {
-        type: String,
-        required: true,
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+      index: true,
     },
-    createdAt: { 
-        type: Number, 
-        required: true }
-});
+  },
+  { timestamps: true }
+);
 
-const Like = model('Like', likeSchema);
+// Prevent the same user from liking the same place twice
+likeSchema.index({ placeId: 1, userId: 1 }, { unique: true });
 
+const Like = model("Like", likeSchema);
 export default Like;

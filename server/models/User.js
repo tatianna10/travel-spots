@@ -1,36 +1,38 @@
 import bcrypt from 'bcrypt';
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
+import { BCRYPT_ROUNDS } from '../config/env.js';
 
-
-const userSchema = new Schema({
-    _id: {
-        type: String,
-        required: true
-    },
+const userSchema = new Schema(
+  {
     email: {
-        type: String,
-        required: [true, 'User email is required!'],
-        unique: true,
-        lowercase: true,
-        trim: true
+      type: String,
+      required: [true, 'User email is required!'],
+      unique: true,
+      lowercase: true,
+      trim: true,
+      index: true,
     },
     fullName: {
-        type: String,
-        default: "",
-        trim: true
+      type: String,
+      default: '',
+      trim: true,
     },
     password: {
-        type: String,
-        required: [true, 'User password is required!'],
-        minlength: [4, 'The password should be at least 4 characters long!'],
-        select: false
-    }
-});
+      type: String,
+      required: [true, 'User password is required!'],
+      minlength: [4, 'The password should be at least 4 characters long!'],
+      select: false,
+    },
+  },
+  { timestamps: true }
+);
 
-userSchema.pre('save', async function () {
-    this.password = await bcrypt.hash(this.password, 12);
+// Hash password before saving
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+  this.password = await bcrypt.hash(this.password, BCRYPT_ROUNDS);
+  next();
 });
 
 const User = model('User', userSchema);
-
 export default User;

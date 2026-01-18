@@ -100,7 +100,7 @@ export default function CatalogPage() {
           {/* GRID */}
           <div className="catalog-grid">
             {filteredPlaces.map((place) => (
-              <PlaceCard key={place.id} place={place} />
+              <PlaceCard key={place._id} place={place} />
             ))}
           </div>
 

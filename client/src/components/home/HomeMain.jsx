@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router"; 
-import { getAllPlaces } from "../../api/placesApi";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router'; 
+import { getAllPlaces } from '../../api/placesApi';
 
 export default function HomeMain() {
   const [places, setPlaces] = useState([]);
@@ -9,7 +9,9 @@ export default function HomeMain() {
   useEffect(() => {
     getAllPlaces()
       .then(data => {
-        const sorted = [...data].sort((a, b) => b.createdAt - a.createdAt);
+        const sorted = [...data].sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
         setPlaces(sorted.slice(0, 3));
         setLoading(false);
       })
@@ -30,7 +32,7 @@ export default function HomeMain() {
             <p className="home-no-spots">No travel spots available yet.</p>
           ) : (
             places.map(place => (
-              <div key={place.id} className="home-card">
+              <div key={place._id} className="home-card">
                 <img
                   src={place.imageUrl}
                   alt={place.title}
@@ -42,8 +44,8 @@ export default function HomeMain() {
                 <p className="home-card-desc">{place.description}</p>
 
                 <Link
-                  to={`/places/${place.id}/details`}
-                  state={{ from: "home" }}
+                  to={`/places/${place._id}/details`}
+                  state={{ from: 'home' }}
                   className="home-button"
                 >
                   View Details

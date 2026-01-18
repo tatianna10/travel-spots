@@ -98,7 +98,7 @@ router.post("/data/likes", async (req, res) => {
 });
 
 router.delete("/data/likes/:id", async (req, res) => {
-  await Like.findByIdAndDelete(req.params.id);
+  await Like.findByIdAndDelete(req.params._id);
   res.json({ message: "Unliked" });
 });
 

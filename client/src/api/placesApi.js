@@ -21,8 +21,8 @@ export async function getAllPlaces() {
 }
 
 // ============= GET BY ID ============
-export async function getPlaceById(id) {
-  const res = await fetch(`${baseUrl}/${id}`);
+export async function getPlaceById(_id) {
+  const res = await fetch(`${baseUrl}/${_}`);
   return handleResponse(res);
 }
 
@@ -41,7 +41,7 @@ export async function createPlace(placeData, token) {
 }
 
 // ============= UPDATE =============
-export async function updatePlace(id, placeData, token) {
+export async function updatePlace(_id, placeData, token) {
   const res = await fetch(`${baseUrl}/${id}`, {
     method: "PUT",
     headers: {
@@ -54,8 +54,8 @@ export async function updatePlace(id, placeData, token) {
 }
 
 // ============= DELETE =============
-export async function deletePlace(id, token) {
-  const res = await fetch(`${baseUrl}/${id}`, {
+export async function deletePlace(_, token) {
+  const res = await fetch(`${baseUrl}/${_id}`, {
     method: "DELETE",
     headers: {
       "X-Authorization": token

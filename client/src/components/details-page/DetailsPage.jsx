@@ -14,7 +14,7 @@ import Comments from "./comments/Comments";
 import { getDisplayName, formatRelativeTime } from "../../utils/formatters";
 
 export default function DetailsPage() {
-  const { id } = useParams();
+  const { _id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const { user, isAuthenticated } = useContext(AuthContext);
@@ -28,10 +28,10 @@ export default function DetailsPage() {
   const [likeId, setLikeId] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const isOwner = useMemo(() => place && user?.id === place.ownerId, [place, user]);
+  const isOwner = useMemo(() => place && user?._id === place.ownerId, [place, user]);
 
   const loadComments = async () => {
-    const data = await getCommentsByPlace(id);
+    const data = await getCommentsByPlace(_id);
 
     const mapped = await Promise.all(
       data.map(async (c) => {
@@ -56,23 +56,23 @@ export default function DetailsPage() {
   };
 
   const loadLikes = async () => {
-    const count = await getLikes(id);
+    const count = await getLikes(_id);
     setLikesCount(count);
 
     if (user) {
-      const status = await checkUserLike(id, user.id);
+      const status = await checkUserLike(_id, user._d);
       setLiked(status.liked);
       setLikeId(status.likeId);
     } else {
       setLiked(false);
-      setLikeId(null);
+      setLike(null);
     }
   };
 
   useEffect(() => {
     async function loadData() {
       try {
-        const p = await getPlaceById(id);
+        const p = await getPlaceById(_id);
         setPlace(p);
         await Promise.all([loadComments(), loadLikes()]);
       } catch (err) {
@@ -83,13 +83,13 @@ export default function DetailsPage() {
     }
 
     loadData();
-  }, [id]);
+  }, [_id]);
 
   const handleLikeToggle = async () => {
     if (!isAuthenticated) return alert("Please login first!");
     if (isOwner) return;
 
-    liked && likeId ? await unlikePlace(likeId) : await likePlace(id, user.id);
+    liked && likeId ? await unlikePlace(likeId) : await likePlace(_id, user._id);
     await loadLikes();
   };
 

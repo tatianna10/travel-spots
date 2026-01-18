@@ -69,12 +69,12 @@ app.post("/users/login", async (req, res) => {
   if (!match) return res.status(403).json({ message: "Invalid login" });
 
   const token = jwt.sign(
-    { id: user.id, email: user.email, fullName: user.fullName },
+    { id: user._id, email: user.email, fullName: user.fullName },
     SECRET
   );
 
   res.json({
-    id: user.id,
+    id: user._id,
     email: user.email,
     fullName: user.fullName,
     accessToken: token,
@@ -84,12 +84,12 @@ app.post("/users/login", async (req, res) => {
 // ---------- GET USER BY ID ----------
 app.get("/data/users/:id", (req, res) => {
   const db = readDB();
-  const user = db.users.find((u) => u.id === req.params.id);
+  const user = db.users.find((u) => u._id === req.params._id);
 
   if (!user) return res.status(404).json({ message: "User not found" });
 
   res.json({
-    id: user.id,
+    id: user._id,
     email: user.email,
     fullName: user.fullName,
   });

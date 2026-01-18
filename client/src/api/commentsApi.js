@@ -20,7 +20,7 @@ export async function createComment(placeId, text, user) {
     body: JSON.stringify({
       placeId,
       text: text.trim(),
-      authorId: user.id, 
+      authorId: user._id, 
     }),
   });
 

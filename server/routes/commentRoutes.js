@@ -24,7 +24,7 @@ router.post(
   '/data/comments',
   auth,
   validateBody({
-    placeId: { required: true, type: 'string' },
+    placeId: { required: true, type: 'string', pattern: /^[0-9a-fA-F]{24}$/ },
     text: { required: true, type: 'string', minLength: 1 },
   }),
   async (req, res, next) => {
@@ -37,7 +37,7 @@ router.post(
         authorId: req.user._id,
       });
 
-      res.json(comment);
+      res.status(201).json(comment);
     } catch (err) {
       next(err);
     }

@@ -1,25 +1,24 @@
-import { useParams, Link, useNavigate, useLocation } from "react-router";
-import { useContext, useEffect, useState, useMemo } from "react";
+import { useParams, Link, useNavigate, useLocation } from 'react-router';
+import { useContext, useEffect, useState, useMemo } from 'react';
 
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from '../../contexts/AuthContext';
 
-import { getPlaceById, deletePlace } from "../../api/placesApi";
-import { getCommentsByPlace, createComment } from "../../api/commentsApi";
-import { getLikes, checkUserLike, likePlace, unlikePlace } from "../../api/likesApi";
-import { getUserById } from "../../api/userApi";
+import { getPlaceById, deletePlace } from '../../api/placesApi';
+import { getCommentsByPlace, createComment } from '../../api/commentsApi';
+import { getLikes, checkUserLike, likePlace, unlikePlace } from '../../api/likesApi';
 
-import Likes from "./likes/Likes";
-import Comments from "./comments/Comments";
+import Likes from './likes/Likes';
+import Comments from './comments/Comments';
 
-import { getDisplayName, formatRelativeTime } from "../../utils/formatters";
+import { formatRelativeTime } from '../../utils/formatters';
 
 export default function DetailsPage() {
-  const { _id } = useParams();
+  const { id } = useParams(); // this is the place _id from the URL
   const navigate = useNavigate();
   const location = useLocation();
   const { user, isAuthenticated } = useContext(AuthContext);
 
-  const from = location.state?.from ?? "catalog";
+  const from = location.state?.from ?? 'catalog';
 
   const [place, setPlace] = useState(null);
   const [comments, setComments] = useState([]);
@@ -28,51 +27,44 @@ export default function DetailsPage() {
   const [likeId, setLikeId] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const isOwner = useMemo(() => place && user?._id === place.ownerId, [place, user]);
+  // place.ownerId is ObjectId; backend returns it as a string in JSON
+  const isOwner = useMemo(() => {
+    if (!place || !user?._id) return false;
+    return String(place.ownerId) === String(user._id);
+  }, [place, user]);
 
   const loadComments = async () => {
-    const data = await getCommentsByPlace(_id);
+    const data = await getCommentsByPlace(id);
 
-    const mapped = await Promise.all(
-      data.map(async (c) => {
-        try {
-          const u = await getUserById(c.authorId);
-          return {
-            ...c,
-            authorName: getDisplayName(u),
-            createdAtFormatted: formatRelativeTime(c.createdAt),
-          };
-        } catch {
-          return {
-            ...c,
-            authorName: "Unknown user",
-            createdAtFormatted: formatRelativeTime(c.createdAt),
-          };
-        }
-      })
-    );
+    // backend returns authorId, but you don't have /data/users/:id anymore,
+    // so show a simple label
+    const mapped = data.map((c) => ({
+      ...c,
+      authorName: 'User',
+      createdAtFormatted: formatRelativeTime(c.createdAt),
+    }));
 
     setComments(mapped);
   };
 
   const loadLikes = async () => {
-    const count = await getLikes(_id);
+    const count = await getLikes(id);
     setLikesCount(count);
 
-    if (user) {
-      const status = await checkUserLike(_id, user._d);
+    if (user?.accessToken) {
+      const status = await checkUserLike(id, user);
       setLiked(status.liked);
       setLikeId(status.likeId);
     } else {
       setLiked(false);
-      setLike(null);
+      setLikeId(null);
     }
   };
 
   useEffect(() => {
     async function loadData() {
       try {
-        const p = await getPlaceById(_id);
+        const p = await getPlaceById(id);
         setPlace(p);
         await Promise.all([loadComments(), loadLikes()]);
       } catch (err) {
@@ -83,13 +75,19 @@ export default function DetailsPage() {
     }
 
     loadData();
-  }, [_id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   const handleLikeToggle = async () => {
-    if (!isAuthenticated) return alert("Please login first!");
+    if (!isAuthenticated) return alert('Please login first!');
     if (isOwner) return;
 
-    liked && likeId ? await unlikePlace(likeId) : await likePlace(_id, user._id);
+    if (liked && likeId) {
+      await unlikePlace(likeId, user);
+    } else {
+      await likePlace(id, user);
+    }
+
     await loadLikes();
   };
 
@@ -101,33 +99,32 @@ export default function DetailsPage() {
 
   const handleDelete = async () => {
     if (!window.confirm(`Delete: ${place.title}?`)) return;
-    await deletePlace(id, user.accessToken);
-    navigate("/");
+    await deletePlace(id, user);
+    navigate('/');
   };
 
-  if (loading) return <h1 className="details-notfound">Loading...</h1>;
-  if (!place) return <h1 className="details-notfound">Not Found</h1>;
+  if (loading) return <h1 className='details-notfound'>Loading...</h1>;
+  if (!place) return <h1 className='details-notfound'>Not Found</h1>;
 
   return (
-    <div className="details-wrapper">
-      <div className="details-card">
+    <div className='details-wrapper'>
+      <div className='details-card'>
+        <img className='details-image' src={place.imageUrl} alt={place.title} />
 
-        <img className="details-image" src={place.imageUrl} alt={place.title} />
+        <h1 className='details-title'>{place.title}</h1>
+        <p className='details-extra'>{place.longDescription}</p>
 
-        <h1 className="details-title">{place.title}</h1>
-        <p className="details-extra">{place.longDescription}</p>
-
-        <div className="details-category-box">
-          <span className="details-category-label">Category:</span>
-          <span className="details-category-value">{place.category}</span>
+        <div className='details-category-box'>
+          <span className='details-category-label'>Category:</span>
+          <span className='details-category-value'>{place.category}</span>
         </div>
 
-        <div className="details-actions">
+        <div className='details-actions'>
           <button
-            className="details-btn back"
-            onClick={() => navigate(from === "home" ? "/" : "/places")}
+            className='details-btn back'
+            onClick={() => navigate(from === 'home' ? '/' : '/places')}
           >
-            {from === "home" ? "Back to Home" : "Back to Catalog"}
+            {from === 'home' ? 'Back to Home' : 'Back to Catalog'}
           </button>
 
           <Likes
@@ -140,10 +137,10 @@ export default function DetailsPage() {
 
           {isAuthenticated && isOwner && (
             <>
-              <Link className="details-btn edit" to={`/places/${id}/edit`} state={{ from }}>
+              <Link className='details-btn edit' to={`/places/${id}/edit`} state={{ from }}>
                 Edit
               </Link>
-              <button className="details-btn delete" onClick={handleDelete}>
+              <button className='details-btn delete' onClick={handleDelete}>
                 Delete
               </button>
             </>
@@ -158,10 +155,10 @@ export default function DetailsPage() {
         />
 
         {!isAuthenticated && (
-          <p className="details-login-msg">
-            <Link to="/login" className="details-login-link">
+          <p className='details-login-msg'>
+            <Link to='/login' className='details-login-link'>
               Login
-            </Link>{" "}
+            </Link>{' '}
             to post comments or like this place.
           </p>
         )}

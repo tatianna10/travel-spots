@@ -33,17 +33,20 @@ export default function DetailsPage() {
   }, [place, user]);
 
   const loadComments = async () => {
-    const data = await getCommentsByPlace(id);
+  const data = await getCommentsByPlace(id);
 
+  const mapped = data.map((c) => ({
+    ...c,
+    authorName:
+      (c.authorName && c.authorName.trim()) ||
+      (c.authorEmail && c.authorEmail.trim()) ||
+      'Unknown user',
+    createdAtFormatted: formatRelativeTime(c.createdAt),
+  }));
 
-    const mapped = data.map((c) => ({
-      ...c,
-      authorName: 'User',
-      createdAtFormatted: formatRelativeTime(c.createdAt),
-    }));
+  setComments(mapped);
+};
 
-    setComments(mapped);
-  };
 
   const loadLikes = async () => {
     const count = await getLikes(id);

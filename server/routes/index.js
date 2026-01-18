@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import authRoutes from './authRoutes.js';
+import userRoutes from './userRoutes.js';     
 import placeRoutes from './placeRoutes.js';
 import commentRoutes from './commentRoutes.js';
 import likeRoutes from './likeRoutes.js';
@@ -7,6 +8,7 @@ import likeRoutes from './likeRoutes.js';
 const router = Router();
 
 router.use(authRoutes);
+router.use(userRoutes);      
 router.use(placeRoutes);
 router.use(commentRoutes);
 router.use(likeRoutes);

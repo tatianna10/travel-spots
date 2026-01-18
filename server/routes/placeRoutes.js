@@ -1,17 +1,46 @@
 import { Router } from 'express';
+import mongoose from 'mongoose';
 import Place from '../models/Place.js';
 import { auth } from '../middlewares/authMiddleware.js';
 import { validateBody } from '../middlewares/validationMiddleware.js';
 import { requireOwnership } from '../middlewares/ownershipMiddleware.js';
 
 const router = Router();
+const { Types } = mongoose;
 
-const objectIdPattern = /^[0-9a-fA-F]{24}$/;
+function validateObjectIdParam(paramName = 'id') {
+  return (req, res, next) => {
+    const value = req.params[paramName];
+    if (!Types.ObjectId.isValid(String(value))) {
+      return res.status(400).json({ message: 'Invalid id' });
+    }
+    next();
+  };
+}
+
+function pickPlaceFields(body) {
+  // Whitelist allowed fields to update/create
+  const allowed = [
+    'title',
+    'city',
+    'country',
+    'description',
+    'longDescription',
+    'imageUrl',
+    'category',
+  ];
+
+  const out = {};
+  for (const key of allowed) {
+    if (body[key] !== undefined) out[key] = body[key];
+  }
+  return out;
+}
 
 // ---------- GET ALL PLACES ----------
 router.get('/data/places', async (req, res, next) => {
   try {
-    const places = await Place.find().sort({ createdAt: -1 });
+    const places = await Place.find().sort({ createdAt: -1 }).lean();
     res.json(places);
   } catch (err) {
     next(err);
@@ -19,25 +48,16 @@ router.get('/data/places', async (req, res, next) => {
 });
 
 // ---------- GET PLACE BY ID ----------
-router.get(
-  '/data/places/:id',
-  async (req, res, next) => {
-    if (!objectIdPattern.test(req.params.id)) {
-      return res.status(400).json({ message: 'Invalid id' });
-    }
-    next();
-  },
-  async (req, res, next) => {
-    try {
-      const place = await Place.findById(req.params.id);
-      if (!place) return res.status(404).json({ message: 'Place not found' });
+router.get('/data/places/:id', validateObjectIdParam('id'), async (req, res, next) => {
+  try {
+    const place = await Place.findById(req.params.id).lean();
+    if (!place) return res.status(404).json({ message: 'Place not found' });
 
-      res.json(place);
-    } catch (err) {
-      next(err);
-    }
+    res.json(place);
+  } catch (err) {
+    next(err);
   }
-);
+});
 
 // ---------- CREATE PLACE ----------
 router.post(
@@ -59,7 +79,18 @@ router.post(
   }),
   async (req, res, next) => {
     try {
-      const place = await Place.create({ ...req.body, ownerId: req.user._id });
+      const data = pickPlaceFields(req.body);
+
+      const ownerId = req.user?._id ?? req.user?.id;
+      if (!ownerId || !Types.ObjectId.isValid(String(ownerId))) {
+        return res.status(401).json({ message: 'Invalid or missing user id' });
+      }
+
+      const place = await Place.create({
+        ...data,
+        ownerId: new Types.ObjectId(String(ownerId)),
+      });
+
       res.status(201).json(place);
     } catch (err) {
       next(err);
@@ -71,17 +102,28 @@ router.post(
 router.put(
   '/data/places/:id',
   auth,
-  async (req, res, next) => {
-    if (!objectIdPattern.test(req.params.id)) {
-      return res.status(400).json({ message: 'Invalid id' });
-    }
-    next();
-  },
+  validateObjectIdParam('id'),
+  // You can reuse the same validation but make fields optional
+  validateBody({
+    title: { required: false, type: 'string', minLength: 1 },
+    city: { required: false, type: 'string', minLength: 1 },
+    country: { required: false, type: 'string', minLength: 1 },
+    description: { required: false, type: 'string', minLength: 1 },
+    longDescription: { required: false, type: 'string', minLength: 4 },
+    imageUrl: {
+      required: false,
+      type: 'string',
+      pattern: /^https?:\/\//,
+      message: 'The image URL should start with http:// or https://',
+    },
+    category: { required: false, type: 'string' },
+  }),
   requireOwnership({ Model: Place, ownerField: 'ownerId', attachAs: 'place' }),
   async (req, res, next) => {
     try {
-      const { ownerId, ...rest } = req.body; 
-      Object.assign(req.place, rest);
+      const patch = pickPlaceFields(req.body);
+      Object.assign(req.place, patch);
+
       const updated = await req.place.save();
       res.json(updated);
     } catch (err) {
@@ -94,12 +136,7 @@ router.put(
 router.delete(
   '/data/places/:id',
   auth,
-  async (req, res, next) => {
-    if (!objectIdPattern.test(req.params.id)) {
-      return res.status(400).json({ message: 'Invalid id' });
-    }
-    next();
-  },
+  validateObjectIdParam('id'),
   requireOwnership({ Model: Place, ownerField: 'ownerId' }),
   async (req, res, next) => {
     try {

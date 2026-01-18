@@ -20,8 +20,17 @@ const commentSchema = new Schema(
       minlength: 1,
       trim: true,
     },
+
+    authorName: {
+      type: String,
+      default: "Unknown user",
+    },
+    authorEmail: {
+      type: String,
+      default: "",
+    },
   },
-  { timestamps: true } // adds createdAt & updatedAt automatically
+  { timestamps: true }
 );
 
 const Comment = model("Comment", commentSchema);

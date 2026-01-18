@@ -9,6 +9,19 @@ import { authLimiter } from '../middlewares/rateLimitMiddleware.js';
 
 const router = Router();
 
+function signToken(user) {
+  return jwt.sign(
+    {
+      _id: user._id.toString(),
+      id: user._id.toString(), // optional compatibility
+      email: user.email,
+      fullName: user.fullName,
+    },
+    JWT_SECRET,
+    { expiresIn: '7d' }
+  );
+}
+
 // ---------- REGISTER ----------
 router.post(
   '/users/register',
@@ -27,9 +40,9 @@ router.post(
     try {
       const email = String(req.body.email).trim().toLowerCase();
       const password = req.body.password;
-      const fullName = req.body.fullName || '';
+      const fullName = req.body.fullName ? String(req.body.fullName).trim() : '';
 
-      const existing = await User.findOne({ email });
+      const existing = await User.findOne({ email }).lean();
       if (existing) return res.status(409).json({ message: 'User already exists' });
 
       const user = await User.create({
@@ -38,13 +51,10 @@ router.post(
         password, // hashed by pre-save hook
       });
 
-      const token = jwt.sign(
-        { _id: user._id, email: user.email, fullName: user.fullName },
-        JWT_SECRET
-      );
+      const token = signToken(user);
 
       res.json({
-        _id: user._id,
+        _id: user._id.toString(),
         email: user.email,
         fullName: user.fullName,
         accessToken: token,
@@ -74,13 +84,10 @@ router.post(
       const match = await bcrypt.compare(password, user.password);
       if (!match) return res.status(403).json({ message: 'Invalid login' });
 
-      const token = jwt.sign(
-        { _id: user._id, email: user.email, fullName: user.fullName },
-        JWT_SECRET
-      );
+      const token = signToken(user);
 
       res.json({
-        _id: user._id,
+        _id: user._id.toString(),
         email: user.email,
         fullName: user.fullName,
         accessToken: token,

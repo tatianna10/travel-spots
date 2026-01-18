@@ -1,49 +1,103 @@
-import { v4 as uuid } from "uuid";
-import { readDB, writeDB } from "../utils/jsonDb.js";
+import mongoose from 'mongoose';
+import Like from '../models/Like.js';
 
-export function getLikes(req, res) {
-  const db = readDB();
-  const { placeId } = req.query;
+const { Types } = mongoose;
 
-  const likes = db.likes.filter(l => l.placeId === placeId);
-  res.json({ count: likes.length });
+function isValidObjectId(v) {
+  return Types.ObjectId.isValid(String(v));
 }
 
-export function checkLike(req, res) {
-  const db = readDB();
-  const { placeId, userId } = req.query;
-
-  const like = db.likes.find(l => l.placeId === placeId && l.userId === userId);
-  res.json({ liked: !!like, likeId: like?._id || null });
+function toObjectId(v) {
+  return new Types.ObjectId(String(v));
 }
 
-export function createLike(req, res) {
-  const db = readDB();
-  const { placeId, userId } = req.body;
-
-  if (db.likes.some(l => l.placeId === placeId && l.userId === userId)) {
-    return res.status(409).json({ message: "Already liked" });
+function requirePlaceId(req, res) {
+  const placeId = req.query.placeId ?? req.body.placeId;
+  if (!placeId) {
+    res.status(400).json({ message: 'placeId is required' });
+    return null;
   }
-
-  const like = {
-    _id: uuid(),
-    placeId,
-    userId,
-    createdAt: Date.now()
-  };
-
-  db.likes.push(like);
-  writeDB(db);
-  res.json(like);
+  if (!isValidObjectId(placeId)) {
+    res.status(400).json({ message: 'Invalid placeId' });
+    return null;
+  }
+  return toObjectId(placeId);
 }
 
-export function deleteLike(req, res) {
-  const db = readDB();
-  const index = db.likes.findIndex(l => l._id === req.params.id);
+function requireUserId(req, res) {
+  const userId = req.user?._id ?? req.user?.id;
+  if (!userId || !isValidObjectId(userId)) {
+    res.status(401).json({ message: 'Invalid or missing user id' });
+    return null;
+  }
+  return toObjectId(userId);
+}
 
-  if (index === -1) return res.status(404).json({ message: "Like not found" });
+export async function getLikes(req, res, next) {
+  try {
+    const placeId = requirePlaceId(req, res);
+    if (!placeId) return;
 
-  const removed = db.likes.splice(index, 1);
-  writeDB(db);
-  res.json(removed[0]);
+    const count = await Like.countDocuments({ placeId });
+    res.json({ count });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function checkLike(req, res, next) {
+  try {
+    const placeId = requirePlaceId(req, res);
+    if (!placeId) return;
+
+    const userId = requireUserId(req, res);
+    if (!userId) return;
+
+    const like = await Like.findOne({ placeId, userId }).select('_id').lean();
+    res.json({ liked: !!like, likeId: like ? String(like._id) : null });
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function createLike(req, res, next) {
+  try {
+    const placeId = requirePlaceId(req, res);
+    if (!placeId) return;
+
+    const userId = requireUserId(req, res);
+    if (!userId) return;
+
+    try {
+      const like = await Like.create({ placeId, userId });
+      res.status(201).json(like);
+    } catch (e) {
+      if (e?.code === 11000) {
+        return res.status(409).json({ message: 'Already liked' });
+      }
+      throw e;
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function deleteLike(req, res, next) {
+  try {
+    const { id } = req.params;
+
+    if (!isValidObjectId(id)) {
+      return res.status(400).json({ message: 'Invalid like id' });
+    }
+
+    const userId = requireUserId(req, res);
+    if (!userId) return;
+
+    const deleted = await Like.findOneAndDelete({ _id: toObjectId(id), userId });
+    if (!deleted) return res.status(404).json({ message: 'Like not found' });
+
+    res.json(deleted);
+  } catch (err) {
+    next(err);
+  }
 }

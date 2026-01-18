@@ -11,8 +11,7 @@ export default function Comments({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    setError(""); 
+    setError("");
 
     if (!text.trim()) {
       setError("Comment cannot be empty.");
@@ -34,12 +33,21 @@ export default function Comments({
       {!comments.length && <p className="details-no-comments">No comments yet.</p>}
 
       <ul className="details-comments-list">
-        {comments.map((c) => (
-          <li key={c._id} className="details-comment-item">
-            <strong>{c.authorName}:</strong> {c.text}
-            <span className="details-comment-date">• {c.createdAtFormatted}</span>
-          </li>
-        ))}
+        {comments.map((c) => {
+          const displayUser =
+            (c.authorName && c.authorName.trim()) ||
+            (c.authorEmail && c.authorEmail.trim()) ||
+            "Unknown user";
+
+          return (
+            <li key={c._id} className="details-comment-item">
+              <strong>{displayUser}:</strong> {c.text}
+              <span className="details-comment-date">
+                • {c.createdAtFormatted}
+              </span>
+            </li>
+          );
+        })}
       </ul>
 
       {error && <p className="details-error-msg">{error}</p>}

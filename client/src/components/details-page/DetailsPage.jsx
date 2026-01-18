@@ -13,7 +13,7 @@ import Comments from './comments/Comments';
 import { formatRelativeTime } from '../../utils/formatters';
 
 export default function DetailsPage() {
-  const { id } = useParams(); // this is the place _id from the URL
+  const { id } = useParams(); 
   const navigate = useNavigate();
   const location = useLocation();
   const { user, isAuthenticated } = useContext(AuthContext);
@@ -27,7 +27,6 @@ export default function DetailsPage() {
   const [likeId, setLikeId] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // place.ownerId is ObjectId; backend returns it as a string in JSON
   const isOwner = useMemo(() => {
     if (!place || !user?._id) return false;
     return String(place.ownerId) === String(user._id);
@@ -36,8 +35,7 @@ export default function DetailsPage() {
   const loadComments = async () => {
     const data = await getCommentsByPlace(id);
 
-    // backend returns authorId, but you don't have /data/users/:id anymore,
-    // so show a simple label
+
     const mapped = data.map((c) => ({
       ...c,
       authorName: 'User',
@@ -75,7 +73,7 @@ export default function DetailsPage() {
     }
 
     loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  
   }, [id]);
 
   const handleLikeToggle = async () => {

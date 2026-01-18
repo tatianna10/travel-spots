@@ -24,13 +24,12 @@
 
 ---
 
-##  Backend — Collections & API
+##  Backend — MongoDB Collections
 
 ### Collection: `places`
 ```json
-  "places": [
     {
-      "id": "78877795-98e5-4fd6-b90c-6a792dbbb1db",
+      "_id": "696d05f1b75f7bed4ad1d11f",
       "title": "Paris, France",
       "city": "Paris",
       "country": "France",
@@ -38,56 +37,54 @@
       "longDescription": "Paris is known for the Eiffel Tower, rich culture, museums, fashion, luxury cafes, and historic architecture.",
       "imageUrl": "https://images2.alphacoders.com/561/thumb-1920-561115.jpg",
       "category": "romantic",
-      "ownerId": "1196316b-f606-4094-a84a-73810b123382",
-      "createdAt": 1763670005123
+      "createdAt": "2026-01-18T16:10:25.674+00:00",
+      "updatedAt": "2026-01-18T16:10:25.674+00:00"
     }
-]
 ```
 
 ### Collection: `users`
 ```json
-  "users": [
    {
-      "id": "1196316b-f606-4094-a84a-73810b123382",
+      "_id": "696d037db75f7bed4ad1d0f3",
       "email": "mick@abv.bg",
       "fullName": "Mick James",
-      "password": "$2b$10$SU.4peE.Wl68DJK/TFGsieluRACd9RMY4rfXPMMP/Z3sbri1kDGiW"
+      "password": "hashed_password",
+      "createdAt": "2026-01-18T15:59:57.357+00:00",
+      "updatedAt": "2026-01-18T15:59:57.357+00:00"
     }
-]
 ```
 
 ### Collection: `comments`
 ```json
-  "comments": [
       {
-      "id": "d1cd8396-a5fa-4583-a11a-05108c503d97",
-      "placeId": "7cc16866-46e2-427c-b378-2fbf54e2b41a",
+      "_id": "696d0990b75f7bed4ad1d152",
+      "placeId": "696d08dbb75f7bed4ad1d147",
       "text": "nice",
-      "authorId": "06bb4519-3db9-4af1-9831-26718b6ee1e1",
-      "createdAt": 1764268027547
+      "authorId": "696d03b9b75f7bed4ad1d0fb",
+      "createdAt": "2026-01-18T16:25:52.185+00:00",
+      "updatedAt": "2026-01-18T16:25:52.185+00:00"
     }
-]
 ```
 
 ### Collection: `likes`
 ```json
-  "likes": [
      {
-      "id": "51b04d16-119d-49cc-a134-31416e4fecbc",
-      "placeId": "54e70b2e-7e0c-4dc6-a9d9-8b9077b9a0b9",
-      "userId": "b5042f58-6a11-4e1b-81f8-4b447da01348",
-      "createdAt": 1764252989828
+      "_id": "51b04d16119d49cca13431416e4fecbc",
+      "placeId": "54e70b2e7e0c4dc6a9d98b9077b9a0b9",
+      "userId": "b5042f586a114e1b81f84b447da01348",
+      "createdAt": "2026-01-18T12:00:00.000Z",
+      "updatedAt": "2026-01-18T12:00:00.000Z"
     }
-]
 ```
 
 ## Backend API 
 
 ### Authentication
-- POST /api/users/login  
-- POST /api/users/register  
+- POST /users/login  
+- POST /users/register  
 - JWT token stored in `localStorage`  
-- Sent via `X-Authorization`  
+- Protected routes require header:
+[x]Authorization: Bearer <token>
 
 ### Places
 | Method | Endpoint | Access | Description |
@@ -143,7 +140,9 @@
 
 ### Backend (any working backend)
 - Node.js + Express 
-- Custom JSON storage (`db.json`) used as a lightweight database
+- MongoDB Atlas + Mongoose
+- JWT authentication (jsonwebtoken)
+- Password hashing (bcrypt)
  
 ---
 
@@ -182,10 +181,11 @@ node .\server.js
 ##  Authentication Flow
 
 1. User registers or logs in with email and password
-2. The backend creates a signed JWT token using `jsonwebtoken`
-3. The token is returned to the client and stored in `localStorage`
-4. `AuthContext` reads the token and user data and exposes login/logout functions
-5. The token is used to keep the user logged in between page refreshes
+2. Backend returns a signed JWT token
+3. The token + user data are stored in localStorage
+4. AuthContext restores the session on refresh
+5. Protected requests send:
+- Authorization: Bearer <token>
 6. React guards protect client routes:
    - **PrivateRoute** — only for authenticated users
    - **GuestRoute** — only for guests
@@ -244,5 +244,7 @@ Appears after scrolling and smoothly scrolls to the top of the page. Improves UX
 
 ##  License
 MIT License
+
+
 
 

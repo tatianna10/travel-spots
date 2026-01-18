@@ -20,7 +20,6 @@ export async function getLikes(placeId) {
   return data.count;
 }
 
-// user is the object from AuthContext (contains accessToken)
 export async function checkUserLike(placeId, user) {
   if (!user?.accessToken) return { liked: false, likeId: null };
 

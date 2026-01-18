@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3030/data/places";
+const baseUrl = 'http://localhost:3030/data/places';
 
 // Handle fetch errors
 async function handleResponse(res) {
@@ -7,9 +7,9 @@ async function handleResponse(res) {
     try {
       error = await res.json();
     } catch {
-      error = { message: "Server error" };
+      error = { message: 'Server error' };
     }
-    throw new Error(error.message || "Request failed");
+    throw new Error(error.message || 'Request failed');
   }
   return res.json();
 }
@@ -27,39 +27,41 @@ export async function getPlaceById(id) {
 }
 
 // ============= CREATE =============
-// MUST include token and ownerId
-export async function createPlace(placeData, token) {
+// ownerId is taken from JWT on the backend
+export async function createPlace(placeData, user) {
   const res = await fetch(baseUrl, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      "X-Authorization": token
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.accessToken}`,
     },
     body: JSON.stringify(placeData),
   });
+
   return handleResponse(res);
 }
 
 // ============= UPDATE =============
-export async function updatePlace(_id, placeData, token) {
-  const res = await fetch(`${baseUrl}/${_id}`, {
-    method: "PUT",
+export async function updatePlace(id, placeData, user) {
+  const res = await fetch(`${baseUrl}/${id}`, {
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
-      "X-Authorization": token
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${user.accessToken}`,
     },
     body: JSON.stringify(placeData),
   });
+
   return handleResponse(res);
 }
 
 // ============= DELETE =============
-export async function deletePlace(_, token) {
-  const res = await fetch(`${baseUrl}/${_id}`, {
-    method: "DELETE",
+export async function deletePlace(id, user) {
+  const res = await fetch(`${baseUrl}/${id}`, {
+    method: 'DELETE',
     headers: {
-      "X-Authorization": token
-    }
+      Authorization: `Bearer ${user.accessToken}`,
+    },
   });
 
   await handleResponse(res);

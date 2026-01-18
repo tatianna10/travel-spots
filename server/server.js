@@ -1,16 +1,7 @@
-import express from "express";
-import cors from "cors";
+import app from './app.js';
+import { connectDB } from './config/db.js';
+import { PORT } from './config/env.js';
 
-import routes from "./routes/index.js";
-import errorMiddleware from "./middlewares/errorMiddleware.js";
+await connectDB();
 
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-app.use(routes);
-
-app.use(errorMiddleware);
-
-export default app;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -37,7 +37,7 @@ router.post(
   '/data/likes',
   auth,
   validateBody({
-    placeId: { required: true, type: 'string' },
+    placeId: { required: true, type: 'string', pattern: /^[0-9a-fA-F]{24}$/ },
   }),
   async (req, res, next) => {
     try {
@@ -48,7 +48,7 @@ router.post(
         userId: req.user._id,
       });
 
-      res.json(like);
+      res.status(201).json(like);
     } catch (err) {
       // unique index on { placeId, userId }
       if (err && err.code === 11000) {

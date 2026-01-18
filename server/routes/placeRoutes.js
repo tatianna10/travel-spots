@@ -8,6 +8,7 @@ const router = Router();
 
 const objectIdPattern = /^[0-9a-fA-F]{24}$/;
 
+// ---------- GET ALL PLACES ----------
 router.get('/data/places', async (req, res, next) => {
   try {
     const places = await Place.find().sort({ createdAt: -1 });
@@ -17,6 +18,28 @@ router.get('/data/places', async (req, res, next) => {
   }
 });
 
+// ---------- GET PLACE BY ID ----------
+router.get(
+  '/data/places/:id',
+  async (req, res, next) => {
+    if (!objectIdPattern.test(req.params.id)) {
+      return res.status(400).json({ message: 'Invalid id' });
+    }
+    next();
+  },
+  async (req, res, next) => {
+    try {
+      const place = await Place.findById(req.params.id);
+      if (!place) return res.status(404).json({ message: 'Place not found' });
+
+      res.json(place);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+// ---------- CREATE PLACE ----------
 router.post(
   '/data/places',
   auth,
@@ -44,19 +67,20 @@ router.post(
   }
 );
 
+// ---------- UPDATE PLACE ----------
 router.put(
-  "/data/places/:id",
+  '/data/places/:id',
   auth,
   async (req, res, next) => {
     if (!objectIdPattern.test(req.params.id)) {
-      return res.status(400).json({ message: "Invalid id" });
+      return res.status(400).json({ message: 'Invalid id' });
     }
     next();
   },
   requireOwnership({ Model: Place, ownerField: 'ownerId', attachAs: 'place' }),
   async (req, res, next) => {
     try {
-      const { ownerId, ...rest } = req.body; // prevent changing ownerId
+      const { ownerId, ...rest } = req.body; 
       Object.assign(req.place, rest);
       const updated = await req.place.save();
       res.json(updated);
@@ -66,6 +90,7 @@ router.put(
   }
 );
 
+// ---------- DELETE PLACE ----------
 router.delete(
   '/data/places/:id',
   auth,

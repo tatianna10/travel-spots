@@ -35,7 +35,7 @@ export default function Comments({
 
       <ul className="details-comments-list">
         {comments.map((c) => (
-          <li key={c.id} className="details-comment-item">
+          <li key={c._id} className="details-comment-item">
             <strong>{c.authorName}:</strong> {c.text}
             <span className="details-comment-date">• {c.createdAtFormatted}</span>
           </li>

@@ -11,14 +11,19 @@ export default function MyPlaces() {
   useEffect(() => {
     async function load() {
       const all = await getAllPlaces();
-      setPlaces(all.filter(p => p.ownerId === user.id || p.ownerId === user._id));
+
+      const myId = user?._id || user?.id;
+      setPlaces(all.filter(p => String(p.ownerId) === String(myId)));
     }
-    load();
-  }, [user.id, user._id]);
+
+    if (user) load();
+  }, [user]);
 
   async function handleDelete(id) {
     if (!confirm('Delete this place?')) return;
-    await deletePlace(id, user.accessToken);
+
+    await deletePlace(id, user);
+
     setPlaces(prev => prev.filter(p => p._id !== id));
   }
 

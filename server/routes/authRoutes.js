@@ -13,7 +13,7 @@ function signToken(user) {
   return jwt.sign(
     {
       _id: user._id.toString(),
-      id: user._id.toString(), // optional compatibility
+      id: user._id.toString(), 
       email: user.email,
       fullName: user.fullName,
     },
@@ -48,7 +48,7 @@ router.post(
       const user = await User.create({
         email,
         fullName,
-        password, // hashed by pre-save hook
+        password, 
       });
 
       const token = signToken(user);

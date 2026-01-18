@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import routes from './routes.js';
 import { connectDB } from './config/db.js';
+import { errorHandler } from './middlewares/errorMiddleware.js';
 
 const app = express();
 
@@ -15,9 +16,6 @@ app.use(async (req, res, next) => {
 
 app.use(routes);
 
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ message: 'Internal server error' });
-});
+app.use(errorHandler);
 
 export default app;

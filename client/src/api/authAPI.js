@@ -1,5 +1,5 @@
 // ===== AUTH API SERVICE =====
-const baseUrl = 'http://localhost:3030/users';
+const baseUrl = '/api/users';
 
 // Handle response errors
 async function handleResponse(res) {

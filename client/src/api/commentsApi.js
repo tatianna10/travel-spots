@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3030/data/comments';
+const baseUrl = '/api/data/comments';
 
 async function handleRes(res) {
   if (!res.ok) {

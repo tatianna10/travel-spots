@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3030/data/places';
+const baseUrl = '/api/data/places';
 
 // Handle fetch errors
 async function handleResponse(res) {

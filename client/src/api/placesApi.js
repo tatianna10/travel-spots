@@ -1,4 +1,4 @@
-const baseUrl = '/api/data/places';
+const baseUrl = '${API_HOST}/api/data/places';
 
 // Handle fetch errors
 async function handleResponse(res) {

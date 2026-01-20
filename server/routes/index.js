@@ -8,9 +8,13 @@ import likeRoutes from './likeRoutes.js';
 const router = Router();
 
 router.use('/auth', authRoutes);
+
 router.use('/users', userRoutes);      
+
 router.use('/data/places', placeRoutes); 
+
 router.use('/comments', commentRoutes);
+
 router.use('/likes', likeRoutes);
 
 export default router;

@@ -19,7 +19,6 @@ function validateObjectIdParam(paramName = 'id') {
 }
 
 function pickPlaceFields(body) {
-  // Whitelist allowed fields to update/create
   const allowed = [
     'title',
     'city',
@@ -38,7 +37,7 @@ function pickPlaceFields(body) {
 }
 
 // ---------- GET ALL PLACES ----------
-router.get('/data/places', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const places = await Place.find().sort({ createdAt: -1 }).lean();
     res.json(places);
@@ -48,7 +47,7 @@ router.get('/data/places', async (req, res, next) => {
 });
 
 // ---------- GET PLACE BY ID ----------
-router.get('/data/places/:id', validateObjectIdParam('id'), async (req, res, next) => {
+router.get('/:id', validateObjectIdParam('id'), async (req, res, next) => {
   try {
     const place = await Place.findById(req.params.id).lean();
     if (!place) return res.status(404).json({ message: 'Place not found' });
@@ -61,7 +60,7 @@ router.get('/data/places/:id', validateObjectIdParam('id'), async (req, res, nex
 
 // ---------- CREATE PLACE ----------
 router.post(
-  '/data/places',
+  '/',
   auth,
   validateBody({
     title: { required: true, type: 'string', minLength: 1 },
@@ -100,10 +99,9 @@ router.post(
 
 // ---------- UPDATE PLACE ----------
 router.put(
-  '/data/places/:id',
+  '/:id',
   auth,
   validateObjectIdParam('id'),
-  // You can reuse the same validation but make fields optional
   validateBody({
     title: { required: false, type: 'string', minLength: 1 },
     city: { required: false, type: 'string', minLength: 1 },
@@ -134,7 +132,7 @@ router.put(
 
 // ---------- DELETE PLACE ----------
 router.delete(
-  '/data/places/:id',
+  '/:id',
   auth,
   validateObjectIdParam('id'),
   requireOwnership({ Model: Place, ownerField: 'ownerId' }),

@@ -13,7 +13,7 @@ function signToken(user) {
   return jwt.sign(
     {
       _id: user._id.toString(),
-      id: user._id.toString(), 
+      id: user._id.toString(),
       email: user.email,
       fullName: user.fullName,
     },
@@ -22,9 +22,9 @@ function signToken(user) {
   );
 }
 
-// ---------- REGISTER ----------
+// FINAL URL: /api/auth/register
 router.post(
-  '/users/register',
+  '/register',
   authLimiter,
   validateBody({
     email: {
@@ -48,7 +48,7 @@ router.post(
       const user = await User.create({
         email,
         fullName,
-        password, 
+        password,
       });
 
       const token = signToken(user);
@@ -65,9 +65,9 @@ router.post(
   }
 );
 
-// ---------- LOGIN ----------
+// FINAL URL: /api/auth/login
 router.post(
-  '/users/login',
+  '/login',
   authLimiter,
   validateBody({
     email: { required: true, type: 'string' },

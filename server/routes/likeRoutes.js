@@ -20,8 +20,7 @@ function requireObjectId(value, fieldName) {
   return { ok: true };
 }
 
-// ---------- GET LIKES COUNT FOR PLACE ----------
-router.get('/data/likes', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const { placeId } = req.query;
 
@@ -35,8 +34,7 @@ router.get('/data/likes', async (req, res, next) => {
   }
 });
 
-// ---------- CHECK IF USER LIKED A PLACE ----------
-router.get('/data/likes/check', auth, async (req, res, next) => {
+router.get('/check', auth, async (req, res, next) => {
   try {
     const { placeId } = req.query;
 
@@ -59,9 +57,8 @@ router.get('/data/likes/check', auth, async (req, res, next) => {
   }
 });
 
-// ---------- LIKE A PLACE ----------
 router.post(
-  '/data/likes',
+  '/',
   auth,
   validateBody({
     placeId: { required: true, type: 'string', pattern: /^[0-9a-fA-F]{24}$/ },
@@ -88,9 +85,8 @@ router.post(
   }
 );
 
-// ---------- UNLIKE (OWNER ONLY) ----------
 router.delete(
-  '/data/likes/:id',
+  '/:id',
   auth,
   requireOwnership({ Model: Like, ownerField: 'userId' }),
   async (req, res, next) => {

@@ -22,7 +22,6 @@ function signToken(user) {
   );
 }
 
-// FINAL URL: /api/auth/register
 router.post(
   '/register',
   authLimiter,
@@ -65,7 +64,6 @@ router.post(
   }
 );
 
-// FINAL URL: /api/auth/login
 router.post(
   '/login',
   authLimiter,

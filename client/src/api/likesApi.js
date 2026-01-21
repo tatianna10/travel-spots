@@ -1,4 +1,4 @@
-const baseUrl = '/api/data/likes';
+const baseUrl = '/api/likes';
 
 async function handleResponse(res) {
   if (!res.ok) {

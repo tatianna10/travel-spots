@@ -7,10 +7,11 @@ import likeRoutes from './likeRoutes.js';
 
 const router = Router();
 
-router.use(authRoutes);
-router.use(userRoutes);      
-router.use(placeRoutes);
-router.use(commentRoutes);
-router.use(likeRoutes);
+router.use('/users', authRoutes);
+router.use('/users', userRoutes);
+
+router.use('/data/places', placeRoutes); 
+router.use('/likes', likeRoutes);
+router.use('/comments', commentRoutes);
 
 export default router;

@@ -1,0 +1,8 @@
+{
+  "name": "travel-spots",
+  "private": true,
+  "workspaces": ["server", "client"],
+  "scripts": {
+    "build": "npm --workspace client run build"
+  }
+}

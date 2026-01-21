@@ -7,15 +7,26 @@ import { validateBody } from '../middlewares/validationMiddleware.js';
 const router = Router();
 const { Types } = mongoose;
 
-router.get('/data/comments', async (req, res, next) => {
+function toObjectId(id) {
+  return new Types.ObjectId(String(id));
+}
+
+function requireObjectId(value, fieldName) {
+  if (!value) return { ok: false, status: 400, message: `${fieldName} is required` };
+  if (!Types.ObjectId.isValid(String(value))) {
+    return { ok: false, status: 400, message: `Invalid ${fieldName}` };
+  }
+  return { ok: true };
+}
+
+router.get('/', async (req, res, next) => {
   try {
     const { placeId } = req.query;
-    if (!placeId) return res.status(400).json({ message: 'placeId is required' });
-    if (!Types.ObjectId.isValid(String(placeId))) {
-      return res.status(400).json({ message: 'Invalid placeId' });
-    }
 
-    const comments = await Comment.find({ placeId: new Types.ObjectId(String(placeId)) })
+    const v = requireObjectId(placeId, 'placeId');
+    if (!v.ok) return res.status(v.status).json({ message: v.message });
+
+    const comments = await Comment.find({ placeId: toObjectId(placeId) })
       .sort({ createdAt: -1 })
       .lean();
 
@@ -26,7 +37,7 @@ router.get('/data/comments', async (req, res, next) => {
 });
 
 router.post(
-  '/data/comments',
+  '/',
   auth,
   validateBody({
     placeId: { required: true, type: 'string', pattern: /^[0-9a-fA-F]{24}$/ },
@@ -50,9 +61,9 @@ router.post(
         'Unknown user';
 
       const comment = await Comment.create({
-        placeId: new Types.ObjectId(String(placeId)),
+        placeId: toObjectId(placeId),
         text: String(text).trim(),
-        authorId: new Types.ObjectId(String(userId)),
+        authorId: toObjectId(userId),
         authorEmail: email,
         authorName: displayName,
       });
@@ -63,6 +74,5 @@ router.post(
     }
   }
 );
-
 
 export default router;

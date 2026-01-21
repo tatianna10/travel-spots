@@ -11,6 +11,7 @@ router.use('/users', authRoutes);
 router.use('/users', userRoutes);
 
 router.use('/data/places', placeRoutes); 
+
 router.use('/likes', likeRoutes);
 router.use('/comments', commentRoutes);
 

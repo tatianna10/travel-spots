@@ -16,8 +16,7 @@ function validateObjectIdParam(param = 'id') {
   };
 }
 
-// ---------- GET CURRENT USER ----------
-router.get('/data/users/me', auth, async (req, res, next) => {
+router.get('/me', auth, async (req, res, next) => {
   try {
     const userId = req.user._id ?? req.user.id;
 
@@ -30,8 +29,7 @@ router.get('/data/users/me', auth, async (req, res, next) => {
   }
 });
 
-// ---------- GET PUBLIC USER BY ID (optional) ----------
-router.get('/data/users/:id', validateObjectIdParam('id'), async (req, res, next) => {
+router.get('/:id', validateObjectIdParam('id'), async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id).select('_id fullName').lean();
     if (!user) return res.status(404).json({ message: 'User not found' });
@@ -42,9 +40,8 @@ router.get('/data/users/:id', validateObjectIdParam('id'), async (req, res, next
   }
 });
 
-// ---------- UPDATE CURRENT USER (optional) ----------
 router.put(
-  '/data/users/me',
+  '/me',
   auth,
   validateBody({
     fullName: { required: true, type: 'string', minLength: 1 },

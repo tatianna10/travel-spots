@@ -16,8 +16,6 @@ dist-ssr
 
 # Environment variables (secrets)
 .env
-server/.env
-client/.env
 *.local
 
 # Editor directories and files

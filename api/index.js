@@ -1,19 +1,18 @@
-import serverless from 'serverless-http';
-import app from '../server/app.js';
-import { connectDB } from '../server/config/db.js';
+import express from 'express';
+import routes from './routes/index.js';
+import { errorHandler } from './middlewares/errorMiddleware.js';
+import { connectDB } from './config/db.js';
 
-let dbReady = false;
+const app = express();
 
-async function ensureDB() {
-  if (!dbReady) {
-    await connectDB();
-    dbReady = true;
-  }
-}
+connectDB().catch(err => console.error('DB connection failed:', err.message));
 
-const handler = serverless(app);
 
-export default async function (req, res) {
-  await ensureDB();
-  return handler(req, res);
-}
+app.get('/', (req, res) => res.send('Travel Spots API'));
+app.get('/api/health', (req, res) => res.status(200).send('ok'));
+
+app.use(express.json());
+app.use('/api', routes);
+app.use(errorHandler);
+
+export default app;

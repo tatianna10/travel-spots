@@ -68,7 +68,7 @@ router.post(
         authorName: displayName,
       });
 
-      res.status(201).json(comment);
+      res.status(201).json(comment.toObject());
     } catch (err) {
       next(err);
     }

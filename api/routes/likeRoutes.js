@@ -75,7 +75,7 @@ router.post(
         userId: toObjectId(req.user._id ?? req.user.id),
       });
 
-      res.status(201).json(like);
+      res.status(201).json(like.toObject());
     } catch (err) {
       if (err?.code === 11000) {
         return res.status(409).json({ message: 'Already liked' });

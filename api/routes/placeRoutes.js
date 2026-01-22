@@ -90,7 +90,7 @@ router.post(
         ownerId: new Types.ObjectId(String(ownerId)),
       });
 
-      res.status(201).json(place);
+      res.status(201).json(place.toObject());
     } catch (err) {
       next(err);
     }

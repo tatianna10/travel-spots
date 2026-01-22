@@ -1,8 +1,23 @@
 {
   "name": "travel-spots",
   "private": true,
-  "workspaces": ["server", "client"],
+  "type": "module",
   "scripts": {
-    "build": "npm --workspace client run build"
+    "dev": "concurrently \"vite\" \"node api/dev.js\"",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.2.1",
+    "mongoose": "^8.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "vite": "^5.0.0"
   }
 }

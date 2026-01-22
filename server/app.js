@@ -6,6 +6,8 @@ import { errorHandler } from './middlewares/errorMiddleware.js';
 
 const app = express();
 
+app.get('/', (req, res) => res.send('Travel Spots API'));
+
 app.get('/api/health', (req, res) => res.status(200).send('ok'));
 
 app.use(cors({
@@ -20,7 +22,7 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use('/api/data/places', routes);
+app.use('/api', routes);
 
 app.use(errorHandler);
 

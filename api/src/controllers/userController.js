@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import User from '../models/User.js';
+import User from '../../models/User.js';
 import { JWT_SECRET } from '../config/env.js';
 
 function signToken(user) {

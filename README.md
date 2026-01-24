@@ -209,7 +209,7 @@ npm run dev
 
 ---
 
-##  Routing (React Router 6)
+##  Routing (React Router 7)
 
 ### Public Routes
 - `/` — Home  

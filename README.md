@@ -30,29 +30,45 @@
 ##  Project Structure
 ```
 🧳 travel-spots
- ┣ 📂src
+ ┣ 📂api
+ ┃ ┗ 📜index.js              # Vercel serverless entry
+ ┣ 📂dist
  ┃ ┣ 📂assets
+ ┃ ┣ 📂images
+ ┃ ┣ 📂styles
+ ┃ ┗ 📜index.html
+ ┣ 📂public
+ ┃ ┣ 📂images
+ ┃ ┗ 📂styles
+ ┣ 📂server
+ ┃ ┣ 📂config
+ ┃ ┣ 📂controllers
+ ┃ ┣ 📂middlewares
+ ┃ ┣ 📂models
+ ┃ ┣ 📂routes
+ ┃ ┣ 📜app.js
+ ┃ ┣ 📜dev.js
+ ┃ ┗ 📜server.js
+ ┣ 📂src
+ ┃ ┣ 📂api
  ┃ ┣ 📂components
- ┃ ┣ 📂pages
- ┃ ┣ 📂hooks
- ┃ ┣ 📂services
+ ┃ ┣ 📂config
+ ┃ ┣ 📂contexts
+ ┃ ┣ 📂guards
+ ┃ ┣ 📂utils
  ┃ ┣ 📜App.jsx
  ┃ ┗ 📜main.jsx
- ┣ 📂public
- ┃ ┗ 🖼️ static files
- ┣ 📂server
- ┃ ┣ 📜server.js
- ┃ ┣ 📜app.js
- ┃ ┣ 📂routes
- ┃ ┣ 📂models
- ┃ ┣ 📂config
- ┃ ┗ 📂middlewares
- ┣ 📂api
- ┃ ┗ 📜index.js
- ┣ 📜vite.config.js
+ ┣ 📜.env
+ ┣ 📜.gitignore
+ ┣ 📜eslint.config.js
+ ┣ 📜index.css
+ ┣ 📜index.html
+ ┣ 📜package-lock.json
  ┣ 📜package.json
- ┗ 📜vercel.json
-
+ ┣ 📜README.md
+ ┣ 📜vercel.json
+ ┗ 📜vite.config.js
+ 
 ```
 ---
 
@@ -209,23 +225,28 @@ npm run dev
 
 ---
 
-##  Routing (React Router 7)
+## Routing (React Router 7)
 
 ### Public Routes
-- `/` — Home  
-- `/catalog` — List of all places  
-- `/places/:id` — Place details  
-- `/login`  
-- `/register`  
+- `/` — Home
+- `/places` — Catalog (all places)
+- `/places/:id/details` — Place details
 
-### Private Routes
-- `/create`  
-- `/my-places`  
-- `/places/:id/edit`  
+### Guest-only Routes
+- `/login` — Login
+- `/register` — Register
+
+### Private Routes (authenticated)
+- `/places/create` — Create new place
+- `/places/:id/edit` — Edit place
+- `/places/my-places` — My Places (user-owned spots)
+
+### Fallback
+- `*` — Not Found page
 
 Route protection:
-- `<PrivateRoute>` for logged-in users  
-- `<GuestRoute>` for guests only  
+- `<PrivateRoute>` — allows only authenticated users
+- `<GuestRoute>` — allows only guests (redirects logged-in users)
 
 ---
 

@@ -1,28 +1,71 @@
 # Travel Spots  
-🚀 Live App: https://travel-spots-beta.vercel.app/
 
-**TravelSpots** is a modern React web application that allows users to discover, share, and manage interesting places around the world. The platform includes a public catalog, user authentication, full CRUD operations, likes/comments and protected routes.
+**TravelSpots** is a full-stack MERN application deployed on Vercel, featuring a serverless REST API, JWT-based authentication, and a cloud-hosted MongoDB Atlas database. It is a modern React web application that allows users to discover, share, and manage interesting places around the world. The platform includes a public catalog, user authentication, full CRUD operations, likes, comments, and role-protected routes.
 
+🔗 Live App: https://travel-spots-beta.vercel.app/
+
+---
+
+## Tech Stack
+
+**Frontend**
+- React (Vite)
+- React Router
+
+**Backend**
+- Node.js / Express (Serverless on Vercel)
+- MongoDB Atlas (cloud database)
+- Mongoose ODM
+- JWT-based authentication (stateless)
+- bcryptjs password hashing
+- dotenv for environment configuration
+
+**Deployment**
+- Vercel (frontend + serverless API)
+- REST API deployed as Vercel Serverless Functions
+- MongoDB Atlas used as external cloud database
+
+---
+
+##  Project Structure
+```
+🧳 travel-spots
+ ┣ 📂src
+ ┃ ┣ 📂assets
+ ┃ ┣ 📂components
+ ┃ ┣ 📂pages
+ ┃ ┣ 📂hooks
+ ┃ ┣ 📂services
+ ┃ ┣ 📜App.jsx
+ ┃ ┗ 📜main.jsx
+ ┣ 📂public
+ ┃ ┗ 🖼️ static files
+ ┣ 📂server
+ ┃ ┣ 📜server.js
+ ┃ ┣ 📜app.js
+ ┃ ┣ 📂routes
+ ┃ ┣ 📂models
+ ┃ ┣ 📂config
+ ┃ ┗ 📂middlewares
+ ┣ 📂api
+ ┃ ┗ 📜index.js
+ ┣ 📜vite.config.js
+ ┣ 📜package.json
+ ┗ 📜vercel.json
+
+```
 ---
 
 ##  Features
 
-###  Public Area
-- Home / Landing page  
-- Catalog of all places  
-- Place details (image, description, commnets, likes)  
-- Login / Register pages  
-
-###  Private Area
-- Create a place  
-- Edit your own places  
-- Delete your own places  
-- My Places page  
-- Like & comment on other users’ places  
-
-###  Route Guards
-- **PrivateRoute** — accessible only for authenticated users  
-- **GuestRoute** — accessible only for guests (login/register)  
+- Public catalog of travel spots
+- Details page for each spot
+- Authentication (Register / Login)
+- Protected actions:
+  - Create spot
+  - My Places (edit/delete your own spots)
+- Rate limiting for auth endpoints
+- Responsive UI (mobile-friendly header + grids)
 
 ---
 
@@ -78,120 +121,89 @@
       "updatedAt": "2026-01-18T12:00:00.000Z"
     }
 ```
+---
 
 ## Backend API 
 
 ### Authentication
-- POST /users/login  
-- POST /users/register  
-- JWT token stored in `localStorage`  
-- Protected routes require header:
-[x]Authorization: Bearer <token>
+
+* POST `/api/users/login`
+* POST `/api/users/register`
+* JWT token is stored in the browser `localStorage` after login/registration.
+* For protected routes the client sends:
+`Authorization: Bearer <JWT_TOKEN>`
 
 ### Places
-| Method | Endpoint | Access | Description |
-|-------|----------|--------|-------------|
-| GET | `/data/places` | Public | Retrieve all places |
-| GET | `/data/places/:id` | Public | Retrieve a single place |
-| POST | `/data/places` | Authenticated | Create a new place |
-| PUT | `/data/places/:id` | Owner only | Edit an existing place |
-| DELETE | `/data/places/:id` | Owner only | Delete your place |
 
----
+| Method | Endpoint               | Access        | Description             |
+| ------ | ---------------------- | ------------- | ----------------------- |
+| GET    | `/api/data/places`     | Public        | Retrieve all places     |
+| GET    | `/api/data/places/:id` | Public        | Retrieve a single place |
+| POST   | `/api/data/places`     | Authenticated | Create a new place      |
+| PUT    | `/api/data/places/:id` | Owner only    | Edit an existing place  |
+| DELETE | `/api/data/places/:id` | Owner only    | Delete your place       |
+
 
 ### Comments
-| Method | Endpoint | Access | Description |
-|-------|----------|--------|-------------|
-| GET | `/data/comments?placeId=:id` | Public | Fetch comments for a place |
-| POST | `/data/comments` | Authenticated | Add a comment |
 
-[x] **Owners cannot comment on their own place**  
-[x] Comments sorted newest first
+| Method | Endpoint                         | Access        | Description                |
+| ------ | -------------------------------- | ------------- | -------------------------- |
+| GET    | `/api/data/comments?placeId=:id` | Public        | Fetch comments for a place |
+| POST   | `/api/data/comments`             | Authenticated | Add a comment              |
 
----
+✔ Owners cannot comment on their own places
+✔ Comments are sorted by newest first
+
 
 ### Likes
-| Method | Endpoint | Access | Description |
-|-------|----------|--------|-------------|
-| GET | `/data/likes?placeId=:id` | Public | Get total likes count |
-| GET | `/data/likes/check?placeId=:id&userId=:id` | Authenticated | Check if user liked a place |
-| POST | `/data/likes` | Authenticated | Like a place |
-| DELETE | `/data/likes/:id` | Authenticated | Unlike a place |
 
-[x] One like per user  
-[x] Owner cannot like own place
+| Method | Endpoint                                       | Access        | Description                   |
+| ------ | ---------------------------------------------- | ------------- | ----------------------------- |
+| GET    | `/api/data/likes?placeId=:id`                  | Public        | Get total likes count         |
+| GET    | `/api/data/likes/check?placeId=:id&userId=:id` | Authenticated | Check if a user liked a place |
+| POST   | `/api/data/likes`                              | Authenticated | Like a place                  |
+| DELETE | `/api/data/likes/:id`                          | Authenticated | Unlike a place                |
+
+✔ One like per user
+✔ Owners cannot like their own places
+
+
+### Authentication Endpoints
+
+| Method | Endpoint              | Description          |
+| ------ | --------------------- | -------------------- |
+| POST   | `/api/users/login`    | Login user           |
+| POST   | `/api/users/register` | Create a new account |
 
 ---
 
-## Authentication
+## Setup & Local Development
 
-| Method | Endpoint | Description |
-|-------|----------|-------------|
-| POST | `/users/login` | Login user |
-| POST | `/users/register` | Create a new account |
+### Clone the repository:
 
----
+   ```bash
+   git clone https://github.com/tatianna10/travel-spots.git
+   cd travel-spots
+  ```
+### Install dependencies:
+   ```bash
+   npm install
+   ```
 
-##  Tech Stack
-
-### Frontend
-- React 18+  
-- React Router v6  
-- Context API (AuthContext)  
-- Custom component-based styling using external CSS files
-
-### Backend (any working backend)
-- Node.js + Express 
-- MongoDB Atlas + Mongoose
-- JWT authentication (jsonwebtoken)
-- Password hashing (bcrypt)
- 
----
-
-##  Project Structure
-```
-📦src
- ┣ 📂api
- ┣ 📂components
- ┣ 📂contexts
- ┣ 📂guards
- ┣ 📂utils
- ┣ 📜App.jsx
- ┗ 📜main.jsx
-```
----
-
-##  Getting Started
-
-### Install dependencies
+### Create a .env file in the root:
 ```bash
-npm install
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+BCRYPT_ROUNDS=12
+PORT=3030
 ```
 
-### Start development server
+### Run locally frontend + backend:
 ```bash
 npm run dev
 ```
-
-### Start backend (example for Node.js)
-```bash
-node .\server.js
-```
-
----
-
-##  Authentication Flow
-
-1. User registers or logs in with email and password
-2. Backend returns a signed JWT token
-3. The token + user data are stored in localStorage
-4. AuthContext restores the session on refresh
-5. Protected requests send:
-- Authorization: Bearer <token>
-6. React guards protect client routes:
-   - **PrivateRoute** — only for authenticated users
-   - **GuestRoute** — only for guests
-7. The backend does not validate the JWT on each request; route protection happens on the frontend
+- Frontend: http://localhost:5173
+- API: http://localhost:3030
 
 ---
 
@@ -215,22 +227,6 @@ Route protection:
 
 ---
 
-##  React Concepts Covered
-- useState
-- useEffect
-- useContext
-- Context API
-- Controlled components
-- Synthetic events
-- Stateless components
-- Stateful components
-- Client-side routing
-- Route guards
-- Conditional rendering
-- External CSS styling
-
----
-
 ## Bonus Functionality
 
 ### Category Filter
@@ -245,7 +241,7 @@ Appears after scrolling and smoothly scrolls to the top of the page. Improves UX
 ---
 
 ##  License
-MIT License
+- MIT License
 
 
 

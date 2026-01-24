@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
     "express": "^4.19.2",
     "express-rate-limit": "^8.2.1",

@@ -1,4 +1,6 @@
 # Travel Spots  
+🚀 Live App: https://travel-spots-beta.vercel.app/
+
 **TravelSpots** is a modern React web application that allows users to discover, share, and manage interesting places around the world. The platform includes a public catalog, user authentication, full CRUD operations, likes/comments and protected routes.
 
 ---

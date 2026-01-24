@@ -1,97 +1,200 @@
 /* ===== HEADER WRAPPER ===== */
 .site-header {
-    width: 100%;
-    padding: 1rem 1.5rem;
-
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(12px);
-
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
+  overflow-x: hidden;
+  gap: 1rem;
+  min-height: 80px;
 }
 
-/* ===== LEFT SIDE (logo + title) ===== */
+/* ===== LEFT SIDE ===== */
 .header-left {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
 }
 
 .header-logo {
-    width: 2rem;
-    height: 2rem;
-    filter: drop-shadow(0 0 15px #1E90FF);
+  width: 2rem;
+  height: 2rem;
+  filter: drop-shadow(0 0 15px #1E90FF);
 }
 
 .header-title {
-    font-size: 1.75rem;
-    font-weight: bold;
-    color: #1E90FF;
-    filter: drop-shadow(0 0 15px #1E90FF);
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #1E90FF;
+  filter: drop-shadow(0 0 15px #1E90FF);
+  white-space: nowrap;
 }
 
-/* ===== NAVIGATION LINKS ===== */
+/* ===== NAVIGATION ===== */
 .header-nav {
-    display: flex;
-    gap: 1.5rem;
-    font-weight: 600;
-    color: white;
-    align-items: center;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+  display: flex;
+  gap: 1.5rem;
+  font-weight: 600;
+  color: white;
+  align-items: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .header-nav a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.25s ease;
+  color: white;
+  text-decoration: none;
+  transition: color 0.25s ease;
+  white-space: nowrap;
 }
 
 .header-nav a:hover {
-    color: #93C5FD; 
+  color: #93C5FD;
 }
 
-/* ===== USER GREETING ===== */
+/* ===== USER + LOGOUT ===== */
 .header-user {
-    color: #e0eaff;
-    font-weight: 600;
-    margin-left: 0.5rem;
-    text-shadow: 0 0 10px rgba(30, 144, 255, 0.7);
+  color: #e0eaff;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  text-shadow: 0 0 10px rgba(30, 144, 255, 0.7);
 }
 
-/* ===== LOGOUT BUTTON ===== */
 .logout-btn {
-    background: none;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 0.3rem 0.75rem;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-
-    backdrop-filter: blur(4px);
-    transition: all 0.25s ease;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 0.3rem 0.75rem;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+  transition: all 0.25s ease;
 }
 
 .logout-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
-    color: #93C5FD;
-    border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.25);
+  color: #93C5FD;
 }
 
-/* Keeps layout aligned when brand is hidden */
+/* Placeholder */
 .header-placeholder {
-    visibility: hidden;
-    width: 200px; 
+  visibility: hidden;
+  width: 200px;
 }
 
-.site-header {
-    height: 80px; /* SAME height as header on Home */
+/* ===== HAMBURGER ===== */
+.header-burger {
+  display: none;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
 }
 
+.burger-bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.9);
+  margin: 4px 0;
+  border-radius: 2px;
+}
+
+.header-auth {
+  display: contents;
+}
+
+/* ================= MOBILE ONLY ================= */
+@media (max-width: 600px) {
+  .site-header {
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    gap: 10px;
+  }
+
+  .header-burger {
+    display: inline-block;
+    margin-left: auto;
+  }
+
+  .header-title {
+    font-size: 1.35rem;
+  }
+
+  .header-nav a {
+    font-size: 0.95rem;
+  }
+
+  .header-user {
+    font-size: 0.9rem;
+  }
+
+  .logout-btn {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  .header-placeholder {
+    display: none;
+  }
+
+  .header-nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 0 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition:
+      max-height 260ms ease,
+      opacity 200ms ease,
+      padding 260ms ease;
+  }
+
+  .header-nav.is-open {
+    max-height: 520px;
+    opacity: 1;
+    padding: 10px 12px;
+    pointer-events: auto;
+  }
+
+  .header-auth {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .header-user,
+  .logout-btn {
+    margin: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+}

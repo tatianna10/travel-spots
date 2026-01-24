@@ -1,51 +1,69 @@
-import { Link } from "react-router";
-import { useContext } from "react";
-import { AuthContext } from "../../contexts/AuthContext";
-import { getDisplayName } from "../../utils/formatters"; 
+import { Link } from 'react-router';
+import { useContext, useMemo, useState } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+import { getDisplayName } from '../../utils/formatters';
 
 export default function Header({ showBrand = false }) {
-    const { isAuthenticated, user, logout } = useContext(AuthContext);
+  const { isAuthenticated, user, logout } = useContext(AuthContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    return (
-        <header className="site-header">
+  const displayName = useMemo(() => getDisplayName(user), [user]);
 
-            {showBrand ? (
-                <div className="header-left">
-                    <img
-                        src="/images/logo.png"
-                        alt="Logo"
-                        className="header-logo"
-                    />
-                    <h1 className="header-title">TRAVEL SPOTS</h1>
-                </div>
-            ) : (
-                <div className="header-left header-placeholder"></div>
-            )}
+  const closeMenu = () => setIsMenuOpen(false);
 
-            <nav className="header-nav">
-                <Link to="/">Home</Link>
-                <Link to="/places">Catalog</Link>
+  return (
+    <header className="site-header">
+      {showBrand ? (
+        <div className="header-left">
+          <img src="/images/logo.png" alt="Logo" className="header-logo" />
+          <h1 className="header-title">TRAVEL SPOTS</h1>
+        </div>
+      ) : (
+        <div className="header-left header-placeholder"></div>
+      )}
 
-                {isAuthenticated ? (
-                    <>
-                        <Link to="/places/create">Create Spot</Link>
-                        <Link to="/places/my-places">My Places</Link>
+      <button
+        type="button"
+        className="header-burger"
+        aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={isMenuOpen}
+        onClick={() => setIsMenuOpen((v) => !v)}
+      >
+        <span className="burger-bar" />
+        <span className="burger-bar" />
+        <span className="burger-bar" />
+      </button>
 
-                        <span className="header-user">
-                            Hello, {getDisplayName(user)}
-                        </span>
+      <nav className={`header-nav ${isMenuOpen ? 'is-open' : ''}`}>
+        <Link to="/" onClick={closeMenu}>Home</Link>
+        <Link to="/places" onClick={closeMenu}>Catalog</Link>
 
-                        <button className="logout-btn" onClick={logout}>
-                            Logout
-                        </button>
-                    </>
-                ) : (
-                    <>
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Register</Link>
-                    </>
-                )}
-            </nav>
-        </header>
-    );
+        {isAuthenticated ? (
+          <>
+            <Link to="/places/create" onClick={closeMenu}>Create Spot</Link>
+            <Link to="/places/my-places" onClick={closeMenu}>My Places</Link>
+
+            <div className="header-auth">
+              <span className="header-user">Hello, {displayName}</span>
+              <button
+                type="button"
+                className="logout-btn"
+                onClick={() => {
+                  closeMenu();
+                  logout();
+                }}
+              >
+                Logout
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <Link to="/login" onClick={closeMenu}>Login</Link>
+            <Link to="/register" onClick={closeMenu}>Register</Link>
+          </>
+        )}
+      </nav>
+    </header>
+  );
 }

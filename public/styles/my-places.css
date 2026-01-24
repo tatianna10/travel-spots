@@ -20,6 +20,7 @@
 .myplaces-container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 12px;
 }
 
 /* ===== TITLE ===== */
@@ -43,7 +44,7 @@
 /* ===== GRID ===== */
 .myplaces-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
 }
 
@@ -135,4 +136,31 @@
   background: rgba(220, 38, 38, 0.55);
   transform: translateY(-2px);
   box-shadow: 0 8px 22px rgba(220, 38, 38, 0.6);
+}
+
+/* ===== TABLET + MOBILE (2 COLUMNS) ===== */
+@media (max-width: 900px) {
+  .myplaces-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .place-img {
+    height: 140px;
+  }
+
+  .place-title {
+    font-size: 18px;
+  }
+
+  .place-desc {
+    font-size: 13px;
+    height: 40px;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
 }

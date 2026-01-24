@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { Schema, model } from 'mongoose';
 import { BCRYPT_ROUNDS } from '../config/env.js';
 

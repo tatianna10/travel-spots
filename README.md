@@ -151,8 +151,9 @@
 | GET    | `/api/data/comments?placeId=:id` | Public        | Fetch comments for a place |
 | POST   | `/api/data/comments`             | Authenticated | Add a comment              |
 
-✔ Owners cannot comment on their own places
+✔ Owners cannot comment on their own places  
 ✔ Comments are sorted by newest first
+
 
 
 ### Likes
@@ -164,8 +165,9 @@
 | POST   | `/api/data/likes`                              | Authenticated | Like a place                  |
 | DELETE | `/api/data/likes/:id`                          | Authenticated | Unlike a place                |
 
-✔ One like per user
+✔ One like per user  
 ✔ Owners cannot like their own places
+
 
 
 ### Authentication Endpoints
